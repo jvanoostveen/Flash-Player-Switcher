@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   width="100%" height="100%"
+					   creationComplete="onCreationComplete()" 
+					   applicationComplete="onInit()"
+					   backgroundColor="#F4F4F2">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+
+	<fx:Script>
+		<![CDATA[
+			import flashplayerswitcher.data.DB;
+			import flashplayerswitcher.data.FlashPlayerBundle;
+			import flashplayerswitcher.tasks.ExtractBundle;
+
+			import spark.events.GridSelectionEvent;
+
+			import mx.controls.Alert;
+			import mx.managers.DragManager;
+
+			import flash.desktop.ClipboardFormats;
+			import flash.filesystem.File;
+			
+			[Bindable]
+			public var db:DB = new DB();
+			
+			private function onCreationComplete():void
+			{
+				addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, handleDragEnter);
+				addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, handleDragDrop);
+			}
+
+			private function handleDragEnter(event:NativeDragEvent):void
+			{
+				//check and see if files are being drug in
+				if(event.clipboard.hasFormat(ClipboardFormats.FILE_LIST_FORMAT))
+				{
+					//get the array of files
+					var files:Array = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+					
+					//make sure only one file is dragged in (i.e. this app doesn't
+					//support dragging in multiple files)
+					if(files.length == 1)
+					{
+						var file:File = files[0];
+						if (file.isDirectory)
+						{
+							//accept the drag action
+							DragManager.acceptDragDrop(this);
+						}
+					}
+				}
+			}
+
+			private function handleDragDrop(event:NativeDragEvent):void
+			{
+				//get the array of files being drug into the app
+				var files:Array = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+				
+				//grab the files file
+				var file:File = File(files[0]);
+				
+				var extract:ExtractBundle = new ExtractBundle(file);
+				extract.addEventListener(Event.COMPLETE, handleExtractComplete);
+				extract.execute();
+			}
+
+			private function handleExtractComplete(event:Event):void
+			{
+				trace("extraction done");
+			}
+
+			private function onInit():void
+			{
+				if (Capabilities.os.indexOf("Mac OS") == -1)
+				{
+					Alert.show("Only Mac OS X is supported.", "Unsupported platform");
+					return;
+				}
+				
+				listing.addEventListener(GridSelectionEvent.SELECTION_CHANGE, handleSelectionChange);
+				installButton.addEventListener(MouseEvent.CLICK, handleInstallButtonClick);
+				
+				checkVersions();
+			}
+			
+			private function checkVersions():void
+			{
+				// detect user installed
+				var userBundleFile:File = File.userDirectory.resolvePath("Library/Internet Plug-Ins/Flash Player.plugin");
+				if (userBundleFile.exists)
+				{
+					var userBundle:FlashPlayerBundle = new FlashPlayerBundle();
+					userBundle.parse(userBundleFile);
+					userInstalledVersion.text = userBundle.name + " (" + userBundle.version + ")";
+				} else {
+					userInstalledVersion.text = "<none>";
+				}
+				
+				var systemBundleFile:File = File.getRootDirectories()[0];
+				systemBundleFile = systemBundleFile.resolvePath("Library/Internet Plug-Ins/Flash Player.plugin");
+				if (systemBundleFile.exists)
+				{
+					var systemBundle:FlashPlayerBundle = new FlashPlayerBundle();
+					systemBundle.parse(systemBundleFile);
+					systemInstalledVersion.text = systemBundle.name + " (" + systemBundle.version + ")";
+				} else {
+					systemInstalledVersion.text = "<none>";
+				}
+			}
+
+			private function handleInstallButtonClick(event:MouseEvent):void
+			{
+				if (listing.selectedIndex == -1)
+					return;
+				
+				var bundle:FlashPlayerBundle = listing.selectedItem as FlashPlayerBundle;
+				
+				// #1 plugin
+				var plugin:File = File.applicationStorageDirectory.resolvePath("FlashPlayers/" + bundle.version + "-debug" + "/" + "Flash Player.plugin");
+				var pluginTarget:File = File.userDirectory.resolvePath("Library/Internet Plug-Ins/Flash Player.plugin");
+				plugin.copyTo(pluginTarget, true);
+				
+				// #2 xpt
+				var xpt:File = File.applicationStorageDirectory.resolvePath("FlashPlayers/" + bundle.version + "-debug" + "/" + "flashplayer.xpt");
+				var xptTarget:File = File.userDirectory.resolvePath("Library/Internet Plug-Ins/flashplayer.xpt");
+				xpt.copyTo(xptTarget, true);
+				
+				Alert.show("Flash Player switched. Restart your browser(s).", "Flash Player switched");
+				
+				checkVersions();
+			}
+
+			private function handleSelectionChange(event:GridSelectionEvent):void
+			{
+				if (listing.selectedIndex == -1)
+				{
+					installButton.enabled = false;
+					deleteButton.enabled = false;
+					
+					return;
+				}
+				
+				installButton.enabled = true;
+			}
+		]]>
+	</fx:Script>
+	<s:Group x="0" y="0">
+		<s:Image x="10" y="10" smooth="true" source="@Embed('flashplayerswitcher/logo.png')"/>
+		<s:Label x="161" y="36" fontSize="48" text="Flash Player Switcher"/>
+		<s:TextArea x="161" y="84" width="359" height="45" borderVisible="false"
+					contentBackgroundAlpha="0.0" editable="false"
+					text="Flash Player Switcher makes use of '~/Library/Internet Plug-Ins/'. No systemwide Flash Player will be overwritten."/>
+	</s:Group>
+	<mx:ProgressBar visible="false" x="427" y="538" label="Downloading" fontWeight="bold" indeterminate="false"
+					labelPlacement="top"/>
+	<s:VGroup x="429" y="177" width="249" height="200">
+		<s:VGroup>
+			<s:Label fontWeight="bold" text="Current (user):"/>
+			<s:Label id="userInstalledVersion" fontWeight="normal"
+					 text="..."/>
+		</s:VGroup>
+		<s:VGroup paddingTop="20">
+			<s:Label fontWeight="bold" text="System:"/>
+			<s:Label id="systemInstalledVersion" fontWeight="normal"
+					 text="..."/>
+		</s:VGroup>
+	</s:VGroup>
+	<s:VGroup x="26" y="176">
+		<s:DataGrid id="listing" dataProvider="{db.data}" width="385" height="364" editable="true">
+			<s:columns>
+				<s:ArrayList>
+					<s:GridColumn dataField="name" headerText="Name"></s:GridColumn>
+					<s:GridColumn dataField="version" editable="false" headerText="Version"></s:GridColumn>
+					<s:GridColumn dataField="beta" editable="false" headerText="Beta"></s:GridColumn>
+				</s:ArrayList>
+			</s:columns>
+			<s:typicalItem>
+				<fx:Object name="Flash Player" version="10.3.0.23"></fx:Object>
+			</s:typicalItem>
+		</s:DataGrid>
+		<s:HGroup horizontalAlign="right" width="100%">
+			<s:Button id="installButton" label="Install" enabled="false"/>
+			<s:Button id="deleteButton" label="Delete" enabled="false"/>
+		</s:HGroup>
+	</s:VGroup>
+</s:WindowedApplication>
