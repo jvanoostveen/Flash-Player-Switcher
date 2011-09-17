@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-	xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:flashplayerswitcher="flashplayerswitcher.*"
-					   width="100%" height="100%"
-					   applicationComplete="onInit()"
-					   backgroundColor="#F4F4F2">
+	xmlns:mx="library://ns.adobe.com/flex/mx" 
+						xmlns:flashplayerswitcher="flashplayerswitcher.*"
+						xmlns:view="flashplayerswitcher.view.*"
+						backgroundColor="#F4F4F2" width="100%" height="100%" showStatusBar="false"
+						applicationComplete="onInit()">
 	
 	<fx:Declarations>
-		<flashplayerswitcher:FlashPlayerSwitcherContext contextView="{this}" />
+		<flashplayerswitcher:FlashPlayerSwitcherContext id="context" contextView="{this}" />
 	</fx:Declarations>
 
 	<fx:Script>
 		<![CDATA[
-			import flashplayerswitcher.data.DB;
 			import flashplayerswitcher.model.vo.FlashPlayerBundle;
 
 			import spark.events.GridSelectionEvent;
 
+			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
+			import mx.events.FlexEvent;
 
 			import flash.filesystem.File;
 			
 			[Bindable]
-			public var db:DB = new DB();
+			public var dummyData:ArrayCollection = new ArrayCollection();
 			
 			private function onInit():void
 			{
@@ -30,6 +32,8 @@
 					Alert.show("Only Mac OS X is supported.", "Unsupported platform");
 					return;
 				}
+				
+				context.dispatchEvent(new FlexEvent(FlexEvent.APPLICATION_COMPLETE));
 				
 				listing.addEventListener(GridSelectionEvent.SELECTION_CHANGE, handleSelectionChange);
 				installButton.addEventListener(MouseEvent.CLICK, handleInstallButtonClick);
@@ -76,22 +80,9 @@
 					contentBackgroundAlpha="0.0" editable="false"
 					text="Flash Player Switcher makes use of '~/Library/Internet Plug-Ins/'. No systemwide Flash Player will be overwritten."/>
 	</s:Group>
-	<mx:ProgressBar visible="false" x="427" y="538" label="Downloading" fontWeight="bold" indeterminate="false"
-					labelPlacement="top"/>
-	<s:VGroup x="429" y="177" width="249" height="200">
-		<s:VGroup>
-			<s:Label fontWeight="bold" text="Current (user):"/>
-			<s:Label id="userInstalledVersion" fontWeight="normal"
-					 text="..."/>
-		</s:VGroup>
-		<s:VGroup paddingTop="20">
-			<s:Label fontWeight="bold" text="System:"/>
-			<s:Label id="systemInstalledVersion" fontWeight="normal"
-					 text="..."/>
-		</s:VGroup>
-	</s:VGroup>
+	<view:InstalledVersionListing x="429" y="177" width="249" height="200" />
 	<s:VGroup x="26" y="176">
-		<s:DataGrid id="listing" dataProvider="{db.data}" width="385" height="364" editable="true">
+		<s:DataGrid id="listing" dataProvider="{dummyData}" width="385" height="364" editable="true">
 			<s:columns>
 				<s:ArrayList>
 					<s:GridColumn dataField="name" headerText="Name"></s:GridColumn>
@@ -100,7 +91,7 @@
 				</s:ArrayList>
 			</s:columns>
 			<s:typicalItem>
-				<fx:Object name="Flash Player" version="10.3.0.23"></fx:Object>
+				<fx:Object name="Flash Player" version="10.3.0.23" beta="false"></fx:Object>
 			</s:typicalItem>
 		</s:DataGrid>
 		<s:HGroup horizontalAlign="right" width="100%">

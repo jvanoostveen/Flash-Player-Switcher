@@ -1,7 +1,6 @@
 package flashplayerswitcher.controller.commands
 {
 	import flashplayerswitcher.controller.events.CheckInstalledBundleVersionEvent;
-	import flashplayerswitcher.model.InstalledBundlesModel;
 
 	import org.robotlegs.mvcs.Command;
 
@@ -10,9 +9,6 @@ package flashplayerswitcher.controller.commands
 	 */
 	public class InitializeAppCommand extends Command
 	{
-		[Inject]
-		public var installedBundles:InstalledBundlesModel;
-		
 		override public function execute():void
 		{
 			dispatch(new CheckInstalledBundleVersionEvent(CheckInstalledBundleVersionEvent.SYSTEM));

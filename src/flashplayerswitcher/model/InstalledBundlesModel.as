@@ -1,5 +1,6 @@
 package flashplayerswitcher.model
 {
+	import flashplayerswitcher.controller.events.InstalledBundleUpdatedEvent;
 	import flashplayerswitcher.model.vo.FlashPlayerBundle;
 
 	import org.robotlegs.mvcs.Actor;
@@ -20,6 +21,8 @@ package flashplayerswitcher.model
 		public function set system(bundle:FlashPlayerBundle):void
 		{
 			_system = bundle;
+			
+			dispatch(new InstalledBundleUpdatedEvent(InstalledBundleUpdatedEvent.SYSTEM, _system));
 		}
 		
 		public function get user():FlashPlayerBundle
@@ -30,6 +33,8 @@ package flashplayerswitcher.model
 		public function set user(bundle:FlashPlayerBundle):void
 		{
 			_user = bundle;
+			
+			dispatch(new InstalledBundleUpdatedEvent(InstalledBundleUpdatedEvent.USER, _user));
 		}
 	}
 }

@@ -28,10 +28,12 @@ package flashplayerswitcher.controller.commands
 					bundle.parse(plugin);
 					
 					installedBundlesModel.system = bundle;
+				} else {
+					installedBundlesModel.system = null;
 				}
 			} catch (e:Error)
 			{
-				
+				installedBundlesModel.system = null;
 			}
 		}
 	}

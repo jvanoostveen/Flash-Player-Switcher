@@ -26,10 +26,12 @@ package flashplayerswitcher.controller.commands
 					bundle.parse(plugin);
 					
 					installedBundlesModel.user = bundle;
+				} else {
+					installedBundlesModel.user = null;
 				}
 			} catch (e:Error)
 			{
-				
+				installedBundlesModel.user = null;
 			}
 		}
 	}
