@@ -1,4 +1,4 @@
-package flashplayerswitcher.data
+package flashplayerswitcher.model.vo
 {
 	/**
 	 * @author Joeri van Oostveen <joeri@axis.fm>

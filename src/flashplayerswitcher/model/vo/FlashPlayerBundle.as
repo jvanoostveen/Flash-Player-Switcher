@@ -1,13 +1,12 @@
-package flashplayerswitcher.data
+package flashplayerswitcher.model.vo
 {
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	
 	/**
-	 * @author Joeri van Oostveen <joeri@axis.fm>
+	 * @author Joeri van Oostveen
 	 */
-	[Bindable]
 	public class FlashPlayerBundle
 	{
 		public var id:int;
@@ -15,8 +14,6 @@ package flashplayerswitcher.data
 		public var version:String;
 		public var beta:Boolean = false;
 		public var debugger:Boolean = false;
-		public var installed:Boolean = false;
-		public var sourceUrl:String;
 
 		public function FlashPlayerBundle()
 		{

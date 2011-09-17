@@ -1,7 +1,5 @@
 package flashplayerswitcher.data
 {
-	import mx.collections.ArrayCollection;
-
 	import flash.data.SQLConnection;
 	import flash.data.SQLResult;
 	import flash.data.SQLStatement;
@@ -9,6 +7,9 @@ package flashplayerswitcher.data
 	import flash.events.SQLErrorEvent;
 	import flash.events.SQLEvent;
 	import flash.filesystem.File;
+	import flashplayerswitcher.model.vo.FlashPlayerBundle;
+	import mx.collections.ArrayCollection;
+
 
 	/**
 	 * @author Joeri van Oostveen <joeri@axis.fm>
@@ -43,7 +44,7 @@ package flashplayerswitcher.data
 
 		private function handleDatabaseOpen(event:SQLEvent):void
 		{
-			_query.text = "CREATE TABLE IF NOT EXISTS flashplayers ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, version TEXT, beta BOOLEAN, debugger BOOLEAN, installed BOOLEAN, sourceUrl TEXT)";
+			_query.text = "CREATE TABLE IF NOT EXISTS flashplayers ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, version TEXT, beta BOOLEAN, debugger BOOLEAN, installed BOOLEAN )";
 			_query.addEventListener(SQLEvent.RESULT, handleDatabaseCreated);
 			_query.execute();
 		}

@@ -1,79 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
-					   xmlns:s="library://ns.adobe.com/flex/spark"
-					   xmlns:mx="library://ns.adobe.com/flex/mx"
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:flashplayerswitcher="flashplayerswitcher.*"
 					   width="100%" height="100%"
-					   creationComplete="onCreationComplete()" 
 					   applicationComplete="onInit()"
 					   backgroundColor="#F4F4F2">
 	
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<flashplayerswitcher:FlashPlayerSwitcherContext contextView="{this}" />
 	</fx:Declarations>
 
 	<fx:Script>
 		<![CDATA[
 			import flashplayerswitcher.data.DB;
-			import flashplayerswitcher.data.FlashPlayerBundle;
-			import flashplayerswitcher.tasks.ExtractBundle;
+			import flashplayerswitcher.model.vo.FlashPlayerBundle;
 
 			import spark.events.GridSelectionEvent;
 
 			import mx.controls.Alert;
-			import mx.managers.DragManager;
 
-			import flash.desktop.ClipboardFormats;
 			import flash.filesystem.File;
 			
 			[Bindable]
 			public var db:DB = new DB();
 			
-			private function onCreationComplete():void
-			{
-				addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, handleDragEnter);
-				addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, handleDragDrop);
-			}
-
-			private function handleDragEnter(event:NativeDragEvent):void
-			{
-				//check and see if files are being drug in
-				if(event.clipboard.hasFormat(ClipboardFormats.FILE_LIST_FORMAT))
-				{
-					//get the array of files
-					var files:Array = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
-					
-					//make sure only one file is dragged in (i.e. this app doesn't
-					//support dragging in multiple files)
-					if(files.length == 1)
-					{
-						var file:File = files[0];
-						if (file.isDirectory)
-						{
-							//accept the drag action
-							DragManager.acceptDragDrop(this);
-						}
-					}
-				}
-			}
-
-			private function handleDragDrop(event:NativeDragEvent):void
-			{
-				//get the array of files being drug into the app
-				var files:Array = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
-				
-				//grab the files file
-				var file:File = File(files[0]);
-				
-				var extract:ExtractBundle = new ExtractBundle(file);
-				extract.addEventListener(Event.COMPLETE, handleExtractComplete);
-				extract.execute();
-			}
-
-			private function handleExtractComplete(event:Event):void
-			{
-				trace("extraction done");
-			}
-
 			private function onInit():void
 			{
 				if (Capabilities.os.indexOf("Mac OS") == -1)
@@ -84,35 +33,8 @@
 				
 				listing.addEventListener(GridSelectionEvent.SELECTION_CHANGE, handleSelectionChange);
 				installButton.addEventListener(MouseEvent.CLICK, handleInstallButtonClick);
-				
-				checkVersions();
 			}
 			
-			private function checkVersions():void
-			{
-				// detect user installed
-				var userBundleFile:File = File.userDirectory.resolvePath("Library/Internet Plug-Ins/Flash Player.plugin");
-				if (userBundleFile.exists)
-				{
-					var userBundle:FlashPlayerBundle = new FlashPlayerBundle();
-					userBundle.parse(userBundleFile);
-					userInstalledVersion.text = userBundle.name + " (" + userBundle.version + ")";
-				} else {
-					userInstalledVersion.text = "<none>";
-				}
-				
-				var systemBundleFile:File = File.getRootDirectories()[0];
-				systemBundleFile = systemBundleFile.resolvePath("Library/Internet Plug-Ins/Flash Player.plugin");
-				if (systemBundleFile.exists)
-				{
-					var systemBundle:FlashPlayerBundle = new FlashPlayerBundle();
-					systemBundle.parse(systemBundleFile);
-					systemInstalledVersion.text = systemBundle.name + " (" + systemBundle.version + ")";
-				} else {
-					systemInstalledVersion.text = "<none>";
-				}
-			}
-
 			private function handleInstallButtonClick(event:MouseEvent):void
 			{
 				if (listing.selectedIndex == -1)
@@ -131,8 +53,6 @@
 				xpt.copyTo(xptTarget, true);
 				
 				Alert.show("Flash Player switched. Restart your browser(s).", "Flash Player switched");
-				
-				checkVersions();
 			}
 
 			private function handleSelectionChange(event:GridSelectionEvent):void
