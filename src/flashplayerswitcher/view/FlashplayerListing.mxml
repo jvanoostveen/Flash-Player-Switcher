@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
+          xmlns:s="library://ns.adobe.com/flex/spark"
+          xmlns:mx="library://ns.adobe.com/flex/mx">
+	<s:DataGrid id="listing" width="385" height="364" editable="true">
+		<s:columns>
+			<s:ArrayList>
+				<s:GridColumn dataField="name" headerText="Name"></s:GridColumn>
+				<s:GridColumn dataField="version" editable="false" headerText="Version"></s:GridColumn>
+				<s:GridColumn dataField="beta" editable="false" headerText="Beta"></s:GridColumn>
+			</s:ArrayList>
+		</s:columns>
+		<s:typicalItem>
+			<fx:Object name="Flash Player" version="10.3.0.23" beta="false"></fx:Object>
+		</s:typicalItem>
+	</s:DataGrid>
+	<s:HGroup horizontalAlign="right" width="100%">
+		<s:Button id="installButton" label="Install" enabled="false"/>
+		<s:Button id="deleteButton" label="Delete" enabled="false"/>
+	</s:HGroup>
+</s:VGroup>

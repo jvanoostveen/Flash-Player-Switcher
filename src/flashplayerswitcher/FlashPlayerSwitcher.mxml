@@ -35,42 +35,42 @@
 				
 				context.dispatchEvent(new FlexEvent(FlexEvent.APPLICATION_COMPLETE));
 				
-				listing.addEventListener(GridSelectionEvent.SELECTION_CHANGE, handleSelectionChange);
-				installButton.addEventListener(MouseEvent.CLICK, handleInstallButtonClick);
+//				listing.addEventListener(GridSelectionEvent.SELECTION_CHANGE, handleSelectionChange);
+//				installButton.addEventListener(MouseEvent.CLICK, handleInstallButtonClick);
 			}
 			
-			private function handleInstallButtonClick(event:MouseEvent):void
-			{
-				if (listing.selectedIndex == -1)
-					return;
-				
-				var bundle:FlashPlayerBundle = listing.selectedItem as FlashPlayerBundle;
-				
-				// #1 plugin
-				var plugin:File = File.applicationStorageDirectory.resolvePath("FlashPlayers/" + bundle.version + "-debug" + "/" + "Flash Player.plugin");
-				var pluginTarget:File = File.userDirectory.resolvePath("Library/Internet Plug-Ins/Flash Player.plugin");
-				plugin.copyTo(pluginTarget, true);
-				
-				// #2 xpt
-				var xpt:File = File.applicationStorageDirectory.resolvePath("FlashPlayers/" + bundle.version + "-debug" + "/" + "flashplayer.xpt");
-				var xptTarget:File = File.userDirectory.resolvePath("Library/Internet Plug-Ins/flashplayer.xpt");
-				xpt.copyTo(xptTarget, true);
-				
-				Alert.show("Flash Player switched. Restart your browser(s).", "Flash Player switched");
-			}
-
-			private function handleSelectionChange(event:GridSelectionEvent):void
-			{
-				if (listing.selectedIndex == -1)
-				{
-					installButton.enabled = false;
-					deleteButton.enabled = false;
-					
-					return;
-				}
-				
-				installButton.enabled = true;
-			}
+//			private function handleInstallButtonClick(event:MouseEvent):void
+//			{
+//				if (listing.selectedIndex == -1)
+//					return;
+//				
+//				var bundle:FlashPlayerBundle = listing.selectedItem as FlashPlayerBundle;
+//				
+//				// #1 plugin
+//				var plugin:File = File.applicationStorageDirectory.resolvePath("FlashPlayers/" + bundle.version + "-debug" + "/" + "Flash Player.plugin");
+//				var pluginTarget:File = File.userDirectory.resolvePath("Library/Internet Plug-Ins/Flash Player.plugin");
+//				plugin.copyTo(pluginTarget, true);
+//				
+//				// #2 xpt
+//				var xpt:File = File.applicationStorageDirectory.resolvePath("FlashPlayers/" + bundle.version + "-debug" + "/" + "flashplayer.xpt");
+//				var xptTarget:File = File.userDirectory.resolvePath("Library/Internet Plug-Ins/flashplayer.xpt");
+//				xpt.copyTo(xptTarget, true);
+//				
+//				Alert.show("Flash Player switched. Restart your browser(s).", "Flash Player switched");
+//			}
+//
+//			private function handleSelectionChange(event:GridSelectionEvent):void
+//			{
+//				if (listing.selectedIndex == -1)
+//				{
+//					installButton.enabled = false;
+//					deleteButton.enabled = false;
+//					
+//					return;
+//				}
+//				
+//				installButton.enabled = true;
+//			}
 		]]>
 	</fx:Script>
 	<s:Group x="0" y="0">
@@ -80,23 +80,6 @@
 					contentBackgroundAlpha="0.0" editable="false"
 					text="Flash Player Switcher makes use of '~/Library/Internet Plug-Ins/'. No systemwide Flash Player will be overwritten."/>
 	</s:Group>
-	<view:InstalledVersionListing x="429" y="177" width="249" height="200" />
-	<s:VGroup x="26" y="176">
-		<s:DataGrid id="listing" dataProvider="{dummyData}" width="385" height="364" editable="true">
-			<s:columns>
-				<s:ArrayList>
-					<s:GridColumn dataField="name" headerText="Name"></s:GridColumn>
-					<s:GridColumn dataField="version" editable="false" headerText="Version"></s:GridColumn>
-					<s:GridColumn dataField="beta" editable="false" headerText="Beta"></s:GridColumn>
-				</s:ArrayList>
-			</s:columns>
-			<s:typicalItem>
-				<fx:Object name="Flash Player" version="10.3.0.23" beta="false"></fx:Object>
-			</s:typicalItem>
-		</s:DataGrid>
-		<s:HGroup horizontalAlign="right" width="100%">
-			<s:Button id="installButton" label="Install" enabled="false"/>
-			<s:Button id="deleteButton" label="Delete" enabled="false"/>
-		</s:HGroup>
-	</s:VGroup>
+	<view:InstalledVersionListing x="429" y="177" width="249" height="200"/>
+	<view:FlashplayerListing x="26" y="176" />
 </s:WindowedApplication>

@@ -6,7 +6,11 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.commands.InitializeAppCommand;
 	import flashplayerswitcher.controller.events.CheckInstalledBundleVersionEvent;
 	import flashplayerswitcher.model.InstalledBundlesModel;
+	import flashplayerswitcher.service.IFlashplayersService;
+	import flashplayerswitcher.service.SQLFlashplayersService;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
+	import flashplayerswitcher.view.FlashplayerListing;
+	import flashplayerswitcher.view.FlashplayerListingMediator;
 	import flashplayerswitcher.view.InstalledVersionListing;
 	import flashplayerswitcher.view.InstalledVersionListingMediator;
 
@@ -22,6 +26,9 @@ package flashplayerswitcher
 		override public function startup():void
 		{
 			mediatorMap.mapView(InstalledVersionListing, InstalledVersionListingMediator);
+			mediatorMap.mapView(FlashplayerListing, FlashplayerListingMediator);
+			
+			injector.mapSingletonOf(IFlashplayersService, SQLFlashplayersService);
 			
 			injector.mapSingleton(InstalledBundlesModel);
 			
