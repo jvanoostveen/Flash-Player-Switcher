@@ -11,7 +11,7 @@ package flashplayerswitcher.service
 	import flash.errors.SQLError;
 
 	/**
-	 * @author Joeri van Oostveen <joeri@axis.fm>
+	 * @author Joeri van Oostveen
 	 */
 	public class SQLFlashplayersService extends Actor implements IFlashplayersService
 	{

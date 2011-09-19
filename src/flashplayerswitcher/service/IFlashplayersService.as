@@ -1,7 +1,7 @@
 package flashplayerswitcher.service
 {
 	/**
-	 * @author Joeri van Oostveen <joeri@axis.fm>
+	 * @author Joeri van Oostveen
 	 */
 	public interface IFlashplayersService
 	{

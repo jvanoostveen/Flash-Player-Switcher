@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
-          xmlns:s="library://ns.adobe.com/flex/spark"
-          xmlns:mx="library://ns.adobe.com/flex/mx">
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import flashplayerswitcher.controller.events.CopySystemPluginEvent;
+			import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
+			
+			private function handleRemoveUserPluginClick(event:MouseEvent):void
+			{
+				dispatchEvent(new RemoveUserPluginEvent());
+			}
+
+			private function handleCopySystemPluginClick(event:MouseEvent):void
+			{
+				dispatchEvent(new CopySystemPluginEvent());
+			}
+		]]>
+	</fx:Script>
 	<s:VGroup>
 		<s:Label fontWeight="bold" text="Current (user):"/>
-		<s:Label id="userInstalledVersion" fontWeight="normal"
-				 text="..."/>
+		<s:Label id="userInstalledVersion" fontWeight="normal" text="..."/>
+		<s:Button id="removeUserPluginButton" label="remove" visible="false" click="handleRemoveUserPluginClick(event);" />
 	</s:VGroup>
 	<s:VGroup paddingTop="20">
 		<s:Label fontWeight="bold" text="System:"/>
-		<s:Label id="systemInstalledVersion" fontWeight="normal"
-				 text="..."/>
+		<s:Label id="systemInstalledVersion" fontWeight="normal" text="..."/>
+		<s:Button id="copySystemPluginButton" label="install" visible="false" click="handleCopySystemPluginClick(event);" />
 	</s:VGroup>
 </s:VGroup>

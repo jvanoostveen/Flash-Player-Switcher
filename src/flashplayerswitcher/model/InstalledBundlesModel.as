@@ -24,6 +24,11 @@ package flashplayerswitcher.model
 			dispatch(new BundlesUpdatedEvent(BundlesUpdatedEvent.UPDATED, _bundles));
 		}
 		
+		public function get bundles():ArrayCollection
+		{
+			return _bundles ||= new ArrayCollection();
+		}
+		
 		public function get system():FlashPlayerBundle
 		{
 			return _system;

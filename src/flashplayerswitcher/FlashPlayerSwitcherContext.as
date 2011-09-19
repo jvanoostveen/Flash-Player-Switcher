@@ -3,8 +3,12 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.commands.CheckInstalledSystemBundleVersionCommand;
 	import flashplayerswitcher.controller.commands.CheckInstalledUserBundleVersionCommand;
 	import flashplayerswitcher.controller.commands.ConfigureDatabaseCommand;
+	import flashplayerswitcher.controller.commands.CopySystemPluginCommand;
 	import flashplayerswitcher.controller.commands.InitializeAppCommand;
+	import flashplayerswitcher.controller.commands.RemoveUserPluginCommand;
 	import flashplayerswitcher.controller.events.CheckInstalledBundleVersionEvent;
+	import flashplayerswitcher.controller.events.CopySystemPluginEvent;
+	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
 	import flashplayerswitcher.model.InstalledBundlesModel;
 	import flashplayerswitcher.service.IFlashplayersService;
 	import flashplayerswitcher.service.SQLFlashplayersService;
@@ -36,6 +40,8 @@ package flashplayerswitcher
 			commandMap.mapEvent(DatabaseReadyEvent.READY, InitializeAppCommand);
 			commandMap.mapEvent(CheckInstalledBundleVersionEvent.SYSTEM, CheckInstalledSystemBundleVersionCommand);
 			commandMap.mapEvent(CheckInstalledBundleVersionEvent.USER, CheckInstalledUserBundleVersionCommand);
+			commandMap.mapEvent(CopySystemPluginEvent.COPY, CopySystemPluginCommand, CopySystemPluginEvent);
+			commandMap.mapEvent(RemoveUserPluginEvent.REMOVE, RemoveUserPluginCommand, RemoveUserPluginEvent);
 			
 			super.startup();
 		}
