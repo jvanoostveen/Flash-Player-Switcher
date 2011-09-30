@@ -21,11 +21,11 @@
 	<s:VGroup>
 		<s:Label fontWeight="bold" text="Current (user):"/>
 		<s:Label id="userInstalledVersion" fontWeight="normal" text="..."/>
-		<s:Button id="removeUserPluginButton" label="remove" visible="false" click="handleRemoveUserPluginClick(event);" />
+		<s:Button id="removeUserPluginButton" label="Remove" visible="false" click="handleRemoveUserPluginClick(event);" />
 	</s:VGroup>
 	<s:VGroup paddingTop="20">
 		<s:Label fontWeight="bold" text="System:"/>
 		<s:Label id="systemInstalledVersion" fontWeight="normal" text="..."/>
-		<s:Button id="copySystemPluginButton" label="install" visible="false" click="handleCopySystemPluginClick(event);" />
+		<s:Button id="copySystemPluginButton" label="Install" visible="false" click="handleCopySystemPluginClick(event);" />
 	</s:VGroup>
 </s:VGroup>
