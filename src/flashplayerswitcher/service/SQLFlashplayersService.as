@@ -1,7 +1,7 @@
 package flashplayerswitcher.service
 {
 	import mx.collections.ArrayCollection;
-	import flashplayerswitcher.model.InstalledBundlesModel;
+	import flashplayerswitcher.model.InstalledPluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.service.helpers.ISQLRunnerDelegate;
 
@@ -19,7 +19,7 @@ package flashplayerswitcher.service
         public var sqlRunner:ISQLRunnerDelegate;
 
         [Inject]
-		public var installedBundles:InstalledBundlesModel;
+		public var installedPlugins:InstalledPluginsModel;
 
 		public function loadFlashplayers():void
 		{
@@ -28,7 +28,7 @@ package flashplayerswitcher.service
 		
 		private function result(data:SQLResult):void
 		{
-			installedBundles.bundles = new ArrayCollection(data.data);
+			installedPlugins.bundles = new ArrayCollection(data.data);
 		}
 		
 		private function fault(error:SQLError):void

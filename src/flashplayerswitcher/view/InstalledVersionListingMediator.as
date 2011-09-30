@@ -2,7 +2,7 @@ package flashplayerswitcher.view
 {
 	import flashplayerswitcher.controller.events.BundlesUpdatedEvent;
 	import flashplayerswitcher.controller.events.CopySystemPluginEvent;
-	import flashplayerswitcher.controller.events.InstalledBundleUpdatedEvent;
+	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
 
 	import org.robotlegs.mvcs.Mediator;
@@ -17,36 +17,36 @@ package flashplayerswitcher.view
 
 		override public function onRegister():void
 		{
-			addContextListener(InstalledBundleUpdatedEvent.SYSTEM, systemBundleUpdated);
-			addContextListener(InstalledBundleUpdatedEvent.USER, userBundleUpdated);
-			addContextListener(BundlesUpdatedEvent.UPDATED, knownBundlesUpdated);
+			addContextListener(InstalledPluginUpdatedEvent.SYSTEM, systemPluginUpdated);
+			addContextListener(InstalledPluginUpdatedEvent.USER, userPluginUpdated);
+			addContextListener(BundlesUpdatedEvent.UPDATED, knownPluginsUpdated);
 			
 			addViewListener(RemoveUserPluginEvent.REMOVE, dispatch);
 			addViewListener(CopySystemPluginEvent.COPY, dispatch);
 		}
 		
-		private function knownBundlesUpdated(event:BundlesUpdatedEvent):void
+		private function knownPluginsUpdated(event:BundlesUpdatedEvent):void
 		{
-			// check if copy system bundle button should be visible
+			// check if copy system plugin button should be visible
 		}
 		
-		private function systemBundleUpdated(event:InstalledBundleUpdatedEvent):void
+		private function systemPluginUpdated(event:InstalledPluginUpdatedEvent):void
 		{
-			if (event.bundle)
-				view.systemInstalledVersion.text = event.bundle.name + " (" + event.bundle.version + ")";
+			if (event.plugin)
+				view.systemInstalledVersion.text = event.plugin.name + " (" + event.plugin.version + ")";
 			else
 				view.systemInstalledVersion.text = "<none>";
 			
 		}
 		
-		private function userBundleUpdated(event:InstalledBundleUpdatedEvent):void
+		private function userPluginUpdated(event:InstalledPluginUpdatedEvent):void
 		{
-			if (event.bundle)
-				view.userInstalledVersion.text = event.bundle.name + " (" + event.bundle.version + ")";
+			if (event.plugin)
+				view.userInstalledVersion.text = event.plugin.name + " (" + event.plugin.version + ")";
 			else
 				view.userInstalledVersion.text = "<none>";
 			
-			view.removeUserPluginButton.visible = (event.bundle ? true : false);
+			view.removeUserPluginButton.visible = (event.plugin ? true : false);
 		}
 	}
 }

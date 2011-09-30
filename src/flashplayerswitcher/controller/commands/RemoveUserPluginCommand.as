@@ -1,6 +1,6 @@
 package flashplayerswitcher.controller.commands
 {
-	import flashplayerswitcher.controller.events.CheckInstalledBundleVersionEvent;
+	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 
 	import org.robotlegs.mvcs.Command;
 
@@ -21,7 +21,7 @@ package flashplayerswitcher.controller.commands
 			if (xpt.exists)
 				xpt.deleteFile();
 			
-			dispatch(new CheckInstalledBundleVersionEvent(CheckInstalledBundleVersionEvent.USER));
+			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
 		}
 	}
 }

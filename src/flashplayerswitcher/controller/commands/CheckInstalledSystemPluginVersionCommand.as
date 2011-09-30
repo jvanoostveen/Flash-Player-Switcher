@@ -1,34 +1,34 @@
 package flashplayerswitcher.controller.commands
 {
-	import flashplayerswitcher.model.InstalledBundlesModel;
+	import flashplayerswitcher.model.InstalledPluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.model.vo.InternetPlugins;
 
 	import org.robotlegs.mvcs.Command;
 
 	/**
-	 * @author Joeri van Oostveen
+	 * @author Joeri van Oostveen <joeri@axis.fm>
 	 */
-	public class CheckInstalledUserBundleVersionCommand extends Command
+	public class CheckInstalledSystemPluginVersionCommand extends Command
 	{
 		[Inject]
-		public var installedBundlesModel:InstalledBundlesModel;
+		public var installedPluginsModel:InstalledPluginsModel;
 		
 		override public function execute():void
 		{
 			try
 			{
 				var plugin:FlashPlayerPlugin = new FlashPlayerPlugin();
-				plugin.search(InternetPlugins.USER);
+				plugin.search(InternetPlugins.SYSTEM);
 				if (plugin.exists)
 				{
-					installedBundlesModel.user = plugin;
+					installedPluginsModel.system = plugin;
 				} else {
-					installedBundlesModel.user = null;
+					installedPluginsModel.system = null;
 				}
 			} catch (e:Error)
 			{
-				installedBundlesModel.user = null;
+				installedPluginsModel.system = null;
 			}
 		}
 	}

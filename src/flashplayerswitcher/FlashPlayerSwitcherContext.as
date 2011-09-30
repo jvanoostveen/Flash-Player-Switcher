@@ -1,15 +1,15 @@
 package flashplayerswitcher
 {
-	import flashplayerswitcher.controller.commands.CheckInstalledSystemBundleVersionCommand;
-	import flashplayerswitcher.controller.commands.CheckInstalledUserBundleVersionCommand;
+	import flashplayerswitcher.controller.commands.CheckInstalledSystemPluginVersionCommand;
+	import flashplayerswitcher.controller.commands.CheckInstalledUserPluginVersionCommand;
 	import flashplayerswitcher.controller.commands.ConfigureDatabaseCommand;
 	import flashplayerswitcher.controller.commands.CopySystemPluginCommand;
 	import flashplayerswitcher.controller.commands.InitializeAppCommand;
 	import flashplayerswitcher.controller.commands.RemoveUserPluginCommand;
-	import flashplayerswitcher.controller.events.CheckInstalledBundleVersionEvent;
+	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.controller.events.CopySystemPluginEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
-	import flashplayerswitcher.model.InstalledBundlesModel;
+	import flashplayerswitcher.model.InstalledPluginsModel;
 	import flashplayerswitcher.service.IFlashplayersService;
 	import flashplayerswitcher.service.SQLFlashplayersService;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
@@ -34,12 +34,12 @@ package flashplayerswitcher
 			
 			injector.mapSingletonOf(IFlashplayersService, SQLFlashplayersService);
 			
-			injector.mapSingleton(InstalledBundlesModel);
+			injector.mapSingleton(InstalledPluginsModel);
 			
 			commandMap.mapEvent(FlexEvent.APPLICATION_COMPLETE, ConfigureDatabaseCommand);
 			commandMap.mapEvent(DatabaseReadyEvent.READY, InitializeAppCommand);
-			commandMap.mapEvent(CheckInstalledBundleVersionEvent.SYSTEM, CheckInstalledSystemBundleVersionCommand);
-			commandMap.mapEvent(CheckInstalledBundleVersionEvent.USER, CheckInstalledUserBundleVersionCommand);
+			commandMap.mapEvent(CheckInstalledPluginVersionEvent.SYSTEM, CheckInstalledSystemPluginVersionCommand);
+			commandMap.mapEvent(CheckInstalledPluginVersionEvent.USER, CheckInstalledUserPluginVersionCommand);
 			commandMap.mapEvent(CopySystemPluginEvent.COPY, CopySystemPluginCommand, CopySystemPluginEvent);
 			commandMap.mapEvent(RemoveUserPluginEvent.REMOVE, RemoveUserPluginCommand, RemoveUserPluginEvent);
 			

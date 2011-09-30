@@ -1,7 +1,7 @@
 package flashplayerswitcher.model
 {
 	import flashplayerswitcher.controller.events.BundlesUpdatedEvent;
-	import flashplayerswitcher.controller.events.InstalledBundleUpdatedEvent;
+	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 
 	import org.robotlegs.mvcs.Actor;
@@ -11,7 +11,7 @@ package flashplayerswitcher.model
 	/**
 	 * @author Joeri van Oostveen
 	 */
-	public class InstalledBundlesModel extends Actor
+	public class InstalledPluginsModel extends Actor
 	{
 		private var _system:FlashPlayerPlugin;
 		private var _user:FlashPlayerPlugin;
@@ -38,7 +38,7 @@ package flashplayerswitcher.model
 		{
 			_system = bundle;
 			
-			dispatch(new InstalledBundleUpdatedEvent(InstalledBundleUpdatedEvent.SYSTEM, _system));
+			dispatch(new InstalledPluginUpdatedEvent(InstalledPluginUpdatedEvent.SYSTEM, _system));
 		}
 		
 		public function get user():FlashPlayerPlugin
@@ -50,7 +50,7 @@ package flashplayerswitcher.model
 		{
 			_user = bundle;
 			
-			dispatch(new InstalledBundleUpdatedEvent(InstalledBundleUpdatedEvent.USER, _user));
+			dispatch(new InstalledPluginUpdatedEvent(InstalledPluginUpdatedEvent.USER, _user));
 		}
 	}
 }

@@ -5,12 +5,12 @@ package flashplayerswitcher.controller.events
 	/**
 	 * @author Joeri van Oostveen
 	 */
-	public class CheckInstalledBundleVersionEvent extends Event
+	public class CheckInstalledPluginVersionEvent extends Event
 	{
 		public static const SYSTEM:String = "CheckInstalledBundleVersionEvent.SYSTEM";
 		public static const USER:String = "CheckInstalledBundleVersionEvent.USER";
 		
-		public function CheckInstalledBundleVersionEvent(type:String)
+		public function CheckInstalledPluginVersionEvent(type:String)
 		{
 			super(type);
 		}

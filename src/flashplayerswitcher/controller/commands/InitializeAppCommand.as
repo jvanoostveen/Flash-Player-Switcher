@@ -1,6 +1,6 @@
 package flashplayerswitcher.controller.commands
 {
-	import flashplayerswitcher.controller.events.CheckInstalledBundleVersionEvent;
+	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.model.vo.InternetPlugins;
 
 	import org.robotlegs.mvcs.Command;
@@ -18,8 +18,8 @@ package flashplayerswitcher.controller.commands
 			InternetPlugins.SYSTEM = (File.getRootDirectories()[0] as File).resolvePath("Library/Internet Plug-Ins");
 			InternetPlugins.USER = File.userDirectory.resolvePath("Library/Internet Plug-Ins");
 			
-			dispatch(new CheckInstalledBundleVersionEvent(CheckInstalledBundleVersionEvent.SYSTEM));
-			dispatch(new CheckInstalledBundleVersionEvent(CheckInstalledBundleVersionEvent.USER));
+			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.SYSTEM));
+			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
 			
 			
 		}

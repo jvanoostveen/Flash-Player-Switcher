@@ -12,15 +12,9 @@
 
 	<fx:Script>
 		<![CDATA[
-			import flashplayerswitcher.model.vo.FlashPlayerPlugin;
-
-			import spark.events.GridSelectionEvent;
-
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.events.FlexEvent;
-
-			import flash.filesystem.File;
 			
 			[Bindable]
 			public var dummyData:ArrayCollection = new ArrayCollection();
@@ -78,7 +72,7 @@
 		<s:Label x="161" y="36" fontSize="48" text="Flash Player Switcher"/>
 		<s:TextArea x="161" y="84" width="359" height="45" borderVisible="false"
 					contentBackgroundAlpha="0.0" editable="false"
-					text="Flash Player Switcher makes use of '~/Library/Internet Plug-Ins/'. No systemwide Flash Player will be overwritten."/>
+					text="Flash Player Switcher makes use of '~/Library/Internet Plug-Ins/'. No systemwide Flash Player plugin will be overwritten."/>
 	</s:Group>
 	<view:InstalledVersionListing x="429" y="177" width="249" height="200"/>
 	<view:FlashplayerListing x="26" y="176" />
