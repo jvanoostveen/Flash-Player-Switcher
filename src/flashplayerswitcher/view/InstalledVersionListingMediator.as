@@ -1,33 +1,47 @@
 package flashplayerswitcher.view
 {
-	import flashplayerswitcher.controller.events.BundlesUpdatedEvent;
 	import flashplayerswitcher.controller.events.CopySystemPluginEvent;
 	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
+	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
+	import flashplayerswitcher.model.PluginsModel;
 
 	import org.robotlegs.mvcs.Mediator;
 
 	/**
-	 * @author Joeri van Oostveen <joeri@axis.fm>
+	 * @author Joeri van Oostveen
 	 */
 	public class InstalledVersionListingMediator extends Mediator
 	{
 		[Inject]
 		public var view:InstalledVersionListing;
+		
+		[Inject]
+		public var plugins:PluginsModel;
 
 		override public function onRegister():void
 		{
 			addContextListener(InstalledPluginUpdatedEvent.SYSTEM, systemPluginUpdated);
 			addContextListener(InstalledPluginUpdatedEvent.USER, userPluginUpdated);
-			addContextListener(BundlesUpdatedEvent.UPDATED, knownPluginsUpdated);
+			addContextListener(PluginsUpdatedEvent.UPDATED, knownPluginsUpdated);
 			
 			addViewListener(RemoveUserPluginEvent.REMOVE, dispatch);
 			addViewListener(CopySystemPluginEvent.COPY, dispatch);
 		}
 		
-		private function knownPluginsUpdated(event:BundlesUpdatedEvent):void
+		private function knownPluginsUpdated(event:PluginsUpdatedEvent):void
 		{
 			// check if copy system plugin button should be visible
+			checkSystemPluginInstall();
+		}
+
+		private function checkSystemPluginInstall():void
+		{
+			view.copySystemPluginButton.visible = false;
+			if (!plugins.contains(plugins.system))
+			{
+				view.copySystemPluginButton.visible = true;
+			}
 		}
 		
 		private function systemPluginUpdated(event:InstalledPluginUpdatedEvent):void
@@ -37,6 +51,7 @@ package flashplayerswitcher.view
 			else
 				view.systemInstalledVersion.text = "<none>";
 			
+			checkSystemPluginInstall();
 		}
 		
 		private function userPluginUpdated(event:InstalledPluginUpdatedEvent):void

@@ -5,16 +5,16 @@ package flashplayerswitcher.controller.commands
 	import org.robotlegs.mvcs.Command;
 
 	/**
-	 * @author Joeri van Oostveen <joeri@axis.fm>
+	 * @author Joeri van Oostveen
 	 */
-	public class LoadFlashplayersCommand extends Command
+	public class LoadPluginsCommand extends Command
 	{
 		[Inject]
 		public var flashplayers:IFlashplayersService;
 		
 		override public function execute():void
 		{
-			flashplayers.loadFlashplayers();
+			flashplayers.loadPlugins();
 		}
 	}
 }

@@ -5,7 +5,7 @@ package flashplayerswitcher.controller.commands
 	/**
 	 * @author Joeri van Oostveen
 	 */
-	public class RemoveInstalledBundleCommand extends Command
+	public class InstallPluginCommand extends Command
 	{
 	}
 }

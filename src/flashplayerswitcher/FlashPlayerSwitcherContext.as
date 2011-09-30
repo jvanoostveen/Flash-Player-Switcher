@@ -5,11 +5,13 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.commands.ConfigureDatabaseCommand;
 	import flashplayerswitcher.controller.commands.CopySystemPluginCommand;
 	import flashplayerswitcher.controller.commands.InitializeAppCommand;
+	import flashplayerswitcher.controller.commands.LoadPluginsCommand;
 	import flashplayerswitcher.controller.commands.RemoveUserPluginCommand;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.controller.events.CopySystemPluginEvent;
+	import flashplayerswitcher.controller.events.LoadPluginsEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
-	import flashplayerswitcher.model.InstalledPluginsModel;
+	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.service.IFlashplayersService;
 	import flashplayerswitcher.service.SQLFlashplayersService;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
@@ -34,10 +36,11 @@ package flashplayerswitcher
 			
 			injector.mapSingletonOf(IFlashplayersService, SQLFlashplayersService);
 			
-			injector.mapSingleton(InstalledPluginsModel);
+			injector.mapSingleton(PluginsModel);
 			
 			commandMap.mapEvent(FlexEvent.APPLICATION_COMPLETE, ConfigureDatabaseCommand);
 			commandMap.mapEvent(DatabaseReadyEvent.READY, InitializeAppCommand);
+			commandMap.mapEvent(LoadPluginsEvent.LOAD_PLUGINS, LoadPluginsCommand, LoadPluginsEvent);
 			commandMap.mapEvent(CheckInstalledPluginVersionEvent.SYSTEM, CheckInstalledSystemPluginVersionCommand);
 			commandMap.mapEvent(CheckInstalledPluginVersionEvent.USER, CheckInstalledUserPluginVersionCommand);
 			commandMap.mapEvent(CopySystemPluginEvent.COPY, CopySystemPluginCommand, CopySystemPluginEvent);

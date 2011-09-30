@@ -1,6 +1,6 @@
 package flashplayerswitcher.controller.commands
 {
-	import flashplayerswitcher.model.InstalledPluginsModel;
+	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.model.vo.InternetPlugins;
 
@@ -12,7 +12,7 @@ package flashplayerswitcher.controller.commands
 	public class CheckInstalledSystemPluginVersionCommand extends Command
 	{
 		[Inject]
-		public var installedPluginsModel:InstalledPluginsModel;
+		public var installedPluginsModel:PluginsModel;
 		
 		override public function execute():void
 		{

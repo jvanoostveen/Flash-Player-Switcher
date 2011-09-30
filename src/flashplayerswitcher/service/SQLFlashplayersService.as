@@ -1,7 +1,7 @@
 package flashplayerswitcher.service
 {
 	import mx.collections.ArrayCollection;
-	import flashplayerswitcher.model.InstalledPluginsModel;
+	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.service.helpers.ISQLRunnerDelegate;
 
@@ -19,16 +19,16 @@ package flashplayerswitcher.service
         public var sqlRunner:ISQLRunnerDelegate;
 
         [Inject]
-		public var installedPlugins:InstalledPluginsModel;
+		public var installedPlugins:PluginsModel;
 
-		public function loadFlashplayers():void
+		public function loadPlugins():void
 		{
-			sqlRunner.execute(LOAD_ALL_FLASHPLAYERS_SQL, null, result, FlashPlayerPlugin, fault);
+			sqlRunner.execute(LOAD_ALL_PLUGINS_SQL, null, onAllPluginsLoaded, FlashPlayerPlugin, fault);
 		}
 		
-		private function result(data:SQLResult):void
+		private function onAllPluginsLoaded(data:SQLResult):void
 		{
-			installedPlugins.bundles = new ArrayCollection(data.data);
+			installedPlugins.plugins = new ArrayCollection(data.data);
 		}
 		
 		private function fault(error:SQLError):void
@@ -38,6 +38,6 @@ package flashplayerswitcher.service
 		
 		[Embed(source="flashplayerswitcher/sql/flashplayers/LoadAllFlashplayers.sql", mimeType="application/octet-stream")]
 		private static var LoadAllFlashplayersStatementText:Class;
-		public static const LOAD_ALL_FLASHPLAYERS_SQL:String = new LoadAllFlashplayersStatementText();
+		public static const LOAD_ALL_PLUGINS_SQL:String = new LoadAllFlashplayersStatementText();
 	}
 }

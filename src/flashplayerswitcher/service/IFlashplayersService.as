@@ -5,6 +5,6 @@ package flashplayerswitcher.service
 	 */
 	public interface IFlashplayersService
 	{
-		function loadFlashplayers():void;
+		function loadPlugins():void;
 	}
 }

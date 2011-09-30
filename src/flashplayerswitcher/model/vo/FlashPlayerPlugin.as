@@ -34,10 +34,24 @@ package flashplayerswitcher.model.vo
 			if (plugin.exists)
 				parse();
 		}
+
+		public function remove():void
+		{
+			if (plugin.exists)
+				plugin.deleteDirectory(true);
+			
+			if (xpt.exists)
+				xpt.deleteFile();
+		}
 		
 		public function get exists():Boolean
 		{
 			return plugin ? plugin.exists : false;
+		}
+		
+		public function get hash():String
+		{
+			return version + "_" + (debugger ? "debugger" : "release") + "_" + (beta ? "beta" : "final");
 		}
 		
 		private function parse():void
@@ -71,6 +85,5 @@ package flashplayerswitcher.model.vo
 				}
 			}
 		}
-
 	}
 }
