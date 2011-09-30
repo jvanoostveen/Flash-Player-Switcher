@@ -7,7 +7,7 @@ package flashplayerswitcher.data
 	import flash.events.SQLErrorEvent;
 	import flash.events.SQLEvent;
 	import flash.filesystem.File;
-	import flashplayerswitcher.model.vo.FlashPlayerBundle;
+	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import mx.collections.ArrayCollection;
 
 
@@ -29,7 +29,7 @@ package flashplayerswitcher.data
 			var dbFile:File = File.applicationStorageDirectory.resolvePath("flashplayers.db");
 			
 			_query = new SQLStatement();
-			_query.itemClass = FlashPlayerBundle;
+			_query.itemClass = FlashPlayerPlugin;
 			_query.addEventListener(SQLErrorEvent.ERROR, handleDatabaseCreatedError);
 			
 			_db = new SQLConnection();

@@ -12,7 +12,7 @@
 
 	<fx:Script>
 		<![CDATA[
-			import flashplayerswitcher.model.vo.FlashPlayerBundle;
+			import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 
 			import spark.events.GridSelectionEvent;
 

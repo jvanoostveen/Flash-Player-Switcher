@@ -1,6 +1,6 @@
 package flashplayerswitcher.controller.events
 {
-	import flashplayerswitcher.model.vo.FlashPlayerBundle;
+	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 
 	import flash.events.Event;
 
@@ -12,9 +12,9 @@ package flashplayerswitcher.controller.events
 		public static const SYSTEM:String = "InstalledBundleUpdatedEvent.SYSTEM";
 		public static const USER:String = "InstalledBundleUpdatedEvent.USER";
 		
-		public var bundle:FlashPlayerBundle;
+		public var bundle:FlashPlayerPlugin;
 		
-		public function InstalledBundleUpdatedEvent(type:String, bundle:FlashPlayerBundle)
+		public function InstalledBundleUpdatedEvent(type:String, bundle:FlashPlayerPlugin)
 		{
 			super(type);
 			

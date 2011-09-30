@@ -2,7 +2,7 @@ package flashplayerswitcher.model
 {
 	import flashplayerswitcher.controller.events.BundlesUpdatedEvent;
 	import flashplayerswitcher.controller.events.InstalledBundleUpdatedEvent;
-	import flashplayerswitcher.model.vo.FlashPlayerBundle;
+	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 
 	import org.robotlegs.mvcs.Actor;
 
@@ -13,8 +13,8 @@ package flashplayerswitcher.model
 	 */
 	public class InstalledBundlesModel extends Actor
 	{
-		private var _system:FlashPlayerBundle;
-		private var _user:FlashPlayerBundle;
+		private var _system:FlashPlayerPlugin;
+		private var _user:FlashPlayerPlugin;
 		
 		private var _bundles:ArrayCollection;
 		
@@ -29,24 +29,24 @@ package flashplayerswitcher.model
 			return _bundles ||= new ArrayCollection();
 		}
 		
-		public function get system():FlashPlayerBundle
+		public function get system():FlashPlayerPlugin
 		{
 			return _system;
 		}
 
-		public function set system(bundle:FlashPlayerBundle):void
+		public function set system(bundle:FlashPlayerPlugin):void
 		{
 			_system = bundle;
 			
 			dispatch(new InstalledBundleUpdatedEvent(InstalledBundleUpdatedEvent.SYSTEM, _system));
 		}
 		
-		public function get user():FlashPlayerBundle
+		public function get user():FlashPlayerPlugin
 		{
 			return _user;
 		}
 
-		public function set user(bundle:FlashPlayerBundle):void
+		public function set user(bundle:FlashPlayerPlugin):void
 		{
 			_user = bundle;
 			

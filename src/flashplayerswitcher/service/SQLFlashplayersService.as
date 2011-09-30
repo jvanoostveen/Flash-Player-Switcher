@@ -2,7 +2,7 @@ package flashplayerswitcher.service
 {
 	import mx.collections.ArrayCollection;
 	import flashplayerswitcher.model.InstalledBundlesModel;
-	import flashplayerswitcher.model.vo.FlashPlayerBundle;
+	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.service.helpers.ISQLRunnerDelegate;
 
 	import org.robotlegs.mvcs.Actor;
@@ -23,7 +23,7 @@ package flashplayerswitcher.service
 
 		public function loadFlashplayers():void
 		{
-			sqlRunner.execute(LOAD_ALL_FLASHPLAYERS_SQL, null, result, FlashPlayerBundle, fault);
+			sqlRunner.execute(LOAD_ALL_FLASHPLAYERS_SQL, null, result, FlashPlayerPlugin, fault);
 		}
 		
 		private function result(data:SQLResult):void

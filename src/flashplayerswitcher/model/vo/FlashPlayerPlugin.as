@@ -7,22 +7,42 @@ package flashplayerswitcher.model.vo
 	/**
 	 * @author Joeri van Oostveen
 	 */
-	public class FlashPlayerBundle
+	public class FlashPlayerPlugin
 	{
+		private static const FLASH_PLAYER_PLUGIN:String = "Flash Player.plugin";
+		private static const FLASH_PLAYER_XPT:String = "flashplayer.xpt";
+		
 		public var id:int;
 		public var name:String;
 		public var version:String;
 		public var beta:Boolean = false;
 		public var debugger:Boolean = false;
 
-		public function FlashPlayerBundle()
+		public var plugin:File; // essential file
+		public var xpt:File; // optional, used for browser script access
+
+		public function FlashPlayerPlugin()
 		{
 			
 		}
 		
-		public function parse(bundle:File):void
+		public function search(directory:File):void
 		{
-			var infoPlist:File = bundle.resolvePath("Contents/Info.plist");
+			plugin = directory.resolvePath(FLASH_PLAYER_PLUGIN);
+			xpt = directory.resolvePath(FLASH_PLAYER_XPT);
+			
+			if (plugin.exists)
+				parse();
+		}
+		
+		public function get exists():Boolean
+		{
+			return plugin ? plugin.exists : false;
+		}
+		
+		private function parse():void
+		{
+			var infoPlist:File = plugin.resolvePath("Contents/Info.plist");
 			
 			if (!infoPlist.exists)
 			{

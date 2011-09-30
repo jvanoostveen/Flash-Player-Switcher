@@ -1,11 +1,10 @@
 package flashplayerswitcher.controller.commands
 {
 	import flashplayerswitcher.model.InstalledBundlesModel;
-	import flashplayerswitcher.model.vo.FlashPlayerBundle;
+	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
+	import flashplayerswitcher.model.vo.InternetPlugins;
 
 	import org.robotlegs.mvcs.Command;
-
-	import flash.filesystem.File;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -19,13 +18,11 @@ package flashplayerswitcher.controller.commands
 		{
 			try
 			{
-				var plugin:File = File.userDirectory.resolvePath("Library/Internet Plug-Ins/Flash Player.plugin");
+				var plugin:FlashPlayerPlugin = new FlashPlayerPlugin();
+				plugin.search(InternetPlugins.USER);
 				if (plugin.exists)
 				{
-					var bundle:FlashPlayerBundle = new FlashPlayerBundle();
-					bundle.parse(plugin);
-					
-					installedBundlesModel.user = bundle;
+					installedBundlesModel.user = plugin;
 				} else {
 					installedBundlesModel.user = null;
 				}
