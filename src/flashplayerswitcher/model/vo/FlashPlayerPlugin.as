@@ -34,6 +34,13 @@ package flashplayerswitcher.model.vo
 			if (plugin.exists)
 				parse();
 		}
+		
+		public function searchStorage():void
+		{
+			var directory:File = File.applicationStorageDirectory.resolvePath("plugins/" + hash);
+			plugin = directory.resolvePath(FLASH_PLAYER_PLUGIN);
+			xpt = directory.resolvePath(FLASH_PLAYER_XPT);
+		}
 
 		public function remove():void
 		{

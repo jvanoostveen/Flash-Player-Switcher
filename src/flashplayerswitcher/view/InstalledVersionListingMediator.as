@@ -1,12 +1,14 @@
 package flashplayerswitcher.view
 {
-	import flashplayerswitcher.controller.events.CopySystemPluginEvent;
+	import flashplayerswitcher.controller.events.CopyPluginToStorageEvent;
 	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
 	import flashplayerswitcher.model.PluginsModel;
 
 	import org.robotlegs.mvcs.Mediator;
+
+	import flash.events.MouseEvent;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -25,8 +27,8 @@ package flashplayerswitcher.view
 			addContextListener(InstalledPluginUpdatedEvent.USER, userPluginUpdated);
 			addContextListener(PluginsUpdatedEvent.UPDATED, knownPluginsUpdated);
 			
+			eventMap.mapListener(view.copySystemPluginButton, MouseEvent.CLICK, onCopyPluginClick);
 			addViewListener(RemoveUserPluginEvent.REMOVE, dispatch);
-			addViewListener(CopySystemPluginEvent.COPY, dispatch);
 		}
 		
 		private function knownPluginsUpdated(event:PluginsUpdatedEvent):void
@@ -38,7 +40,7 @@ package flashplayerswitcher.view
 		private function checkSystemPluginInstall():void
 		{
 			view.copySystemPluginButton.visible = false;
-			if (!plugins.contains(plugins.system))
+			if (plugins.system && !plugins.contains(plugins.system))
 			{
 				view.copySystemPluginButton.visible = true;
 			}
@@ -62,6 +64,11 @@ package flashplayerswitcher.view
 				view.userInstalledVersion.text = "<none>";
 			
 			view.removeUserPluginButton.visible = (event.plugin ? true : false);
+		}
+		
+		private function onCopyPluginClick(event:MouseEvent):void
+		{
+			dispatch(new CopyPluginToStorageEvent());
 		}
 	}
 }

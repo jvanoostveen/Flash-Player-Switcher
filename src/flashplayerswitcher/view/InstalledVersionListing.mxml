@@ -4,18 +4,11 @@
 		  xmlns:mx="library://ns.adobe.com/flex/mx">
 	<fx:Script>
 		<![CDATA[
-			import flashplayerswitcher.controller.events.CopySystemPluginEvent;
 			import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
 			
 			private function handleRemoveUserPluginClick(event:MouseEvent):void
 			{
 				dispatchEvent(new RemoveUserPluginEvent());
-			}
-
-			private function handleCopySystemPluginClick(event:MouseEvent):void
-			{
-				copySystemPluginButton.enabled = false;
-				dispatchEvent(new CopySystemPluginEvent());
 			}
 		]]>
 	</fx:Script>
@@ -27,6 +20,6 @@
 	<s:VGroup paddingTop="20">
 		<s:Label fontWeight="bold" text="System:"/>
 		<s:Label id="systemInstalledVersion" fontWeight="normal" text="..."/>
-		<s:Button id="copySystemPluginButton" label="Copy" visible="false" click="handleCopySystemPluginClick(event);" />
+		<s:Button id="copySystemPluginButton" label="Copy" visible="false" />
 	</s:VGroup>
 </s:VGroup>

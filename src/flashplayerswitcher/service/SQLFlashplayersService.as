@@ -13,6 +13,7 @@ package flashplayerswitcher.service
 
 	import flash.data.SQLResult;
 	import flash.errors.SQLError;
+	import flash.filesystem.File;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -30,9 +31,14 @@ package flashplayerswitcher.service
 			sqlRunner.execute(LOAD_ALL_PLUGINS_SQL, null, onAllPluginsLoaded, FlashPlayerPlugin, fault);
 		}
 		
-		private function onAllPluginsLoaded(data:SQLResult):void
+		private function onAllPluginsLoaded(result:SQLResult):void
 		{
-			installedPlugins.plugins = new ArrayCollection(data.data);
+			for each (var plugin:FlashPlayerPlugin in result.data)
+			{
+				plugin.searchStorage();
+			}
+			
+			installedPlugins.plugins = new ArrayCollection(result.data);
 		}
 
 		public function storePlugin(plugin:FlashPlayerPlugin):void
