@@ -14,6 +14,7 @@
 
 			private function handleCopySystemPluginClick(event:MouseEvent):void
 			{
+				copySystemPluginButton.enabled = false;
 				dispatchEvent(new CopySystemPluginEvent());
 			}
 		]]>
@@ -26,6 +27,6 @@
 	<s:VGroup paddingTop="20">
 		<s:Label fontWeight="bold" text="System:"/>
 		<s:Label id="systemInstalledVersion" fontWeight="normal" text="..."/>
-		<s:Button id="copySystemPluginButton" label="Install" visible="false" click="handleCopySystemPluginClick(event);" />
+		<s:Button id="copySystemPluginButton" label="Copy" visible="false" click="handleCopySystemPluginClick(event);" />
 	</s:VGroup>
 </s:VGroup>

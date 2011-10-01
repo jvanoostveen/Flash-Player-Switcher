@@ -15,8 +15,8 @@ package flashplayerswitcher.model.vo
 		public var id:int;
 		public var name:String;
 		public var version:String;
-		public var beta:Boolean = false;
 		public var debugger:Boolean = false;
+		public var hash:String;
 
 		public var plugin:File; // essential file
 		public var xpt:File; // optional, used for browser script access
@@ -49,11 +49,6 @@ package flashplayerswitcher.model.vo
 			return plugin ? plugin.exists : false;
 		}
 		
-		public function get hash():String
-		{
-			return version + "_" + (debugger ? "debugger" : "release") + "_" + (beta ? "beta" : "final");
-		}
-		
 		private function parse():void
 		{
 			var infoPlist:File = plugin.resolvePath("Contents/Info.plist");
@@ -84,6 +79,8 @@ package flashplayerswitcher.model.vo
 						break;
 				}
 			}
+			
+			hash = version + "_" + (debugger ? "debugger" : "release");
 		}
 	}
 }

@@ -7,11 +7,11 @@
 			<s:ArrayList>
 				<s:GridColumn dataField="name" headerText="Name"></s:GridColumn>
 				<s:GridColumn dataField="version" editable="false" headerText="Version"></s:GridColumn>
-				<s:GridColumn dataField="beta" editable="false" headerText="Beta"></s:GridColumn>
+				<s:GridColumn dataField="debugger" editable="false" headerText="Debugger"></s:GridColumn>
 			</s:ArrayList>
 		</s:columns>
 		<s:typicalItem>
-			<fx:Object name="Flash Player" version="10.3.0.23" beta="false"></fx:Object>
+			<fx:Object name="Flash Player" version="10.3.0.23" debugger="false"></fx:Object>
 		</s:typicalItem>
 	</s:DataGrid>
 	<s:HGroup horizontalAlign="right" width="100%">

@@ -1,5 +1,11 @@
 package flashplayerswitcher.controller.commands
 {
+	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
+	import flashplayerswitcher.controller.events.CopyPluginToStorageEvent;
+	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
+	import flashplayerswitcher.model.vo.InternetPlugins;
+	import flashplayerswitcher.service.IFlashplayersService;
+
 	import org.robotlegs.mvcs.Command;
 
 	/**
@@ -7,11 +13,20 @@ package flashplayerswitcher.controller.commands
 	 */
 	public class CopySystemPluginCommand extends Command
 	{
+		[Inject]
+		public var service:IFlashplayersService;
+		
 		override public function execute():void
 		{
-			// check if service doesn't contain plugin
 			// copy system plugin files to storage
-			// insert plugin info in db
+			var plugin:FlashPlayerPlugin = new FlashPlayerPlugin();
+			plugin.search(InternetPlugins.SYSTEM);
+			
+			dispatch(new CopyPluginToStorageEvent(plugin));
+			
+			service.storePlugin(plugin);
+			
+//			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.SYSTEM));
 		}
 	}
 }
