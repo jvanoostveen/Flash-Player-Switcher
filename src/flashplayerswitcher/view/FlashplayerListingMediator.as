@@ -23,9 +23,6 @@ package flashplayerswitcher.view
 		
 		private function onPluginsUpdated(event:PluginsUpdatedEvent):void
 		{
-			trace("plugins updated");
-			trace(installed.plugins);
-			
 			view.listing.dataProvider = installed.plugins;
 		}
 	}
