@@ -1,6 +1,8 @@
 Flash Player Switcher
 =============
 
+*(Mac only)*
+
 Background
 --------------
 
@@ -18,3 +20,4 @@ Roadmap
 
  * Make it easy to add new Flash Player plug-ins.
  * If a way is found to extract the files from Adobes own lzma implementation, add an even easier method of adding Flash Player plug-ins to the list.
+ * Windows version?
