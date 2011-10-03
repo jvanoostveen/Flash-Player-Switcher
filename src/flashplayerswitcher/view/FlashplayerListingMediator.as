@@ -1,7 +1,8 @@
 package flashplayerswitcher.view
 {
-	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
+	import flashplayerswitcher.controller.events.DeletePluginEvent;
 	import flashplayerswitcher.controller.events.InstallPluginEvent;
+	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
@@ -73,7 +74,7 @@ package flashplayerswitcher.view
 		
 		private function onDeleteButtonClick(event:MouseEvent):void
 		{
-			trace("implement delete plugin...");
+			dispatch(new DeletePluginEvent(view.listing.selectedItem as FlashPlayerPlugin));
 		}
 	}
 }

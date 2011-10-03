@@ -5,6 +5,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.commands.CheckInstalledUserPluginVersionCommand;
 	import flashplayerswitcher.controller.commands.ConfigureDatabaseCommand;
 	import flashplayerswitcher.controller.commands.CopyPluginToStorageCommand;
+	import flashplayerswitcher.controller.commands.DeletePluginCommand;
 	import flashplayerswitcher.controller.commands.InitializeAppCommand;
 	import flashplayerswitcher.controller.commands.InstallPluginCommand;
 	import flashplayerswitcher.controller.commands.LoadPluginsCommand;
@@ -12,6 +13,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.events.CheckForUpdateEvent;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.controller.events.CopyPluginToStorageEvent;
+	import flashplayerswitcher.controller.events.DeletePluginEvent;
 	import flashplayerswitcher.controller.events.InstallPluginEvent;
 	import flashplayerswitcher.controller.events.LoadPluginsEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
@@ -51,6 +53,7 @@ package flashplayerswitcher
 			commandMap.mapEvent(CopyPluginToStorageEvent.COPY_PLUGIN_TO_STORAGE, CopyPluginToStorageCommand, CopyPluginToStorageEvent);
 			commandMap.mapEvent(InstallPluginEvent.INSTALL, InstallPluginCommand, InstallPluginEvent);
 			commandMap.mapEvent(CheckForUpdateEvent.CHECK_FOR_UPDATE, CheckForUpdateCommand);
+			commandMap.mapEvent(DeletePluginEvent.DELETE, DeletePluginCommand, DeletePluginEvent);
 			
 			super.startup();
 		}

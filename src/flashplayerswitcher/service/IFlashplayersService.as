@@ -9,5 +9,6 @@ package flashplayerswitcher.service
 	{
 		function loadPlugins():void;
 		function storePlugin(plugin:FlashPlayerPlugin):void;
+		function deletePlugin(plugin:FlashPlayerPlugin):void;
 	}
 }

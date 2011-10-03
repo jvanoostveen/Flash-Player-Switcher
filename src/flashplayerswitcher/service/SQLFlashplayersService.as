@@ -13,7 +13,6 @@ package flashplayerswitcher.service
 
 	import flash.data.SQLResult;
 	import flash.errors.SQLError;
-	import flash.filesystem.File;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -56,6 +55,19 @@ package flashplayerswitcher.service
 		{
 			dispatch(new LoadPluginsEvent());
 		}
+
+		public function deletePlugin(plugin:FlashPlayerPlugin):void
+		{
+			var params:Object = new Object();
+			params["hash"] = plugin.hash;
+			
+			sqlRunner.executeModify(Vector.<QueuedStatement>([new QueuedStatement(DELETE_PLUGIN_SQL, params)]), onPluginDeleted, fault);
+		}
+		
+		private function onPluginDeleted(results:Vector.<SQLResult>):void
+		{
+			dispatch(new LoadPluginsEvent());
+		}
 		
 		private function fault(error:SQLError):void
 		{
@@ -70,5 +82,9 @@ package flashplayerswitcher.service
 		[Embed(source="flashplayerswitcher/sql/flashplayers/InsertPlugin.sql", mimeType="application/octet-stream")]
 		private static var InsertPluginStatementText:Class;
 		public static const INSERT_PLUGIN_SQL:String = new InsertPluginStatementText();
+		
+		[Embed(source="flashplayerswitcher/sql/flashplayers/DeletePlugin.sql", mimeType="application/octet-stream")]
+		private static var DeletePluginStatementText:Class;
+		public static const DELETE_PLUGIN_SQL:String = new DeletePluginStatementText();
 	}
 }
