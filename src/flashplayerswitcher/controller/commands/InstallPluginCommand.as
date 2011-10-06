@@ -7,6 +7,8 @@ package flashplayerswitcher.controller.commands
 
 	import org.robotlegs.mvcs.Command;
 
+	import mx.controls.Alert;
+
 	import flash.filesystem.File;
 
 	/**
@@ -28,6 +30,8 @@ package flashplayerswitcher.controller.commands
 			plugin.xpt.copyTo(plugins.resolvePath(plugin.xpt.name), true);
 			
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
+			
+			Alert.show(plugin.name + " " + plugin.version + " is now installed. Please restart your browser(s).", "Plugin installed");
 		}
 	}
 }
