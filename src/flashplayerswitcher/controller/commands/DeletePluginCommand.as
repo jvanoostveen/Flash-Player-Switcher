@@ -5,6 +5,9 @@ package flashplayerswitcher.controller.commands
 
 	import org.robotlegs.mvcs.Command;
 
+	import mx.controls.Alert;
+	import mx.events.CloseEvent;
+
 	/**
 	 * @author Joeri van Oostveen
 	 */
@@ -18,9 +21,18 @@ package flashplayerswitcher.controller.commands
 		
 		override public function execute():void
 		{
-			service.deletePlugin(event.plugin);
-			
-			event.plugin.remove();
+			commandMap.detain(this);
+			Alert.show("This will delete the plugin from the storage.", "Delete plugin", Alert.CANCEL | Alert.OK, null, onAlertConfirm);
+		}
+		
+		private function onAlertConfirm(evt:CloseEvent):void
+		{
+			if (evt.detail == Alert.OK)
+			{
+				service.deletePlugin(event.plugin);
+				event.plugin.remove();
+			}
+			commandMap.release(this);
 		}
 	}
 }
