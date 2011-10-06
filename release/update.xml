@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <update xmlns="http://ns.adobe.com/air/framework/update/description/2.5">
-	<versionNumber>0.8.4</versionNumber>
+	<versionNumber>0.8.5</versionNumber>
 	<url>https://raw.github.com/jvanoostveen/Flash-Player-Switcher/master/release/FlashPlayerSwitcher.air</url>
-	<description><![CDATA[
+	<description><![CDATA[Changelog
+
+v0.8.5
+- Added an alert when deleting a plugin from the storage.
+- Added an alert after installing a plugin.
+
 v0.8.4
 - Added ability to delete installed plugins.
 
