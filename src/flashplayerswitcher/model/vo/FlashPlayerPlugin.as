@@ -14,12 +14,18 @@ package flashplayerswitcher.model.vo
 		
 		public var id:int;
 		public var name:String;
-		public var version:String;
+		protected var _version:String;
 		public var debugger:Boolean = false;
 		public var hash:String;
 
 		public var plugin:File; // essential file
 		public var xpt:File; // optional, used for browser script access
+		
+		// detailed version info (for sorting etc).
+		public var major:uint;
+		public var minor:uint;
+		public var revision:uint;
+		public var build:uint;
 
 		public function FlashPlayerPlugin()
 		{
@@ -88,6 +94,22 @@ package flashplayerswitcher.model.vo
 			}
 			
 			hash = version + "_" + (debugger ? "debugger" : "release");
+		}
+
+		public function get version():String
+		{
+			return _version;
+		}
+
+		public function set version(value:String):void
+		{
+			_version = value;
+			
+			var v:Array = _version.split(".");
+			major = parseInt(v[0]);
+			minor = parseInt(v[1]);
+			revision = parseInt(v[2]);
+			build = parseInt(v[3]);
 		}
 	}
 }

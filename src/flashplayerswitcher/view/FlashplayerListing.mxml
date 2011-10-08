@@ -2,11 +2,26 @@
 <s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
           xmlns:s="library://ns.adobe.com/flex/spark"
           xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import flashplayerswitcher.model.vo.FlashPlayerPlugin;
+		
+			private function sortVersionCompare(itemA:FlashPlayerPlugin, itemB:FlashPlayerPlugin, column:GridColumn):int
+			{
+				if (itemA.major < itemB.major || itemA.minor < itemB.minor || itemA.revision < itemB.revision || itemA.build < itemB.build)
+					return -1;
+				else if (itemA.major > itemB.major || itemA.minor > itemB.minor || itemA.revision > itemB.revision || itemA.build > itemB.build)
+					return 1;
+				else
+					return 0;
+			}
+		]]>
+	</fx:Script>
 	<s:DataGrid id="listing" width="385" height="364" editable="true">
 		<s:columns>
 			<s:ArrayList>
 				<s:GridColumn dataField="name" headerText="Name"></s:GridColumn>
-				<s:GridColumn dataField="version" editable="false" headerText="Version"></s:GridColumn>
+				<s:GridColumn dataField="version" editable="false" headerText="Version" sortCompareFunction="sortVersionCompare"></s:GridColumn>
 				<s:GridColumn dataField="debugger" editable="false" headerText="Debugger"></s:GridColumn>
 			</s:ArrayList>
 		</s:columns>

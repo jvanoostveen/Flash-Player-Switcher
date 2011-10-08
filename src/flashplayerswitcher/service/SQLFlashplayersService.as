@@ -37,6 +37,8 @@ package flashplayerswitcher.service
 				plugin.searchStorage();
 			}
 			
+			// initial sort on version number, ascending
+			result.data.sortOn(["major", "minor", "revision", "build"], Array.NUMERIC);
 			installedPlugins.plugins = new ArrayCollection(result.data);
 		}
 
