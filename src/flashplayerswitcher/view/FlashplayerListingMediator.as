@@ -4,6 +4,7 @@ package flashplayerswitcher.view
 	import flashplayerswitcher.controller.events.InstallPluginEvent;
 	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
+	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 
@@ -32,6 +33,7 @@ package flashplayerswitcher.view
 			eventMap.mapListener(view.listing, GridSelectionEvent.SELECTION_CHANGE, onSelectionChange);
 			eventMap.mapListener(view.installButton, MouseEvent.CLICK, onInstallButtonClick);
 			eventMap.mapListener(view.deleteButton, MouseEvent.CLICK, onDeleteButtonClick);
+			eventMap.mapListener(view.downloadButton, MouseEvent.CLICK, onDownloadButtonClick);
 		}
 		
 		private function onPluginsUpdated(event:PluginsUpdatedEvent):void
@@ -75,6 +77,11 @@ package flashplayerswitcher.view
 		private function onDeleteButtonClick(event:MouseEvent):void
 		{
 			dispatch(new DeletePluginEvent(view.listing.selectedItem as FlashPlayerPlugin));
+		}
+		
+		private function onDownloadButtonClick(event:MouseEvent):void
+		{
+			dispatch(new ShowPluginDownloadListEvent());
 		}
 	}
 }

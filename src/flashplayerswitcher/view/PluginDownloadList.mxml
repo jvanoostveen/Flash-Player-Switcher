@@ -30,9 +30,8 @@
 		</s:typicalItem>
 	</s:DataGrid>
 	<s:HGroup horizontalAlign="right" width="100%">
-		<s:Button id="downloadButton" label="Download more..."/>
+		<s:Button id="storageButton" label="Back to storage"/>
 		<mx:Spacer width="100%" />
-		<s:Button id="installButton" label="Install" enabled="false"/>
-		<s:Button id="deleteButton" label="Delete" enabled="false"/>
+		<s:Button id="downloadButton" label="Download" enabled="false"/>
 	</s:HGroup>
 </s:VGroup>

@@ -21,10 +21,13 @@ package flashplayerswitcher
 	import flashplayerswitcher.service.IFlashplayersService;
 	import flashplayerswitcher.service.SQLFlashplayersService;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
+	import flashplayerswitcher.view.FlashPlayerSwitcherMediator;
 	import flashplayerswitcher.view.FlashplayerListing;
 	import flashplayerswitcher.view.FlashplayerListingMediator;
 	import flashplayerswitcher.view.InstalledVersionListing;
 	import flashplayerswitcher.view.InstalledVersionListingMediator;
+	import flashplayerswitcher.view.PluginDownloadList;
+	import flashplayerswitcher.view.PluginDownloadListMediator;
 
 	import org.robotlegs.mvcs.Context;
 
@@ -37,8 +40,10 @@ package flashplayerswitcher
 	{
 		override public function startup():void
 		{
+			mediatorMap.mapView(FlashPlayerSwitcher, FlashPlayerSwitcherMediator);
 			mediatorMap.mapView(InstalledVersionListing, InstalledVersionListingMediator);
 			mediatorMap.mapView(FlashplayerListing, FlashplayerListingMediator);
+			mediatorMap.mapView(PluginDownloadList, PluginDownloadListMediator);
 			
 			injector.mapSingletonOf(IFlashplayersService, SQLFlashplayersService);
 			
