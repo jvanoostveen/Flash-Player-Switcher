@@ -17,7 +17,7 @@ package flashplayerswitcher.service
 	 */
 	public class PluginDownloadService extends Actor implements IPluginDownloadService
 	{
-		public static const LIST_DATA_URL:String = "http://localhost/fps/plugins.xml";
+		public static const LIST_DATA_URL:String = "https://raw.github.com/jvanoostveen/Flash-Player-Plugins/master/plugins.xml";
 		
 		[Inject]
 		public var downloadModel:DownloadPluginsModel;

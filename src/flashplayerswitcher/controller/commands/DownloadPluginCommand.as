@@ -39,6 +39,8 @@ package flashplayerswitcher.controller.commands
 			
 			var request:URLRequest = new URLRequest(event.plugin.url);
 			loader.load(request);
+			
+			// TODO: show download progress
 		}
 
 		private function onPluginLoaded(evt:Event):void
