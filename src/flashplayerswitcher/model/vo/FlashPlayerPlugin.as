@@ -17,6 +17,7 @@ package flashplayerswitcher.model.vo
 		protected var _version:String;
 		public var debugger:Boolean = false;
 		public var hash:String;
+		public var url:String;
 
 		public var plugin:File; // essential file
 		public var xpt:File; // optional, used for browser script access

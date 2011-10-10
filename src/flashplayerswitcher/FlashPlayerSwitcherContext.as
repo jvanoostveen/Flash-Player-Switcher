@@ -8,6 +8,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.commands.DeletePluginCommand;
 	import flashplayerswitcher.controller.commands.InitializeAppCommand;
 	import flashplayerswitcher.controller.commands.InstallPluginCommand;
+	import flashplayerswitcher.controller.commands.LoadDownloadPluginsCommand;
 	import flashplayerswitcher.controller.commands.LoadPluginsCommand;
 	import flashplayerswitcher.controller.commands.RemoveUserPluginCommand;
 	import flashplayerswitcher.controller.events.CheckForUpdateEvent;
@@ -17,8 +18,12 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.events.InstallPluginEvent;
 	import flashplayerswitcher.controller.events.LoadPluginsEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
+	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
+	import flashplayerswitcher.model.DownloadPluginsModel;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.service.IFlashplayersService;
+	import flashplayerswitcher.service.IPluginDownloadService;
+	import flashplayerswitcher.service.PluginDownloadService;
 	import flashplayerswitcher.service.SQLFlashplayersService;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
 	import flashplayerswitcher.view.FlashPlayerSwitcherMediator;
@@ -46,8 +51,10 @@ package flashplayerswitcher
 			mediatorMap.mapView(PluginDownloadList, PluginDownloadListMediator);
 			
 			injector.mapSingletonOf(IFlashplayersService, SQLFlashplayersService);
+			injector.mapSingletonOf(IPluginDownloadService, PluginDownloadService);
 			
 			injector.mapSingleton(PluginsModel);
+			injector.mapSingleton(DownloadPluginsModel);
 			
 			commandMap.mapEvent(FlexEvent.APPLICATION_COMPLETE, ConfigureDatabaseCommand);
 			commandMap.mapEvent(DatabaseReadyEvent.READY, InitializeAppCommand);
@@ -59,6 +66,7 @@ package flashplayerswitcher
 			commandMap.mapEvent(InstallPluginEvent.INSTALL, InstallPluginCommand, InstallPluginEvent);
 			commandMap.mapEvent(CheckForUpdateEvent.CHECK_FOR_UPDATE, CheckForUpdateCommand);
 			commandMap.mapEvent(DeletePluginEvent.DELETE, DeletePluginCommand, DeletePluginEvent);
+			commandMap.mapEvent(ShowPluginDownloadListEvent.SHOW, LoadDownloadPluginsCommand, ShowPluginDownloadListEvent);
 			
 			super.startup();
 		}
