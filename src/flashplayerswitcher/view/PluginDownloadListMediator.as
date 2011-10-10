@@ -40,8 +40,6 @@ package flashplayerswitcher.view
 		
 		private function onPluginsUpdated(event:DownloadPluginsUpdatedEvent):void
 		{
-			// TODO: filter already installed plugins
-			
 			view.listing.dataProvider = event.plugins;
 		}
 		

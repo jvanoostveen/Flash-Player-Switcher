@@ -1,6 +1,7 @@
 package flashplayerswitcher.service
 {
 	import flashplayerswitcher.model.DownloadPluginsModel;
+	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 
 	import org.robotlegs.mvcs.Actor;
@@ -21,6 +22,9 @@ package flashplayerswitcher.service
 		
 		[Inject]
 		public var downloadModel:DownloadPluginsModel;
+		
+		[Inject]
+		public var installed:PluginsModel;
 		
 		private var _loader:URLLoader;
 		
@@ -51,8 +55,10 @@ package flashplayerswitcher.service
 				plugin.version = pluginData.version.toString();
 				plugin.debugger = (pluginData.debugger.toString() == "true" ? true : false);
 				plugin.url = pluginData.url.toString();
+				plugin.hash = plugin.version + "_" + (plugin.debugger ? "debugger" : "release");
 				
-				plugins.push(plugin);
+				if (!installed.contains(plugin))
+					plugins.push(plugin);
 			}
 			
 			plugins.sortOn(["major", "minor", "revision", "build"], Array.NUMERIC);
