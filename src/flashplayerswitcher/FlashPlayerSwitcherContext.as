@@ -1,5 +1,7 @@
 package flashplayerswitcher
 {
+	import flashplayerswitcher.controller.commands.DownloadPluginCommand;
+	import flashplayerswitcher.controller.events.DownloadPluginEvent;
 	import flashplayerswitcher.controller.commands.CheckForUpdateCommand;
 	import flashplayerswitcher.controller.commands.CheckInstalledSystemPluginVersionCommand;
 	import flashplayerswitcher.controller.commands.CheckInstalledUserPluginVersionCommand;
@@ -67,6 +69,7 @@ package flashplayerswitcher
 			commandMap.mapEvent(CheckForUpdateEvent.CHECK_FOR_UPDATE, CheckForUpdateCommand);
 			commandMap.mapEvent(DeletePluginEvent.DELETE, DeletePluginCommand, DeletePluginEvent);
 			commandMap.mapEvent(ShowPluginDownloadListEvent.SHOW, LoadDownloadPluginsCommand, ShowPluginDownloadListEvent);
+			commandMap.mapEvent(DownloadPluginEvent.DOWNLOAD, DownloadPluginCommand, DownloadPluginEvent);
 			
 			super.startup();
 		}

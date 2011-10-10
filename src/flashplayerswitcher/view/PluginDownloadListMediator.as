@@ -2,6 +2,7 @@ package flashplayerswitcher.view
 {
 	import flashplayerswitcher.controller.events.DownloadPluginEvent;
 	import flashplayerswitcher.controller.events.DownloadPluginsUpdatedEvent;
+	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
 	import flashplayerswitcher.controller.events.ShowPluginStorageListEvent;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 
@@ -21,11 +22,20 @@ package flashplayerswitcher.view
 		
 		override public function onRegister():void
 		{
+			addContextListener(ShowPluginDownloadListEvent.SHOW, onShowList, ShowPluginDownloadListEvent);
 			addContextListener(DownloadPluginsUpdatedEvent.UPDATED, onPluginsUpdated, DownloadPluginsUpdatedEvent);
 			
 			eventMap.mapListener(view.listing, GridSelectionEvent.SELECTION_CHANGE, onSelectionChange);
 			eventMap.mapListener(view.downloadButton, MouseEvent.CLICK, onDownloadButtonClick);
 			eventMap.mapListener(view.storageButton, MouseEvent.CLICK, onStorageButtonClick);
+		}
+		
+		private function onShowList(event:ShowPluginDownloadListEvent):void
+		{
+			view.downloadButton.enabled = false;
+			
+			view.listing.selectedIndex = -1;
+			view.listing.dataProvider = null;
 		}
 		
 		private function onPluginsUpdated(event:DownloadPluginsUpdatedEvent):void

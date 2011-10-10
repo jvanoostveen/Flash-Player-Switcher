@@ -5,6 +5,8 @@ package flashplayerswitcher.view
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
 	import flashplayerswitcher.model.PluginsModel;
+	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
+	import flashplayerswitcher.model.vo.InternetPlugins;
 
 	import org.robotlegs.mvcs.Mediator;
 
@@ -68,7 +70,10 @@ package flashplayerswitcher.view
 		
 		private function onCopyPluginClick(event:MouseEvent):void
 		{
-			dispatch(new CopyPluginToStorageEvent());
+			var plugin:FlashPlayerPlugin = new FlashPlayerPlugin();
+			plugin.search(InternetPlugins.SYSTEM);
+			
+			dispatch(new CopyPluginToStorageEvent(plugin));
 		}
 	}
 }

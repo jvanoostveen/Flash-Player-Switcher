@@ -1,5 +1,7 @@
 package flashplayerswitcher.controller.events
 {
+	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
+
 	import flash.events.Event;
 
 	/**
@@ -9,9 +11,13 @@ package flashplayerswitcher.controller.events
 	{
 		public static const COPY_PLUGIN_TO_STORAGE:String = "copy_plugin_to_storage";
 		
-		public function CopyPluginToStorageEvent()
+		public var plugin:FlashPlayerPlugin;
+		
+		public function CopyPluginToStorageEvent(plugin:FlashPlayerPlugin)
 		{
 			super(COPY_PLUGIN_TO_STORAGE);
+			
+			this.plugin = plugin;
 		}
 	}
 }
