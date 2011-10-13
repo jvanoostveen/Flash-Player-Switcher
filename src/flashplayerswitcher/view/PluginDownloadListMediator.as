@@ -36,11 +36,21 @@ package flashplayerswitcher.view
 			
 			view.listing.selectedIndex = -1;
 			view.listing.dataProvider = null;
+			
+			view.message.visible = true;
+			view.message.text = "Loading data";
 		}
 		
 		private function onPluginsUpdated(event:DownloadPluginsUpdatedEvent):void
 		{
+			view.message.visible = false;
 			view.listing.dataProvider = event.plugins;
+			
+			if (event.plugins.length == 0)
+			{
+				view.message.visible = true;
+				view.message.text = "No plugins available";
+			}
 		}
 		
 		private function onSelectionChange(event:GridSelectionEvent):void

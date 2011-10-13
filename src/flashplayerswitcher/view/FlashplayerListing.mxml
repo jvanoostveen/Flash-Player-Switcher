@@ -5,7 +5,7 @@
 	<fx:Script>
 		<![CDATA[
 			import flashplayerswitcher.model.vo.FlashPlayerPlugin;
-		
+			
 			private function sortVersionCompare(itemA:FlashPlayerPlugin, itemB:FlashPlayerPlugin, column:GridColumn):int
 			{
 				if (itemA.major < itemB.major || itemA.minor < itemB.minor || itemA.revision < itemB.revision || itemA.build < itemB.build)

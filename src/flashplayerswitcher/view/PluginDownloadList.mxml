@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
           xmlns:s="library://ns.adobe.com/flex/spark"
-          xmlns:mx="library://ns.adobe.com/flex/mx">
+          xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:view="flashplayerswitcher.view.*">
 	<fx:Script>
 		<![CDATA[
 			import flashplayerswitcher.model.vo.FlashPlayerPlugin;
@@ -17,18 +17,21 @@
 			}
 		]]>
 	</fx:Script>
-	<s:DataGrid id="listing" width="385" height="364" editable="true">
-		<s:columns>
-			<s:ArrayList>
-				<s:GridColumn dataField="name" headerText="Name"></s:GridColumn>
-				<s:GridColumn dataField="version" editable="false" headerText="Version" sortCompareFunction="sortVersionCompare"></s:GridColumn>
-				<s:GridColumn dataField="debugger" editable="false" headerText="Debugger"></s:GridColumn>
-			</s:ArrayList>
-		</s:columns>
-		<s:typicalItem>
-			<fx:Object name="Flash Player" version="10.3.0.23" debugger="false"></fx:Object>
-		</s:typicalItem>
-	</s:DataGrid>
+	<s:BorderContainer borderVisible="false" borderWeight="0" backgroundAlpha="0.0">
+		<s:DataGrid id="listing" width="385" height="364" editable="true">
+			<s:columns>
+				<s:ArrayList>
+					<s:GridColumn dataField="name" headerText="Name"></s:GridColumn>
+					<s:GridColumn dataField="version" editable="false" headerText="Version" sortCompareFunction="sortVersionCompare"></s:GridColumn>
+					<s:GridColumn dataField="debugger" editable="false" headerText="Debugger"></s:GridColumn>
+				</s:ArrayList>
+			</s:columns>
+			<s:typicalItem>
+				<fx:Object name="Flash Player" version="10.3.0.23" debugger="false"></fx:Object>
+			</s:typicalItem>
+		</s:DataGrid>
+		<view:MessageLabel id="message" x="{(listing.width - message.width) * 0.5}" y="110" />
+	</s:BorderContainer>
 	<s:HGroup horizontalAlign="right" width="100%">
 		<s:Button id="storageButton" label="Back to storage"/>
 		<mx:Spacer width="100%" />

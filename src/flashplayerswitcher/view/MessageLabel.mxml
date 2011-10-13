@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx"
+				   width="{messageLabel.width + 20}" height="{messageLabel.height + 30}" 
+				   backgroundAlpha="0.2" backgroundColor="#000000" borderAlpha="0.5" borderColor="#000000"
+				   borderVisible="false" contentBackgroundAlpha="1.0" contentBackgroundColor="#000000" cornerRadius="10">
+	<fx:Script>
+		<![CDATA[
+			public function set text(value:String):void
+			{
+				messageLabel.text = value;
+			}
+		]]>
+	</fx:Script>
+	<s:Label id="messageLabel" x="10" y="15" text="..." maxWidth="200" />
+</s:BorderContainer>
