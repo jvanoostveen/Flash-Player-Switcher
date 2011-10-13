@@ -1,5 +1,6 @@
 package flashplayerswitcher.service
 {
+	import flashplayerswitcher.controller.events.DownloadListDataErrorEvent;
 	import flashplayerswitcher.model.DownloadPluginsModel;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
@@ -39,8 +40,6 @@ package flashplayerswitcher.service
 			
 			var request:URLRequest = new URLRequest(LIST_DATA_URL);
 			_loader.load(request);
-			
-			// TODO: dispatch loading event to show loader
 		}
 
 		private function onListDataLoaded(event:Event):void
@@ -67,8 +66,7 @@ package flashplayerswitcher.service
 
 		private function onListDataError(event:IOErrorEvent):void
 		{
-			// TODO: show error message
-			trace("list data error");
+			dispatch(new DownloadListDataErrorEvent(event.text));
 		}
 	}
 }

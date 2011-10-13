@@ -7,9 +7,15 @@
 				   borderVisible="false" contentBackgroundAlpha="1.0" contentBackgroundColor="#000000" cornerRadius="10">
 	<fx:Script>
 		<![CDATA[
-			public function set text(value:String):void
+			public function show(text:String):void
 			{
-				messageLabel.text = value;
+				messageLabel.text = text;
+				visible = true;
+			}
+			
+			public function hide():void
+			{
+				visible = false;
 			}
 		]]>
 	</fx:Script>

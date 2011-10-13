@@ -1,5 +1,6 @@
 package flashplayerswitcher.view
 {
+	import flashplayerswitcher.controller.events.DownloadListDataErrorEvent;
 	import flashplayerswitcher.controller.events.DownloadPluginEvent;
 	import flashplayerswitcher.controller.events.DownloadPluginsUpdatedEvent;
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
@@ -24,6 +25,7 @@ package flashplayerswitcher.view
 		{
 			addContextListener(ShowPluginDownloadListEvent.SHOW, onShowList, ShowPluginDownloadListEvent);
 			addContextListener(DownloadPluginsUpdatedEvent.UPDATED, onPluginsUpdated, DownloadPluginsUpdatedEvent);
+			addContextListener(DownloadListDataErrorEvent.ERROR, onDataError, DownloadListDataErrorEvent);
 			
 			eventMap.mapListener(view.listing, GridSelectionEvent.SELECTION_CHANGE, onSelectionChange);
 			eventMap.mapListener(view.downloadButton, MouseEvent.CLICK, onDownloadButtonClick);
@@ -37,20 +39,21 @@ package flashplayerswitcher.view
 			view.listing.selectedIndex = -1;
 			view.listing.dataProvider = null;
 			
-			view.message.visible = true;
-			view.message.text = "Loading data";
+			view.message.show("Loading data");
 		}
 		
 		private function onPluginsUpdated(event:DownloadPluginsUpdatedEvent):void
 		{
-			view.message.visible = false;
+			view.message.hide();
 			view.listing.dataProvider = event.plugins;
 			
 			if (event.plugins.length == 0)
-			{
-				view.message.visible = true;
-				view.message.text = "No plugins available";
-			}
+				view.message.show("No plugins available");
+		}
+		
+		private function onDataError(event:DownloadListDataErrorEvent):void
+		{
+			view.message.show("Plugin data could not be retrieved");
 		}
 		
 		private function onSelectionChange(event:GridSelectionEvent):void

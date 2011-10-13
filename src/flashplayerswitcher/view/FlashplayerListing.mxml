@@ -32,7 +32,7 @@
 	<s:HGroup horizontalAlign="right" width="100%">
 		<s:Button id="downloadButton" label="Download more..."/>
 		<mx:Spacer width="100%" />
-		<s:Button id="installButton" label="Install" enabled="false"/>
 		<s:Button id="deleteButton" label="Delete" enabled="false"/>
+		<s:Button id="installButton" label="Install" enabled="false" fontWeight="bold"/>
 	</s:HGroup>
 </s:VGroup>
