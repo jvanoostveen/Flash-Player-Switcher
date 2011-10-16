@@ -3,6 +3,7 @@
 	<versionNumber>0.9.1</versionNumber>
 	<url>https://raw.github.com/jvanoostveen/Flash-Player-Switcher/master/release/FlashPlayerSwitcher.air</url>
 	<description><![CDATA[Changelog
+
 v0.9.1
 - Download progress when adding plugins.
 - Visual feedback in downloadable plugin list.
