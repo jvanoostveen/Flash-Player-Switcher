@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <update xmlns="http://ns.adobe.com/air/framework/update/description/2.5">
-	<versionNumber>0.9.0</versionNumber>
+	<versionNumber>0.9.1</versionNumber>
 	<url>https://raw.github.com/jvanoostveen/Flash-Player-Switcher/master/release/FlashPlayerSwitcher.air</url>
 	<description><![CDATA[Changelog
 v0.9.1
