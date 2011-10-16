@@ -36,5 +36,5 @@
 	</s:Group>
 	<view:InstalledVersionListing x="429" y="177" width="249" height="200"/>
 	<view:FlashplayerListing id="storage" x="26" y="176" />
-	<view:PluginDownloadList id="download" x="26" y="176" visible="false" />
+	<view:PluginDownloadList id="download" x="26" y="176" visible="false"/>
 </s:WindowedApplication>

@@ -5,6 +5,7 @@ package flashplayerswitcher.controller.commands
 
 	import flashplayerswitcher.controller.events.CopyPluginToStorageEvent;
 	import flashplayerswitcher.controller.events.DownloadPluginEvent;
+	import flashplayerswitcher.controller.events.ProgressBarPopupEvent;
 	import flashplayerswitcher.controller.events.ShowPluginStorageListEvent;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 
@@ -12,6 +13,7 @@ package flashplayerswitcher.controller.commands
 
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
+	import flash.events.ProgressEvent;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
@@ -19,6 +21,7 @@ package flashplayerswitcher.controller.commands
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	import flash.utils.ByteArray;
+	import flash.utils.setTimeout;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -34,18 +37,33 @@ package flashplayerswitcher.controller.commands
 			
 			var loader:URLLoader = new URLLoader();
 			loader.dataFormat = URLLoaderDataFormat.BINARY;
+			loader.addEventListener(ProgressEvent.PROGRESS, onDownloadProgress);
 			loader.addEventListener(Event.COMPLETE, onPluginLoaded);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onError);
 			
 			var request:URLRequest = new URLRequest(event.plugin.url);
 			loader.load(request);
 			
-			// TODO: show download progress
+			var progress:ProgressBarPopupEvent = new ProgressBarPopupEvent(ProgressBarPopupEvent.SHOW);
+			progress.label = "Downloading...";
+			dispatch(progress);
+		}
+		
+		private function onDownloadProgress(evt:ProgressEvent):void
+		{
+			var progress:ProgressBarPopupEvent = new ProgressBarPopupEvent(ProgressBarPopupEvent.UPDATE);
+			progress.label = "Downloading: %1 of %2 KB";
+			progress.value = Math.round(evt.bytesLoaded / 1024);
+			progress.total = Math.round(evt.bytesTotal / 1024);
+			dispatch(progress);
 		}
 
 		private function onPluginLoaded(evt:Event):void
 		{
-			// TODO: show extraction message
+			var progress:ProgressBarPopupEvent = new ProgressBarPopupEvent(ProgressBarPopupEvent.SHOW);
+			progress.label = "Extracting... Please wait...";
+			progress.indeterminate = true;
+			dispatch(progress);
 			
 			var plugin:FlashPlayerPlugin = event.plugin;
 			
@@ -55,6 +73,11 @@ package flashplayerswitcher.controller.commands
 			
 			var data:ByteArray = loader.data as ByteArray;
 			
+			setTimeout(parseZip, 50, plugin, data);
+		}
+		
+		private function parseZip(plugin:FlashPlayerPlugin, data:ByteArray):void
+		{
 			var fzip:FZip = new FZip();
 			fzip.loadBytes(data);
 			
@@ -78,6 +101,7 @@ package flashplayerswitcher.controller.commands
 			plugin.search(destination.getDirectoryListing()[0]);
 			
 			dispatch(new CopyPluginToStorageEvent(plugin));
+			dispatch(new ProgressBarPopupEvent(ProgressBarPopupEvent.HIDE));
 			dispatch(new ShowPluginStorageListEvent());
 			
 			destination.deleteDirectory(true);
@@ -92,6 +116,9 @@ package flashplayerswitcher.controller.commands
 			loader.removeEventListener(IOErrorEvent.IO_ERROR, onError);
 			
 			trace("unable to load plugin: " + event.plugin.url);
+			
+			dispatch(new ProgressBarPopupEvent(ProgressBarPopupEvent.HIDE));
+			// show error message
 			
 			commandMap.release(this);
 		}

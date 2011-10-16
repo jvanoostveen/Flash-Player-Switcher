@@ -1,13 +1,12 @@
 package flashplayerswitcher
 {
-	import flashplayerswitcher.controller.commands.DownloadPluginCommand;
-	import flashplayerswitcher.controller.events.DownloadPluginEvent;
 	import flashplayerswitcher.controller.commands.CheckForUpdateCommand;
 	import flashplayerswitcher.controller.commands.CheckInstalledSystemPluginVersionCommand;
 	import flashplayerswitcher.controller.commands.CheckInstalledUserPluginVersionCommand;
 	import flashplayerswitcher.controller.commands.ConfigureDatabaseCommand;
 	import flashplayerswitcher.controller.commands.CopyPluginToStorageCommand;
 	import flashplayerswitcher.controller.commands.DeletePluginCommand;
+	import flashplayerswitcher.controller.commands.DownloadPluginCommand;
 	import flashplayerswitcher.controller.commands.InitializeAppCommand;
 	import flashplayerswitcher.controller.commands.InstallPluginCommand;
 	import flashplayerswitcher.controller.commands.LoadDownloadPluginsCommand;
@@ -17,6 +16,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.controller.events.CopyPluginToStorageEvent;
 	import flashplayerswitcher.controller.events.DeletePluginEvent;
+	import flashplayerswitcher.controller.events.DownloadPluginEvent;
 	import flashplayerswitcher.controller.events.InstallPluginEvent;
 	import flashplayerswitcher.controller.events.LoadPluginsEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
@@ -35,6 +35,8 @@ package flashplayerswitcher
 	import flashplayerswitcher.view.InstalledVersionListingMediator;
 	import flashplayerswitcher.view.PluginDownloadList;
 	import flashplayerswitcher.view.PluginDownloadListMediator;
+	import flashplayerswitcher.view.ProgressBarPopup;
+	import flashplayerswitcher.view.ProgressBarPopupMediator;
 
 	import org.robotlegs.mvcs.Context;
 
@@ -51,6 +53,7 @@ package flashplayerswitcher
 			mediatorMap.mapView(InstalledVersionListing, InstalledVersionListingMediator);
 			mediatorMap.mapView(FlashplayerListing, FlashplayerListingMediator);
 			mediatorMap.mapView(PluginDownloadList, PluginDownloadListMediator);
+			mediatorMap.mapView(ProgressBarPopup, ProgressBarPopupMediator, null, false, false);
 			
 			injector.mapSingletonOf(IFlashplayersService, SQLFlashplayersService);
 			injector.mapSingletonOf(IPluginDownloadService, PluginDownloadService);
