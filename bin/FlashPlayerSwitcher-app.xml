@@ -4,11 +4,11 @@
 	<filename>Flash Player Switcher</filename>
 	<name>Flash Player Switcher</name>
 	
-	<versionNumber>0.9.0</versionNumber>
+	<versionNumber>0.9.1</versionNumber>
 	<!-- <versionLabel></versionLabel> -->
 	
 	<description>Utility for easy switching between Flash Player plugins.</description>
-	<copyright>Joeri van Oostveen</copyright>
+	<copyright>© Joeri van Oostveen</copyright>
 
 	<initialWindow>
 		<content>FlashPlayerSwitcher.swf</content>
