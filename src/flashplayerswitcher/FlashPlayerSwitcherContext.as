@@ -29,8 +29,8 @@ package flashplayerswitcher
 	import flashplayerswitcher.service.SQLFlashplayersService;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
 	import flashplayerswitcher.view.FlashPlayerSwitcherMediator;
-	import flashplayerswitcher.view.FlashplayerListing;
-	import flashplayerswitcher.view.FlashplayerListingMediator;
+	import flashplayerswitcher.view.PluginStorageListing;
+	import flashplayerswitcher.view.PluginStorageListingMediator;
 	import flashplayerswitcher.view.InstalledVersionListing;
 	import flashplayerswitcher.view.InstalledVersionListingMediator;
 	import flashplayerswitcher.view.PluginDownloadList;
@@ -51,7 +51,7 @@ package flashplayerswitcher
 		{
 			mediatorMap.mapView(FlashPlayerSwitcher, FlashPlayerSwitcherMediator);
 			mediatorMap.mapView(InstalledVersionListing, InstalledVersionListingMediator);
-			mediatorMap.mapView(FlashplayerListing, FlashplayerListingMediator);
+			mediatorMap.mapView(PluginStorageListing, PluginStorageListingMediator);
 			mediatorMap.mapView(PluginDownloadList, PluginDownloadListMediator);
 			mediatorMap.mapView(ProgressBarPopup, ProgressBarPopupMediator, null, false, false);
 			
