@@ -17,10 +17,10 @@ package flashplayerswitcher.view
 	/**
 	 * @author Joeri van Oostveen
 	 */
-	public class FlashplayerListingMediator extends Mediator
+	public class PluginStorageListingMediator extends Mediator
 	{
 		[Inject]
-		public var view:FlashplayerListing;
+		public var view:PluginStorageListing;
 
 		[Inject]
 		public var installed:PluginsModel;
