@@ -6,6 +6,8 @@ package flashplayerswitcher.controller.commands
 
 	import org.robotlegs.mvcs.Command;
 
+	import mx.controls.Alert;
+
 	/**
 	 * @author Joeri van Oostveen
 	 */
@@ -19,6 +21,8 @@ package flashplayerswitcher.controller.commands
 				plugin.remove();
 			
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
+			
+			Alert.show("System plugin is now active.\nPlease restart your browser(s).", "Plugin removed");
 		}
 	}
 }
