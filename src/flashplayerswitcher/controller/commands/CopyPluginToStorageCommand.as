@@ -3,6 +3,7 @@ package flashplayerswitcher.controller.commands
 	import flashplayerswitcher.controller.events.CopyPluginToStorageEvent;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.service.IFlashplayersService;
+	import flashplayerswitcher.service.ITrackerService;
 
 	import org.robotlegs.mvcs.Command;
 
@@ -18,6 +19,9 @@ package flashplayerswitcher.controller.commands
 		
 		[Inject]
 		public var service:IFlashplayersService;
+		
+		[Inject]
+		public var tracker:ITrackerService;
 		
 		override public function execute():void
 		{
@@ -35,6 +39,8 @@ package flashplayerswitcher.controller.commands
 			plugin.xpt.copyTo(pluginDirectory.resolvePath(plugin.xpt.name), true);
 			
 			service.storePlugin(plugin);
+			
+			tracker.track("/storage/" + plugin.version + "/" + (plugin.debugger ? "debugger" : "release") + "/");
 		}
 	}
 }

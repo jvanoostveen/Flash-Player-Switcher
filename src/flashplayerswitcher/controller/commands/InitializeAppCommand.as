@@ -4,6 +4,7 @@ package flashplayerswitcher.controller.commands
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.controller.events.LoadPluginsEvent;
 	import flashplayerswitcher.model.vo.InternetPlugins;
+	import flashplayerswitcher.service.ITrackerService;
 
 	import org.robotlegs.mvcs.Command;
 
@@ -14,8 +15,14 @@ package flashplayerswitcher.controller.commands
 	 */
 	public class InitializeAppCommand extends Command
 	{
+		[Inject]
+		public var tracker:ITrackerService;
+		
 		override public function execute():void
 		{
+			tracker.init(contextView);
+			tracker.track("/");
+			
 			// TODO: refactor to RobotLegs ways...
 			InternetPlugins.SYSTEM = (File.getRootDirectories()[0] as File).resolvePath("Library/Internet Plug-Ins");
 			InternetPlugins.USER = File.userDirectory.resolvePath("Library/Internet Plug-Ins");

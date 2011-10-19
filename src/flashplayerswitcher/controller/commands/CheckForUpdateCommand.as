@@ -1,7 +1,7 @@
 package flashplayerswitcher.controller.commands
 {
-	import air.update.events.StatusUpdateEvent;
 	import air.update.ApplicationUpdaterUI;
+	import air.update.events.StatusUpdateEvent;
 	import air.update.events.UpdateEvent;
 
 	import org.robotlegs.mvcs.Command;
@@ -43,6 +43,8 @@ package flashplayerswitcher.controller.commands
 		private function onError(event:ErrorEvent):void
 		{
 			trace("error: " + event.text);
+			
+			commandMap.release(this);
 		}
 
 		private function clear():void

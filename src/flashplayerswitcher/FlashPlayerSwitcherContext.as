@@ -8,7 +8,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.commands.DeletePluginCommand;
 	import flashplayerswitcher.controller.commands.DownloadPluginCommand;
 	import flashplayerswitcher.controller.commands.InitializeAppCommand;
-	import flashplayerswitcher.controller.commands.InstallPluginCommand;
+	import flashplayerswitcher.controller.commands.ActivatePluginCommand;
 	import flashplayerswitcher.controller.commands.LoadDownloadPluginsCommand;
 	import flashplayerswitcher.controller.commands.LoadPluginsCommand;
 	import flashplayerswitcher.controller.commands.RemoveUserPluginCommand;
@@ -17,24 +17,26 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.events.CopyPluginToStorageEvent;
 	import flashplayerswitcher.controller.events.DeletePluginEvent;
 	import flashplayerswitcher.controller.events.DownloadPluginEvent;
-	import flashplayerswitcher.controller.events.InstallPluginEvent;
+	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.LoadPluginsEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
 	import flashplayerswitcher.model.DownloadPluginsModel;
 	import flashplayerswitcher.model.PluginsModel;
+	import flashplayerswitcher.service.GoogleAnalyticsTrackerService;
 	import flashplayerswitcher.service.IFlashplayersService;
 	import flashplayerswitcher.service.IPluginDownloadService;
+	import flashplayerswitcher.service.ITrackerService;
 	import flashplayerswitcher.service.PluginDownloadService;
 	import flashplayerswitcher.service.SQLFlashplayersService;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
 	import flashplayerswitcher.view.FlashPlayerSwitcherMediator;
-	import flashplayerswitcher.view.PluginStorageListing;
-	import flashplayerswitcher.view.PluginStorageListingMediator;
 	import flashplayerswitcher.view.InstalledVersionListing;
 	import flashplayerswitcher.view.InstalledVersionListingMediator;
 	import flashplayerswitcher.view.PluginDownloadList;
 	import flashplayerswitcher.view.PluginDownloadListMediator;
+	import flashplayerswitcher.view.PluginStorageListing;
+	import flashplayerswitcher.view.PluginStorageListingMediator;
 	import flashplayerswitcher.view.ProgressBarPopup;
 	import flashplayerswitcher.view.ProgressBarPopupMediator;
 
@@ -57,6 +59,7 @@ package flashplayerswitcher
 			
 			injector.mapSingletonOf(IFlashplayersService, SQLFlashplayersService);
 			injector.mapSingletonOf(IPluginDownloadService, PluginDownloadService);
+			injector.mapSingletonOf(ITrackerService, GoogleAnalyticsTrackerService);
 			
 			injector.mapSingleton(PluginsModel);
 			injector.mapSingleton(DownloadPluginsModel);
@@ -68,7 +71,7 @@ package flashplayerswitcher
 			commandMap.mapEvent(CheckInstalledPluginVersionEvent.USER, CheckInstalledUserPluginVersionCommand);
 			commandMap.mapEvent(RemoveUserPluginEvent.REMOVE, RemoveUserPluginCommand, RemoveUserPluginEvent);
 			commandMap.mapEvent(CopyPluginToStorageEvent.COPY_PLUGIN_TO_STORAGE, CopyPluginToStorageCommand, CopyPluginToStorageEvent);
-			commandMap.mapEvent(InstallPluginEvent.INSTALL, InstallPluginCommand, InstallPluginEvent);
+			commandMap.mapEvent(ActivatePluginEvent.ACTIVATE, ActivatePluginCommand, ActivatePluginEvent);
 			commandMap.mapEvent(CheckForUpdateEvent.CHECK_FOR_UPDATE, CheckForUpdateCommand);
 			commandMap.mapEvent(DeletePluginEvent.DELETE, DeletePluginCommand, DeletePluginEvent);
 			commandMap.mapEvent(ShowPluginDownloadListEvent.SHOW, LoadDownloadPluginsCommand, ShowPluginDownloadListEvent);

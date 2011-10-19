@@ -1,7 +1,7 @@
 package flashplayerswitcher.view
 {
 	import flashplayerswitcher.controller.events.DeletePluginEvent;
-	import flashplayerswitcher.controller.events.InstallPluginEvent;
+	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
@@ -71,7 +71,7 @@ package flashplayerswitcher.view
 		
 		private function onInstallButtonClick(event:MouseEvent):void
 		{
-			dispatch(new InstallPluginEvent(view.listing.selectedItem as FlashPlayerPlugin));
+			dispatch(new ActivatePluginEvent(view.listing.selectedItem as FlashPlayerPlugin));
 		}
 		
 		private function onDeleteButtonClick(event:MouseEvent):void
