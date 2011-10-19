@@ -7,22 +7,22 @@ package flashplayerswitcher.controller.events
 	/**
 	 * @author Joeri van Oostveen
 	 */
-	public class InstallPluginEvent extends Event
+	public class ActivatePluginEvent extends Event
 	{
-		public static const INSTALL:String = "install_plugin";
+		public static const ACTIVATE:String = "activate_plugin";
 		
 		public var plugin:FlashPlayerPlugin;
 		
-		public function InstallPluginEvent(plugin:FlashPlayerPlugin)
+		public function ActivatePluginEvent(plugin:FlashPlayerPlugin)
 		{
-			super(INSTALL);
+			super(ACTIVATE);
 			
 			this.plugin = plugin;
 		}
 
 		override public function clone():Event
 		{
-			return new InstallPluginEvent(plugin);
+			return new ActivatePluginEvent(plugin);
 		}
 	}
 }

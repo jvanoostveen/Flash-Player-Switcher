@@ -1,9 +1,10 @@
 package flashplayerswitcher.controller.commands
 {
+	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
-	import flashplayerswitcher.controller.events.InstallPluginEvent;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.model.vo.InternetPlugins;
+	import flashplayerswitcher.service.ITrackerService;
 
 	import org.robotlegs.mvcs.Command;
 
@@ -14,10 +15,13 @@ package flashplayerswitcher.controller.commands
 	/**
 	 * @author Joeri van Oostveen
 	 */
-	public class InstallPluginCommand extends Command
+	public class ActivatePluginCommand extends Command
 	{
 		[Inject]
-		public var event:InstallPluginEvent;
+		public var event:ActivatePluginEvent;
+		
+		[Inject]
+		public var tracker:ITrackerService;
 		
 		override public function execute():void
 		{
@@ -29,9 +33,11 @@ package flashplayerswitcher.controller.commands
 			plugin.plugin.copyTo(plugins.resolvePath(plugin.plugin.name), true);
 			plugin.xpt.copyTo(plugins.resolvePath(plugin.xpt.name), true);
 			
+			tracker.track("/activate/" + plugin.version + "/" + (plugin.debugger ? "debugger" : "release") + "/");
+			
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
 			
-			Alert.show(plugin.name + " " + plugin.version + " is now installed. Please restart your browser(s).", "Plugin installed");
+			Alert.show(plugin.name + " " + plugin.version + " is now activated. Please restart your browser(s).", "Plugin activated");
 		}
 	}
 }
