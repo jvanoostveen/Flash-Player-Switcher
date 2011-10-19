@@ -15,7 +15,7 @@ package flashplayerswitcher.service
 		public function init(display:DisplayObject):void
 		{
 			// FIXME: move account id to config
-			_tracker = new GATracker(display, "UA-26342584-1", "AS3");
+			_tracker = new GATracker(display, "UA-26342584-3", "AS3");
 		}
 
 		public function track(pageURL:String):void
