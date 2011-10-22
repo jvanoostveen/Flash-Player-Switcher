@@ -2,6 +2,7 @@
 <launchConfiguration type="com.powerflasher.fdt.ui.AirReleaseGroup">
 <listAttribute key="ASSET_DIRECTORY_LIST">
 <listEntry value="bin/icons"/>
+<listEntry value="bin/help"/>
 </listAttribute>
 <listAttribute key="ASSET_FILE_LIST">
 <listEntry value="bin/FlashPlayerSwitcher.swf &gt; FlashPlayerSwitcher.swf"/>
