@@ -20,6 +20,6 @@
 	<s:VGroup paddingTop="20">
 		<s:Label fontWeight="bold" text="System:"/>
 		<s:Label id="systemInstalledVersion" fontWeight="normal" text="..."/>
-		<s:Button id="copySystemPluginButton" label="Copy" visible="false" />
+		<s:Button id="copySystemPluginButton" label="Copy to storage" visible="false" />
 	</s:VGroup>
 </s:VGroup>

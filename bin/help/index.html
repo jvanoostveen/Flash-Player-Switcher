@@ -1,0 +1,53 @@
+<!DOCTYPE html> 
+<html>
+	<head> 
+		<meta charset="utf-8" />
+		<title>Flash Player Switcher - Help</title>
+		
+		<link rel="stylesheet" href="style.css" />
+		
+		<script src="jquery-1.4.2-min.js"></script>
+		<script src="jquery.scrollTo-1.4.2-min.js"></script>
+		<script src="jquery.localscroll-1.2.7-min.js"></script>
+		<script>
+			$(document).ready(function ()
+			{
+				$(window).scroll(function (event) {
+					var ypos = $(this).scrollTop();
+				});
+
+				$.localScroll();
+			});
+		</script>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="primary">
+				<h3 id="1">Basic information</h3>
+				<ul class="section_menu">
+					<li><a href="#1_1">How does this work?</a></li>
+					<li><a href="#1_2">I'm not seeing any changes…</a></li>
+					<li><a href="#1_3">How do I add plugins?</a></li>
+					<li><a href="#1_4">I have some bugs / requests / suggestions…</a></li>
+				</ul>
+				<dl class="faq">
+				  <dt id="1_1">How does this work?</dt>
+				    <dd>When plugins are placed in the users 'Internet Plug-Ins' folder, those are loaded instead of the system 'Internet Plug-Ins'. As this tool places files inside the users library, no password is needed.</dd>
+				  <dt id="1_2">I'm not seeing any changes...</dt>
+				    <dd>You need to restart your browser to load the new plugin. If you're using Chrome, disable the built-in Flash Player plugin.</dd>
+				  <dt id="1_3">How do I add plugins?</dt>
+				    <dd>There is a 'Download more…' button where it is possible to download some prepared plugins. If you need different versions or you don't trust the source (nothing was changed, but if you want to be really sure), you can download plugins from the <a href="http://kb2.adobe.com/cps/142/tn_14266.html">Adobe website <img src="extlink.gif"></a>, install them and use the tool to add those plugins to the storage. Make sure you use the uninstaller when trying to install older versions of the plugin when you get errors during the install.</dd>
+				  <dt id="1_4">I have some bugs / requests / suggestions…</dt>
+				    <dd>I'm open for suggestions, so please <a href="https://github.com/jvanoostveen/Flash-Player-Switcher/issues">add an issue here <img src="extlink.gif"></a>.</dd>
+			</div>
+			<div id="sidebar">
+				<div id="sidebar_content" class="fixed">
+					<h3>Select Category</h3>
+					<ul class="section_menu">
+						<li><a href="#1">Basic information</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

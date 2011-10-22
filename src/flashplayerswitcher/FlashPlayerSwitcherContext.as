@@ -1,5 +1,6 @@
 package flashplayerswitcher
 {
+	import flashplayerswitcher.controller.commands.ActivatePluginCommand;
 	import flashplayerswitcher.controller.commands.CheckForUpdateCommand;
 	import flashplayerswitcher.controller.commands.CheckInstalledSystemPluginVersionCommand;
 	import flashplayerswitcher.controller.commands.CheckInstalledUserPluginVersionCommand;
@@ -8,18 +9,19 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.commands.DeletePluginCommand;
 	import flashplayerswitcher.controller.commands.DownloadPluginCommand;
 	import flashplayerswitcher.controller.commands.InitializeAppCommand;
-	import flashplayerswitcher.controller.commands.ActivatePluginCommand;
 	import flashplayerswitcher.controller.commands.LoadDownloadPluginsCommand;
 	import flashplayerswitcher.controller.commands.LoadPluginsCommand;
 	import flashplayerswitcher.controller.commands.RemoveUserPluginCommand;
+	import flashplayerswitcher.controller.commands.ShowHelpCommand;
+	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.CheckForUpdateEvent;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.controller.events.CopyPluginToStorageEvent;
 	import flashplayerswitcher.controller.events.DeletePluginEvent;
 	import flashplayerswitcher.controller.events.DownloadPluginEvent;
-	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.LoadPluginsEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
+	import flashplayerswitcher.controller.events.ShowHelpEvent;
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
 	import flashplayerswitcher.model.DownloadPluginsModel;
 	import flashplayerswitcher.model.PluginsModel;
@@ -76,6 +78,7 @@ package flashplayerswitcher
 			commandMap.mapEvent(DeletePluginEvent.DELETE, DeletePluginCommand, DeletePluginEvent);
 			commandMap.mapEvent(ShowPluginDownloadListEvent.SHOW, LoadDownloadPluginsCommand, ShowPluginDownloadListEvent);
 			commandMap.mapEvent(DownloadPluginEvent.DOWNLOAD, DownloadPluginCommand, DownloadPluginEvent);
+			commandMap.mapEvent(ShowHelpEvent.SHOW, ShowHelpCommand, ShowHelpEvent);
 			
 			super.startup();
 		}

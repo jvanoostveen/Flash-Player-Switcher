@@ -1,0 +1,147 @@
+/** RESET **/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{background:transparent;border:0;font-size:100%;margin:0;outline:0;padding:0;vertical-align:baseline;}body{line-height:1;}ol, ul{list-style:none;}blockquote, q{quotes:none;}blockquote:before, blockquote:after, q:before, q:after{content:'';content:none;}:focus{outline:0;}ins{text-decoration:none;}del{text-decoration:line-through;}table{border-collapse:collapse;border-spacing:0;}
+
+/** BASIC ELEMENT STYLING **/
+
+body {
+	font: 14px/24px helvetica, arial, sans-serif;
+	color:#666666;
+}
+
+a:focus {
+    outline: 1px dotted;
+}
+
+hr {
+    border: 0 #ccc solid;
+    border-top-width: 1px;
+    clear: both;
+    height: 0;
+}
+
+h1 {
+    font-size: 25px;
+    line-height: 25px;
+  	font-family:'Myriad Pro', Helvetica, Arial, sans-serif;
+}
+
+h2 {
+    font-size: 23px;
+    line-height: 23px;
+}
+
+h3 {
+    font-size: 20px;
+    line-height: 21px;
+}
+
+h4 {
+    font-size: 19px;
+    line-height: 19x;
+}
+
+h5 {
+    font-size: 17px;
+    line-height: 17px;
+}
+
+h6 {
+    font-size: 15px;
+    line-height: 15px;
+}
+
+h1, h2, h3, h4, h5, h6{
+	color:#000000;
+}
+
+ol {
+    list-style: decimal;
+}
+
+ul {
+    list-style: disc;
+}
+
+li {
+    margin-left: 30px;
+}
+
+p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul, pre, table, address, fieldset {
+    margin-bottom: 20px;
+}
+
+/** BASIC STYLING **/
+
+div#wrapper{
+	width: 600px;
+	margin: 0 auto;
+	position:relative;
+}
+div#primary{
+	margin-left: 0;
+	margin-bottom: 0;
+	margin-right: 40px;
+	margin-top: 0px;
+	width: 400px;
+	float:left;
+	display:inline;
+}
+
+h1#title{
+	text-align:center;
+	font-size:50px;
+	line-height:70px;
+	margin-top:20px;
+}
+
+a{
+	text-decoration: none;
+	color:#0986e3;
+}
+
+a:hover {
+	text-decoration: underline;
+}ul.section_menu{
+	background:#EDEDED;
+	padding:20px 10px;
+}
+
+h3{
+	padding-top:30px;
+}
+
+dl.faq{
+	margin-bottom:30px;
+}
+
+	dl.faq dt{
+		font-weight:bold;
+		color:#000000;
+		padding:25px 0 5px 0;
+		display:block;
+	}
+	
+	dl.faq dd{
+		padding-bottom:25px;
+		border-bottom:1px solid #cccccc;
+		display:block;
+	}
+
+#sidebar { 
+  	left: 420px;
+  	position: absolute;
+}
+
+#sidebar_content {
+  	position: absolute;
+  	top: 0;
+  	/* just used to show how to include the margin in the effect */
+	width:200px;
+}
+
+#sidebar_content.fixed {
+  position: fixed;
+  top: 0;
+}
+

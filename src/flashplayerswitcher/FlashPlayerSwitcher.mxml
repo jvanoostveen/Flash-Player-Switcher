@@ -24,17 +24,25 @@
 				}
 				
 				context.dispatchEvent(new FlexEvent(FlexEvent.APPLICATION_COMPLETE));
+				
+				nativeWindow.addEventListener(Event.CLOSING, onWindowClosing);
+			}
+
+			private function onWindowClosing(event:Event):void
+			{
+				nativeApplication.exit();
 			}
 		]]>
 	</fx:Script>
-	<s:Group x="0" y="0">
-		<s:Image x="10" y="10" smooth="true" source="@Embed('flashplayerswitcher/logo.png')"/>
-		<s:Label x="161" y="36" fontSize="48" text="Flash Player Switcher"/>
-		<s:TextArea x="161" y="84" width="359" height="45" borderVisible="false"
+	<s:Group left="25" top="25">
+		<s:Image smooth="true" source="@Embed('flashplayerswitcher/logo.png')"/>
+		<s:Label x="150" y="15" fontSize="48" text="Flash Player Switcher"/>
+		<s:TextArea x="150" y="75" width="359" height="45" borderVisible="false"
 					contentBackgroundAlpha="0.0" editable="false"
 					text="Flash Player Switcher makes use of '~/Library/Internet Plug-Ins/'. No systemwide Flash Player plugin will be overwritten."/>
 	</s:Group>
-	<view:InstalledVersionListing x="429" y="177" width="249" height="200"/>
-	<view:PluginStorageListing id="storage" x="26" y="176" />
-	<view:PluginDownloadList id="download" x="26" y="176" visible="false"/>
+	<view:InstalledVersionListing x="429" y="{storage.y}" width="249" height="200"/>
+	<view:PluginStorageListing id="storage" x="25" bottom="25" />
+	<view:PluginDownloadList id="download" x="25" bottom="25" visible="false"/>
+	<s:Button id="helpButton" right="25" bottom="25" width="31" label="?"/>
 </s:WindowedApplication>
