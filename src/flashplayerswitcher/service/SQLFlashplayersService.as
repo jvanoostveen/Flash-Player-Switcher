@@ -1,6 +1,7 @@
 package flashplayerswitcher.service
 {
 	import flashplayerswitcher.controller.events.LoadPluginsEvent;
+	import flashplayerswitcher.controller.events.PluginStoredEvent;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.service.helpers.ISQLRunnerDelegate;
@@ -56,6 +57,7 @@ package flashplayerswitcher.service
 		private function onPluginStored(results:Vector.<SQLResult>):void
 		{
 			dispatch(new LoadPluginsEvent());
+			dispatch(new PluginStoredEvent());
 		}
 
 		public function deletePlugin(plugin:FlashPlayerPlugin):void
