@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <update xmlns="http://ns.adobe.com/air/framework/update/description/2.5">
-	<versionNumber>0.9.1</versionNumber>
+	<versionNumber>1.0.0</versionNumber>
 	<url>https://raw.github.com/jvanoostveen/Flash-Player-Switcher/master/release/FlashPlayerSwitcher.air</url>
 	<description><![CDATA[Changelog
+
+v1.0.0
+- All basic stuff is in.
+- Help added.
+- Added alert when removing user plugin.
 
 v0.9.1
 - Download progress when adding plugins.
