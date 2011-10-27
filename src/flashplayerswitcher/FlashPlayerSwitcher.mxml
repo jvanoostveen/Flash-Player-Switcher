@@ -4,7 +4,7 @@
 						xmlns:flashplayerswitcher="flashplayerswitcher.*"
 						xmlns:view="flashplayerswitcher.view.*"
 						backgroundColor="#F4F4F2" width="100%" height="100%" showStatusBar="false"
-						applicationComplete="onInit()">
+						applicationComplete="onInit()" applicationActivate="onApplicationActivate(event)">
 	
 	<fx:Declarations>
 		<flashplayerswitcher:FlashPlayerSwitcherContext id="context" contextView="{this}" />
@@ -12,7 +12,10 @@
 
 	<fx:Script>
 		<![CDATA[
+			import flashplayerswitcher.controller.events.ApplicationActivateEvent;
+
 			import mx.controls.Alert;
+			import mx.events.AIREvent;
 			import mx.events.FlexEvent;
 			
 			private function onInit():void
@@ -31,6 +34,11 @@
 			private function onWindowClosing(event:Event):void
 			{
 				nativeApplication.exit();
+			}
+
+			private function onApplicationActivate(event:AIREvent):void
+			{
+				dispatchEvent(new ApplicationActivateEvent());
 			}
 		]]>
 	</fx:Script>

@@ -1,6 +1,8 @@
 package flashplayerswitcher.view
 {
 	import flashplayerswitcher.FlashPlayerSwitcher;
+	import flashplayerswitcher.controller.events.ApplicationActivateEvent;
+	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.controller.events.ProgressBarPopupEvent;
 	import flashplayerswitcher.controller.events.ShowHelpEvent;
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
@@ -27,6 +29,8 @@ package flashplayerswitcher.view
 			addContextListener(ShowPluginDownloadListEvent.SHOW, showDownloadList, ShowPluginDownloadListEvent);
 			addContextListener(ShowPluginStorageListEvent.SHOW, showStorageList, ShowPluginStorageListEvent);
 			addContextListener(ProgressBarPopupEvent.SHOW, addProgressBarPopup, ProgressBarPopupEvent, false, 100);
+			
+			addViewListener(ApplicationActivateEvent.ACTIVATE, onApplicationActivate, ApplicationActivateEvent);
 			
 			eventMap.mapListener(view.helpButton, MouseEvent.CLICK, onHelpButtonClick, MouseEvent);
 		}
@@ -55,6 +59,12 @@ package flashplayerswitcher.view
 				
 				dispatch(event.clone());
 			}
+		}
+		
+		private function onApplicationActivate(event:ApplicationActivateEvent):void
+		{
+			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
+			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.SYSTEM));
 		}
 		
 		private function onHelpButtonClick(event:MouseEvent):void
