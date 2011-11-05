@@ -27,6 +27,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
 	import flashplayerswitcher.model.DownloadPluginsModel;
 	import flashplayerswitcher.model.PluginsModel;
+	import flashplayerswitcher.service.DummyTrackerService;
 	import flashplayerswitcher.service.GoogleAnalyticsTrackerService;
 	import flashplayerswitcher.service.IFlashplayersService;
 	import flashplayerswitcher.service.IPluginDownloadService;
@@ -63,7 +64,16 @@ package flashplayerswitcher
 			
 			injector.mapSingletonOf(IFlashplayersService, SQLFlashplayersService);
 			injector.mapSingletonOf(IPluginDownloadService, PluginDownloadService);
-			injector.mapSingletonOf(ITrackerService, GoogleAnalyticsTrackerService);
+			
+			IF::DEV
+			{
+				injector.mapSingletonOf(ITrackerService, DummyTrackerService);
+			}
+			
+			IF::RELEASE
+			{
+				injector.mapSingletonOf(ITrackerService, GoogleAnalyticsTrackerService);
+			}
 			
 			injector.mapSingleton(PluginsModel);
 			injector.mapSingleton(DownloadPluginsModel);
