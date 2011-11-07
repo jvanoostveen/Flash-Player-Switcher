@@ -13,5 +13,10 @@ package flashplayerswitcher.controller.events
 		{
 			super(SHOW);
 		}
+
+		override public function clone():Event
+		{
+			return new ShowHelpEvent();
+		}
 	}
 }
