@@ -37,7 +37,7 @@ package flashplayerswitcher.controller.commands
 			
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
 			
-			Alert.show(plugin.name + " " + plugin.version + " is now activated. Please restart your browser(s).", "Plugin activated");
+			Alert.show(plugin.name + " " + plugin.version + " is now activated. Please restart any open browsers.", "Plugin activated");
 		}
 	}
 }
