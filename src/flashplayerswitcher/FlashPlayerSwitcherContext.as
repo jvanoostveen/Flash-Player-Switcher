@@ -1,5 +1,6 @@
 package flashplayerswitcher
 {
+	import flashplayerswitcher.model.values.PluginDownloadURL;
 	import flashplayerswitcher.controller.commands.ActivatePluginCommand;
 	import flashplayerswitcher.controller.commands.CheckForUpdateCommand;
 	import flashplayerswitcher.controller.commands.CheckInstalledSystemPluginVersionCommand;
@@ -29,6 +30,8 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
 	import flashplayerswitcher.model.DownloadPluginsModel;
 	import flashplayerswitcher.model.PluginsModel;
+	import flashplayerswitcher.model.values.GoogleAnalyticsAccount;
+	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.service.DummyTrackerService;
 	import flashplayerswitcher.service.GoogleAnalyticsTrackerService;
 	import flashplayerswitcher.service.IFlashplayersService;
@@ -61,6 +64,10 @@ package flashplayerswitcher
 	{
 		override public function startup():void
 		{
+			injector.mapValue(InternetPlugins, new InternetPlugins());
+			injector.mapValue(GoogleAnalyticsAccount, new GoogleAnalyticsAccount("UA-26342584-3"));
+			injector.mapValue(PluginDownloadURL, new PluginDownloadURL("http://www.webdebugger.nl/flashplayerswitcher/plugins.xml"));
+			
 			mediatorMap.mapView(FlashPlayerSwitcher, FlashPlayerSwitcherMediator);
 			mediatorMap.mapView(InstalledVersionListing, InstalledVersionListingMediator);
 			mediatorMap.mapView(PluginStorageListing, PluginStorageListingMediator);

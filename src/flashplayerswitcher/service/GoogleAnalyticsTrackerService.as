@@ -1,5 +1,6 @@
 package flashplayerswitcher.service
 {
+	import flashplayerswitcher.model.values.GoogleAnalyticsAccount;
 	import com.google.analytics.AnalyticsTracker;
 	import com.google.analytics.GATracker;
 
@@ -11,11 +12,14 @@ package flashplayerswitcher.service
 	public class GoogleAnalyticsTrackerService implements ITrackerService
 	{
 		private var _tracker:AnalyticsTracker;
-
+		
+		[Inject]
+		public var account:GoogleAnalyticsAccount;
+		
 		public function init(display:DisplayObject):void
 		{
 			// FIXME: move account id to config
-			_tracker = new GATracker(display, "UA-26342584-3", "AS3");
+			_tracker = new GATracker(display, account.toString(), "AS3");
 		}
 
 		public function track(pageURL:String):void

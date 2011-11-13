@@ -3,6 +3,7 @@ package flashplayerswitcher.service
 	import flashplayerswitcher.controller.events.DownloadListDataErrorEvent;
 	import flashplayerswitcher.model.DownloadPluginsModel;
 	import flashplayerswitcher.model.PluginsModel;
+	import flashplayerswitcher.model.values.PluginDownloadURL;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 
 	import org.robotlegs.mvcs.Actor;
@@ -19,13 +20,14 @@ package flashplayerswitcher.service
 	 */
 	public class PluginDownloadService extends Actor implements IPluginDownloadService
 	{
-		public static const LIST_DATA_URL:String = "http://www.webdebugger.nl/flashplayerswitcher/plugins.xml";
-		
 		[Inject]
 		public var downloadModel:DownloadPluginsModel;
 		
 		[Inject]
 		public var installed:PluginsModel;
+		
+		[Inject]
+		public var url:PluginDownloadURL;
 		
 		private var _loader:URLLoader;
 		
@@ -38,7 +40,7 @@ package flashplayerswitcher.service
 				_loader.addEventListener(IOErrorEvent.IO_ERROR, onListDataError);
 			}
 			
-			var request:URLRequest = new URLRequest(LIST_DATA_URL);
+			var request:URLRequest = new URLRequest(url.toString());
 			_loader.load(request);
 		}
 

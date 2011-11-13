@@ -2,8 +2,8 @@ package flashplayerswitcher.controller.commands
 {
 	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
+	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
-	import flashplayerswitcher.model.vo.InternetPlugins;
 	import flashplayerswitcher.service.ITrackerService;
 
 	import org.robotlegs.mvcs.Command;
@@ -23,9 +23,12 @@ package flashplayerswitcher.controller.commands
 		[Inject]
 		public var tracker:ITrackerService;
 		
+		[Inject]
+		public var pluginLocations:InternetPlugins;
+		
 		override public function execute():void
 		{
-			var plugins:File = InternetPlugins.USER;
+			var plugins:File = pluginLocations.user;
 			if (!plugins.exists)
 				plugins.createDirectory();
 			

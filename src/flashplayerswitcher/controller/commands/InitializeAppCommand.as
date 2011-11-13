@@ -3,14 +3,12 @@ package flashplayerswitcher.controller.commands
 	import flashplayerswitcher.controller.events.CheckForUpdateEvent;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.controller.events.LoadPluginsEvent;
-	import flashplayerswitcher.model.vo.InternetPlugins;
 	import flashplayerswitcher.service.ITrackerService;
 	import flashplayerswitcher.view.ApplicationMenu;
 
 	import org.robotlegs.mvcs.Command;
 
 	import flash.desktop.NativeApplication;
-	import flash.filesystem.File;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -25,14 +23,13 @@ package flashplayerswitcher.controller.commands
 			tracker.init(contextView);
 			tracker.track("/");
 			
-			// TODO: refactor to RobotLegs ways...
-			InternetPlugins.SYSTEM = (File.getRootDirectories()[0] as File).resolvePath("Library/Internet Plug-Ins");
-			InternetPlugins.USER = File.userDirectory.resolvePath("Library/Internet Plug-Ins");
-			
 			new ApplicationMenu();
 			mediatorMap.createMediator(NativeApplication.nativeApplication.menu);
 			
-			dispatch(new CheckForUpdateEvent());
+			IF::RELEASE
+			{
+				dispatch(new CheckForUpdateEvent());
+			}
 			
 			dispatch(new LoadPluginsEvent());
 			

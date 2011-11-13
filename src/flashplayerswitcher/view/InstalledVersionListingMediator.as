@@ -5,8 +5,8 @@ package flashplayerswitcher.view
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
 	import flashplayerswitcher.model.PluginsModel;
+	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
-	import flashplayerswitcher.model.vo.InternetPlugins;
 
 	import org.robotlegs.mvcs.Mediator;
 
@@ -23,6 +23,9 @@ package flashplayerswitcher.view
 		[Inject]
 		public var plugins:PluginsModel;
 
+		[Inject]
+		public var pluginLocations:InternetPlugins;
+		
 		override public function onRegister():void
 		{
 			addContextListener(InstalledPluginUpdatedEvent.SYSTEM, systemPluginUpdated);
@@ -71,7 +74,7 @@ package flashplayerswitcher.view
 		private function onCopyPluginClick(event:MouseEvent):void
 		{
 			var plugin:FlashPlayerPlugin = new FlashPlayerPlugin();
-			plugin.search(InternetPlugins.SYSTEM);
+			plugin.search(pluginLocations.system);
 			
 			dispatch(new CopyPluginToStorageEvent(plugin));
 		}

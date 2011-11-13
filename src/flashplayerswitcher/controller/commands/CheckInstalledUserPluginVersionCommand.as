@@ -1,10 +1,10 @@
 package flashplayerswitcher.controller.commands
 {
 	import flashplayerswitcher.model.PluginsModel;
+	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
-	import flashplayerswitcher.model.vo.InternetPlugins;
-
 	import org.robotlegs.mvcs.Command;
+
 
 	/**
 	 * @author Joeri van Oostveen
@@ -14,12 +14,15 @@ package flashplayerswitcher.controller.commands
 		[Inject]
 		public var installedPlugins:PluginsModel;
 		
+		[Inject]
+		public var pluginLocations:InternetPlugins;
+		
 		override public function execute():void
 		{
 			try
 			{
 				var plugin:FlashPlayerPlugin = new FlashPlayerPlugin();
-				plugin.search(InternetPlugins.USER);
+				plugin.search(pluginLocations.user);
 				if (plugin.exists)
 				{
 					installedPlugins.user = plugin;

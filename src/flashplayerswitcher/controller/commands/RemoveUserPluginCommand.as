@@ -1,8 +1,8 @@
 package flashplayerswitcher.controller.commands
 {
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
+	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
-	import flashplayerswitcher.model.vo.InternetPlugins;
 
 	import org.robotlegs.mvcs.Command;
 
@@ -13,10 +13,13 @@ package flashplayerswitcher.controller.commands
 	 */
 	public class RemoveUserPluginCommand extends Command
 	{
+		[Inject]
+		public var pluginLocations:InternetPlugins;
+		
 		override public function execute():void
 		{
 			var plugin:FlashPlayerPlugin = new FlashPlayerPlugin();
-			plugin.search(InternetPlugins.USER);
+			plugin.search(pluginLocations.user);
 			if (plugin.exists)
 				plugin.remove();
 			
