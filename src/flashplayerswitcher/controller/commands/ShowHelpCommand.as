@@ -9,6 +9,7 @@ package flashplayerswitcher.controller.commands
 
 	import flash.desktop.NativeApplication;
 	import flash.display.NativeWindow;
+	import flash.system.Capabilities;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -38,6 +39,9 @@ package flashplayerswitcher.controller.commands
 			w.title = "Flash Player Switcher - Help";
 			w.name = "help_window";
 			w.open();
+			
+			w.nativeWindow.x = Math.round((Capabilities.screenResolutionX - w.width) * 0.5);
+			w.nativeWindow.y = 175;
 		}
 	}
 }
