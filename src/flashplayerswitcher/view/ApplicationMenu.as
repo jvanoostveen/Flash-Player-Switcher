@@ -2,11 +2,13 @@ package flashplayerswitcher.view
 {
 	import flashplayerswitcher.controller.events.ProvideFeedbackEvent;
 	import flashplayerswitcher.controller.events.ShowHelpEvent;
+	import flashplayerswitcher.controller.events.ShowPreferencesEvent;
 
 	import flash.desktop.NativeApplication;
 	import flash.display.NativeMenu;
 	import flash.display.NativeMenuItem;
 	import flash.events.EventDispatcher;
+	import flash.ui.Keyboard;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -17,6 +19,21 @@ package flashplayerswitcher.view
 		{
 			if (NativeApplication.supportsMenu)
 			{
+				var separator:NativeMenuItem;
+				
+				// app menu
+				var appMenu:NativeMenu = (NativeApplication.nativeApplication.menu.items[0] as NativeMenuItem).submenu;
+				
+				separator = new NativeMenuItem("", true);
+				appMenu.addItemAt(separator, 1);
+				
+				var preferences:NativeMenuItem = new NativeMenuItem("Preferences…");
+				preferences.keyEquivalent = ",";
+				preferences.keyEquivalentModifiers = [Keyboard.COMMAND];
+				preferences.data = new ShowPreferencesEvent();
+				appMenu.addItemAt(preferences, 2);
+				
+				// help menu
 				var helpMenuItem:NativeMenuItem = new NativeMenuItem("Help");
 				var helpMenu:NativeMenu = new NativeMenu();
 				helpMenuItem.submenu = helpMenu;
@@ -25,7 +42,7 @@ package flashplayerswitcher.view
 				help.data = new ShowHelpEvent();
 				helpMenu.addItem(help);
 				
-				var separator:NativeMenuItem = new NativeMenuItem("", true);
+				separator = new NativeMenuItem("", true);
 				helpMenu.addItem(separator);
 				
 				var feedback:NativeMenuItem = new NativeMenuItem("Provide feedback");

@@ -1,6 +1,5 @@
 package flashplayerswitcher
 {
-	import flashplayerswitcher.model.values.PluginDownloadURL;
 	import flashplayerswitcher.controller.commands.ActivatePluginCommand;
 	import flashplayerswitcher.controller.commands.CheckForUpdateCommand;
 	import flashplayerswitcher.controller.commands.CheckInstalledSystemPluginVersionCommand;
@@ -16,6 +15,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.commands.ProvideFeedbackCommand;
 	import flashplayerswitcher.controller.commands.RemoveUserPluginCommand;
 	import flashplayerswitcher.controller.commands.ShowHelpCommand;
+	import flashplayerswitcher.controller.commands.ShowPreferencesCommand;
 	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.CheckForUpdateEvent;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
@@ -28,10 +28,12 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
 	import flashplayerswitcher.controller.events.ShowHelpEvent;
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
+	import flashplayerswitcher.controller.events.ShowPreferencesEvent;
 	import flashplayerswitcher.model.DownloadPluginsModel;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.values.GoogleAnalyticsAccount;
 	import flashplayerswitcher.model.values.InternetPlugins;
+	import flashplayerswitcher.model.values.PluginDownloadURL;
 	import flashplayerswitcher.service.DummyTrackerService;
 	import flashplayerswitcher.service.GoogleAnalyticsTrackerService;
 	import flashplayerswitcher.service.IFlashplayersService;
@@ -106,6 +108,7 @@ package flashplayerswitcher
 			commandMap.mapEvent(ShowHelpEvent.SHOW, ShowHelpCommand, ShowHelpEvent);
 			commandMap.mapEvent(PluginStoredEvent.STORED, PluginStoredCommand, PluginStoredEvent);
 			commandMap.mapEvent(ProvideFeedbackEvent.PROVIDE_FEEDBACK, ProvideFeedbackCommand, ProvideFeedbackEvent);
+			commandMap.mapEvent(ShowPreferencesEvent.SHOW, ShowPreferencesCommand, ShowPreferencesEvent);
 			
 			super.startup();
 		}
