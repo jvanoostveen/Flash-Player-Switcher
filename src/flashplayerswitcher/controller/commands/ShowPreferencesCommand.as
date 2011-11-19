@@ -29,6 +29,7 @@ package flashplayerswitcher.controller.commands
 			}
 			
 			var w:Window = new PreferencesWindow();
+			mediatorMap.createMediator(w);
 			w.open();
 			
 			w.nativeWindow.x = Math.round((Capabilities.screenResolutionX - w.width) * 0.5);

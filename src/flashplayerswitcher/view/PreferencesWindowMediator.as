@@ -1,5 +1,8 @@
 package flashplayerswitcher.view
 {
+	import flashplayerswitcher.view.preferences.StoragePreferencesMediator;
+	import flashplayerswitcher.view.preferences.StoragePreferencesPanel;
+
 	import org.robotlegs.mvcs.Mediator;
 
 	/**
@@ -12,8 +15,14 @@ package flashplayerswitcher.view
 
 		override public function onRegister():void
 		{
-			trace("prefs window mediator");
-			view.allowEditing = true;
+			if (!mediatorMap.hasMapping(StoragePreferencesPanel))
+				mediatorMap.mapView(StoragePreferencesPanel, StoragePreferencesMediator);
+			mediatorMap.createMediator(view.storage);
+		}
+
+		override public function onRemove():void
+		{
+			mediatorMap.removeMediatorByView(view.storage);
 		}
 	}
 }

@@ -50,6 +50,8 @@ package flashplayerswitcher
 	import flashplayerswitcher.view.PluginDownloadListMediator;
 	import flashplayerswitcher.view.PluginStorageListing;
 	import flashplayerswitcher.view.PluginStorageListingMediator;
+	import flashplayerswitcher.view.PreferencesWindow;
+	import flashplayerswitcher.view.PreferencesWindowMediator;
 	import flashplayerswitcher.view.ProgressBarPopup;
 	import flashplayerswitcher.view.ProgressBarPopupMediator;
 
@@ -76,6 +78,7 @@ package flashplayerswitcher
 			mediatorMap.mapView(PluginDownloadList, PluginDownloadListMediator);
 			mediatorMap.mapView(ProgressBarPopup, ProgressBarPopupMediator, null, false, false);
 			mediatorMap.mapView(NativeMenu, ApplicationMenuMediator);
+			mediatorMap.mapView(PreferencesWindow, PreferencesWindowMediator);
 			
 			injector.mapSingletonOf(IFlashplayersService, SQLFlashplayersService);
 			injector.mapSingletonOf(IPluginDownloadService, PluginDownloadService);
