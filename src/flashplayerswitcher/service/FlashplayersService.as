@@ -1,10 +1,9 @@
 package flashplayerswitcher.service
 {
 	import flashplayerswitcher.controller.events.LoadPluginsEvent;
-	import flashplayerswitcher.controller.events.PluginStoredEvent;
+	import flashplayerswitcher.model.ConfigModel;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
-	import flashplayerswitcher.service.helpers.ISQLRunnerDelegate;
 
 	import com.probertson.data.QueuedStatement;
 
@@ -18,24 +17,26 @@ package flashplayerswitcher.service
 	/**
 	 * @author Joeri van Oostveen
 	 */
-	public class SQLFlashplayersService extends Actor implements IFlashplayersService
+	public class FlashplayersService extends Actor implements IFlashplayersService
 	{
-        [Inject]
-        public var sqlRunner:ISQLRunnerDelegate;
-
         [Inject]
 		public var installedPlugins:PluginsModel;
 
+		[Inject]
+		public var config:ConfigModel;
+		
 		public function loadPlugins():void
 		{
-			sqlRunner.execute(LOAD_ALL_PLUGINS_SQL, null, onAllPluginsLoaded, FlashPlayerPlugin, fault);
+			installedPlugins.plugins = new ArrayCollection([]);
+			
+			config.sqlrunner.execute(LOAD_ALL_PLUGINS_SQL, null, onAllPluginsLoaded, FlashPlayerPlugin, fault);
 		}
 		
 		private function onAllPluginsLoaded(result:SQLResult):void
 		{
 			for each (var plugin:FlashPlayerPlugin in result.data)
 			{
-				plugin.searchStorage();
+				plugin.search(config.storageDirectory.resolvePath("plugins").resolvePath(plugin.hash), false);
 			}
 			
 			// initial sort on version number, ascending
@@ -51,13 +52,13 @@ package flashplayerswitcher.service
 			params["debugger"] = plugin.debugger;
 			params["hash"] = plugin.hash;
 
-            sqlRunner.executeModify(Vector.<QueuedStatement>([new QueuedStatement(INSERT_PLUGIN_SQL, params)]), onPluginStored, fault);
+            config.sqlrunner.executeModify(Vector.<QueuedStatement>([new QueuedStatement(INSERT_PLUGIN_SQL, params)]), onPluginStored, fault);
 		}
 		
 		private function onPluginStored(results:Vector.<SQLResult>):void
 		{
 			dispatch(new LoadPluginsEvent());
-			dispatch(new PluginStoredEvent());
+//			dispatch(new PluginStoredEvent());
 		}
 
 		public function deletePlugin(plugin:FlashPlayerPlugin):void
@@ -65,7 +66,7 @@ package flashplayerswitcher.service
 			var params:Object = new Object();
 			params["hash"] = plugin.hash;
 			
-			sqlRunner.executeModify(Vector.<QueuedStatement>([new QueuedStatement(DELETE_PLUGIN_SQL, params)]), onPluginDeleted, fault);
+			config.sqlrunner.executeModify(Vector.<QueuedStatement>([new QueuedStatement(DELETE_PLUGIN_SQL, params)]), onPluginDeleted, fault);
 		}
 		
 		private function onPluginDeleted(results:Vector.<SQLResult>):void

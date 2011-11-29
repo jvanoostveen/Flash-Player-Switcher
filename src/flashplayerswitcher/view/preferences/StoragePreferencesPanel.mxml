@@ -8,13 +8,30 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import flashplayerswitcher.controller.events.StoragePrefsLocationSelectEvent;
+
+			import spark.events.IndexChangeEvent;
+
 			import mx.collections.ArrayCollection;
 			
 			[Bindable]
-			public var pluginStorageLocations:ArrayCollection = new ArrayCollection([{label: "Application Storage"}, {label: "Other..."}]);
+			public var pluginStorageLocations:ArrayCollection = new ArrayCollection([{label: "[PLACEHOLDER]", data: null}, {label: "Other...", data: null}]);
+			
+			[Bindable]
+			public var pluginStorageLocationSelectedIndex:int = 0;
+			
+			private function onStorageLocationChange(e:IndexChangeEvent):void
+			{
+				var item:Object = locations.selectedItem;
+				if (item)
+					dispatchEvent(new StoragePrefsLocationSelectEvent(StoragePrefsLocationSelectEvent.CHANGE, item.data));
+			}
 			
 			[Bindable]
 			public var allowEditing:Boolean = true;
+			
+			[Bindable]
+			public var allowEditingEnabled:Boolean = true;
 			
 			private function onAllowEditingChanged(e:Event):void
 			{
@@ -27,13 +44,13 @@
 			<s:Group width="40%">
 				<s:Label text="Plugin storage location:" paddingTop="6" right="0"/>
 			</s:Group>
-			<s:DropDownList dataProvider="{pluginStorageLocations}" selectedIndex="0"  width="150"/>
+			<s:DropDownList id="locations" dataProvider="{pluginStorageLocations}" selectedIndex="{pluginStorageLocationSelectedIndex}" width="150" change="onStorageLocationChange(event)"/>
 		</s:HGroup>
 		<s:HGroup width="100%">
 			<s:Group width="40%">
 				<s:Label text="Allow editing:" paddingTop="5" right="0"/>
 			</s:Group>
-			<s:CheckBox selected="{allowEditing}" change="onAllowEditingChanged(event)"/>
+			<s:CheckBox selected="{allowEditing}" change="onAllowEditingChanged(event)" enabled="{allowEditingEnabled}" toolTip="Disallow editing when you are using a shared storage of plugins and the storage is managed by someone else."/>
 		</s:HGroup>
 	</s:VGroup>
 </s:Panel>

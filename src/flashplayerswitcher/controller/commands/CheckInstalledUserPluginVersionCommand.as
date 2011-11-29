@@ -3,8 +3,8 @@ package flashplayerswitcher.controller.commands
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
-	import org.robotlegs.mvcs.Command;
 
+	import org.robotlegs.mvcs.Command;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -22,6 +22,7 @@ package flashplayerswitcher.controller.commands
 			try
 			{
 				var plugin:FlashPlayerPlugin = new FlashPlayerPlugin();
+				injector.injectInto(plugin);
 				plugin.search(pluginLocations.user);
 				if (plugin.exists)
 				{

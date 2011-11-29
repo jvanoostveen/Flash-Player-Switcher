@@ -13,12 +13,16 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.commands.LoadPluginsCommand;
 	import flashplayerswitcher.controller.commands.PluginStoredCommand;
 	import flashplayerswitcher.controller.commands.ProvideFeedbackCommand;
+	import flashplayerswitcher.controller.commands.ReadConfigCommand;
 	import flashplayerswitcher.controller.commands.RemoveUserPluginCommand;
 	import flashplayerswitcher.controller.commands.ShowHelpCommand;
 	import flashplayerswitcher.controller.commands.ShowPreferencesCommand;
+	import flashplayerswitcher.controller.commands.StorageDirectoryChangedCommand;
+	import flashplayerswitcher.controller.commands.StoragePrefsLocationSelectCommand;
 	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.CheckForUpdateEvent;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
+	import flashplayerswitcher.controller.events.ConfigReadyEvent;
 	import flashplayerswitcher.controller.events.CopyPluginToStorageEvent;
 	import flashplayerswitcher.controller.events.DeletePluginEvent;
 	import flashplayerswitcher.controller.events.DownloadPluginEvent;
@@ -29,18 +33,24 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.events.ShowHelpEvent;
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
 	import flashplayerswitcher.controller.events.ShowPreferencesEvent;
+	import flashplayerswitcher.controller.events.StorageDirectoryChangedEvent;
+	import flashplayerswitcher.controller.events.StoragePrefsLocationSelectEvent;
+	import flashplayerswitcher.model.ConfigModel;
 	import flashplayerswitcher.model.DownloadPluginsModel;
 	import flashplayerswitcher.model.PluginsModel;
+	import flashplayerswitcher.model.values.DatabaseFilename;
 	import flashplayerswitcher.model.values.GoogleAnalyticsAccount;
 	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.values.PluginDownloadURL;
+	import flashplayerswitcher.service.ConfigService;
 	import flashplayerswitcher.service.DummyTrackerService;
 	import flashplayerswitcher.service.GoogleAnalyticsTrackerService;
+	import flashplayerswitcher.service.IConfigService;
 	import flashplayerswitcher.service.IFlashplayersService;
 	import flashplayerswitcher.service.IPluginDownloadService;
 	import flashplayerswitcher.service.ITrackerService;
 	import flashplayerswitcher.service.PluginDownloadService;
-	import flashplayerswitcher.service.SQLFlashplayersService;
+	import flashplayerswitcher.service.FlashplayersService;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
 	import flashplayerswitcher.view.ApplicationMenuMediator;
 	import flashplayerswitcher.view.FlashPlayerSwitcherMediator;
@@ -71,6 +81,7 @@ package flashplayerswitcher
 			injector.mapValue(InternetPlugins, new InternetPlugins());
 			injector.mapValue(GoogleAnalyticsAccount, new GoogleAnalyticsAccount("UA-26342584-3"));
 			injector.mapValue(PluginDownloadURL, new PluginDownloadURL("http://www.webdebugger.nl/flashplayerswitcher/plugins.xml"));
+			injector.mapValue(DatabaseFilename, new DatabaseFilename("flashplayers.db"));
 			
 			mediatorMap.mapView(FlashPlayerSwitcher, FlashPlayerSwitcherMediator);
 			mediatorMap.mapView(InstalledVersionListing, InstalledVersionListingMediator);
@@ -80,8 +91,9 @@ package flashplayerswitcher
 			mediatorMap.mapView(NativeMenu, ApplicationMenuMediator);
 			mediatorMap.mapView(PreferencesWindow, PreferencesWindowMediator);
 			
-			injector.mapSingletonOf(IFlashplayersService, SQLFlashplayersService);
+			injector.mapSingletonOf(IFlashplayersService, FlashplayersService);
 			injector.mapSingletonOf(IPluginDownloadService, PluginDownloadService);
+			injector.mapSingletonOf(IConfigService, ConfigService);
 			
 			IF::DEV
 			{
@@ -95,9 +107,11 @@ package flashplayerswitcher
 			
 			injector.mapSingleton(PluginsModel);
 			injector.mapSingleton(DownloadPluginsModel);
+			injector.mapSingleton(ConfigModel);
 			
-			commandMap.mapEvent(FlexEvent.APPLICATION_COMPLETE, ConfigureDatabaseCommand);
-			commandMap.mapEvent(DatabaseReadyEvent.READY, InitializeAppCommand);
+			commandMap.mapEvent(FlexEvent.APPLICATION_COMPLETE, ReadConfigCommand);
+			commandMap.mapEvent(ConfigReadyEvent.READY, ConfigureDatabaseCommand);
+			commandMap.mapEvent(DatabaseReadyEvent.READY, InitializeAppCommand, DatabaseReadyEvent, true);
 			commandMap.mapEvent(LoadPluginsEvent.LOAD_PLUGINS, LoadPluginsCommand, LoadPluginsEvent);
 			commandMap.mapEvent(CheckInstalledPluginVersionEvent.SYSTEM, CheckInstalledSystemPluginVersionCommand);
 			commandMap.mapEvent(CheckInstalledPluginVersionEvent.USER, CheckInstalledUserPluginVersionCommand);
@@ -112,6 +126,8 @@ package flashplayerswitcher
 			commandMap.mapEvent(PluginStoredEvent.STORED, PluginStoredCommand, PluginStoredEvent);
 			commandMap.mapEvent(ProvideFeedbackEvent.PROVIDE_FEEDBACK, ProvideFeedbackCommand, ProvideFeedbackEvent);
 			commandMap.mapEvent(ShowPreferencesEvent.SHOW, ShowPreferencesCommand, ShowPreferencesEvent);
+			commandMap.mapEvent(StorageDirectoryChangedEvent.CHANGED, StorageDirectoryChangedCommand, StorageDirectoryChangedEvent);
+			commandMap.mapEvent(StoragePrefsLocationSelectEvent.CHANGE, StoragePrefsLocationSelectCommand, StoragePrefsLocationSelectEvent);
 			
 			super.startup();
 		}

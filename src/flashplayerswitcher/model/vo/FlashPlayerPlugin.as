@@ -27,28 +27,21 @@ package flashplayerswitcher.model.vo
 		public var minor:uint;
 		public var revision:uint;
 		public var build:uint;
-
+		
 		public function FlashPlayerPlugin()
 		{
 			
 		}
 		
-		public function search(directory:File):void
+		public function search(directory:File, parsePlugin:Boolean = true):void
 		{
 			plugin = directory.resolvePath(FLASH_PLAYER_PLUGIN);
 			xpt = directory.resolvePath(FLASH_PLAYER_XPT);
 			
-			if (plugin.exists)
+			if (plugin.exists && parsePlugin)
 				parse();
 		}
 		
-		public function searchStorage():void
-		{
-			var directory:File = File.applicationStorageDirectory.resolvePath("plugins/" + hash);
-			plugin = directory.resolvePath(FLASH_PLAYER_PLUGIN);
-			xpt = directory.resolvePath(FLASH_PLAYER_XPT);
-		}
-
 		public function remove():void
 		{
 			if (plugin.exists)

@@ -1,5 +1,6 @@
 package flashplayerswitcher.service.helpers
 {
+	import flashplayerswitcher.model.ConfigModel;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
 
 	import com.probertson.data.QueuedStatement;
@@ -12,15 +13,15 @@ package flashplayerswitcher.service.helpers
 
     public class DatabaseCreator extends Actor
     {
-        [Inject]
-        public var sqlRunner:ISQLRunnerDelegate;
-
+		[Inject]
+		public var config:ConfigModel;
+		
         public function createDatabaseStructure():void
         {
             var statements:Vector.<QueuedStatement> = new Vector.<QueuedStatement>();
             statements[statements.length] = new QueuedStatement(CREATE_FLASHPLAYERS_SQL);
 
-            sqlRunner.executeModify(statements, executeBatchCompleteHandler, executeBatchErrorHandler, null);
+            config.sqlrunner.executeModify(statements, executeBatchCompleteHandler, executeBatchErrorHandler, null);
         }
 
         private function executeBatchCompleteHandler(results:Vector.<SQLResult>):void
