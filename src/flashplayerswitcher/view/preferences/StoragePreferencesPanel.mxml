@@ -46,7 +46,7 @@
 			</s:Group>
 			<s:DropDownList id="locations" dataProvider="{pluginStorageLocations}" selectedIndex="{pluginStorageLocationSelectedIndex}" width="150" change="onStorageLocationChange(event)"/>
 		</s:HGroup>
-		<s:HGroup width="100%">
+		<s:HGroup width="100%" visible="false">
 			<s:Group width="40%">
 				<s:Label text="Allow editing:" paddingTop="5" right="0"/>
 			</s:Group>
