@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <update xmlns="http://ns.adobe.com/air/framework/update/description/2.5">
-	<versionNumber>1.0.1</versionNumber>
+	<versionNumber>1.1.0</versionNumber>
 	<url>https://raw.github.com/jvanoostveen/Flash-Player-Switcher/master/release/FlashPlayerSwitcher.air</url>
 	<description><![CDATA[Changelog
+
+v1.1.0
+- Storage location for database and plugins can now be chosen.
+- Better positioning of Help window.
+- Text changes.
+- Added Help menu with links to the help and issue list.
+- Rechecks installed versions when application is activated.
 
 v1.0.1
 - Multiple Help windows issue fixed.
