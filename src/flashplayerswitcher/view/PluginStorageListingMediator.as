@@ -1,10 +1,11 @@
 package flashplayerswitcher.view
 {
-	import flashplayerswitcher.controller.events.DeletePluginEvent;
 	import flashplayerswitcher.controller.events.ActivatePluginEvent;
+	import flashplayerswitcher.controller.events.DeletePluginEvent;
 	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
+	import flashplayerswitcher.controller.events.StorageAllowEditingChangedEvent;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 
@@ -24,11 +25,12 @@ package flashplayerswitcher.view
 
 		[Inject]
 		public var installed:PluginsModel;
-
+		
 		override public function onRegister():void
 		{
 			addContextListener(PluginsUpdatedEvent.UPDATED, onPluginsUpdated, PluginsUpdatedEvent);
 			addContextListener(InstalledPluginUpdatedEvent.USER, onUserPluginUpdate, InstalledPluginUpdatedEvent);
+			addContextListener(StorageAllowEditingChangedEvent.CHANGED, onAllowEditingChanged, StorageAllowEditingChangedEvent);
 			
 			eventMap.mapListener(view.listing, GridSelectionEvent.SELECTION_CHANGE, onSelectionChange);
 			eventMap.mapListener(view.installButton, MouseEvent.CLICK, onInstallButtonClick);
@@ -54,6 +56,12 @@ package flashplayerswitcher.view
 				else
 					view.installButton.enabled = true;
 			}
+		}
+		
+		private function onAllowEditingChanged(event:StorageAllowEditingChangedEvent):void
+		{
+			view.downloadButton.visible = event.allowEditing;
+			view.deleteButton.visible = event.allowEditing;
 		}
 		
 		private function onSelectionChange(event:GridSelectionEvent):void

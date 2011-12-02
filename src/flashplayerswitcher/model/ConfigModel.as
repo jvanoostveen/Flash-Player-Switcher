@@ -1,5 +1,6 @@
 package flashplayerswitcher.model
 {
+	import flashplayerswitcher.controller.events.StorageAllowEditingChangedEvent;
 	import flashplayerswitcher.controller.events.StorageDirectoryChangedEvent;
 
 	import com.probertson.data.SQLRunner;
@@ -16,6 +17,7 @@ package flashplayerswitcher.model
 		private var _sqlrunner:SQLRunner;
 		
 		private var _storageDirectory:File;
+		private var _storageAllowEditing:Boolean = true;
 
 		public function get storageDirectory():File
 		{
@@ -36,10 +38,22 @@ package flashplayerswitcher.model
 		{
 			return _sqlrunner;
 		}
-
+		
 		public function set sqlrunner(sqlrunner:SQLRunner):void
 		{
 			_sqlrunner = sqlrunner;
+		}
+		
+		public function get storageAllowEditing():Boolean
+		{
+			return _storageAllowEditing;
+		}
+
+		public function set storageAllowEditing(value:Boolean):void
+		{
+			_storageAllowEditing = value;
+			
+			dispatch(new StorageAllowEditingChangedEvent(_storageAllowEditing));
 		}
 	}
 }

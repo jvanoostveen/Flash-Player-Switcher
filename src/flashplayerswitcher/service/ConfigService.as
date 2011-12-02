@@ -22,7 +22,29 @@ package flashplayerswitcher.service
 			_config = SharedObject.getLocal("config", "/");
 		}
 		
-		public function getStorageDirectory():File
+		public function saveStorageDirectory(directory:File):void
+		{
+			_config.data["storage"] = directory.nativePath;
+			_config.flush();
+			
+			model.storageDirectory = directory;
+		}
+		
+		public function saveAllowEditing(value:Boolean):void
+		{
+			_config.data["allowEditing"] = value;
+			_config.flush();
+			
+			model.storageAllowEditing = value;
+		}
+
+		public function readConfig():void
+		{
+			model.storageDirectory = getStorageDirectory();
+			model.storageAllowEditing = getAllowEditing();
+		}
+		
+		private function getStorageDirectory():File
 		{
 			var dir:File = new File();
 			
@@ -34,18 +56,14 @@ package flashplayerswitcher.service
 			return dir;
 		}
 		
-		public function saveStorageDirectory(directory:File):void
+		private function getAllowEditing():Boolean
 		{
-			trace("save storage directory: " + directory.nativePath);
-			_config.data["storage"] = directory.nativePath;
-			_config.flush();
+			var allow:Boolean = true;
 			
-			model.storageDirectory = directory;
-		}
-
-		public function readConfig():void
-		{
-			model.storageDirectory = getStorageDirectory();
+			if (_config.data.hasOwnProperty("allowEditing"))
+				allow = _config.data["allowEditing"];
+			
+			return allow;
 		}
 	}
 }

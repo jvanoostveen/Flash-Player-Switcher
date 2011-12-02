@@ -4,6 +4,8 @@ package flashplayerswitcher.view
 	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
 	import flashplayerswitcher.controller.events.RemoveUserPluginEvent;
+	import flashplayerswitcher.controller.events.StorageAllowEditingChangedEvent;
+	import flashplayerswitcher.model.ConfigModel;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
@@ -26,11 +28,15 @@ package flashplayerswitcher.view
 		[Inject]
 		public var pluginLocations:InternetPlugins;
 		
+		[Inject]
+		public var config:ConfigModel;
+		
 		override public function onRegister():void
 		{
 			addContextListener(InstalledPluginUpdatedEvent.SYSTEM, systemPluginUpdated);
 			addContextListener(InstalledPluginUpdatedEvent.USER, userPluginUpdated);
 			addContextListener(PluginsUpdatedEvent.UPDATED, knownPluginsUpdated);
+			addContextListener(StorageAllowEditingChangedEvent.CHANGED, onAllowEditingChanged, StorageAllowEditingChangedEvent);
 			
 			eventMap.mapListener(view.copySystemPluginButton, MouseEvent.CLICK, onCopyPluginClick);
 			addViewListener(RemoveUserPluginEvent.REMOVE, dispatch);
@@ -42,10 +48,17 @@ package flashplayerswitcher.view
 			checkSystemPluginInstall();
 		}
 
+		private function onAllowEditingChanged(event:StorageAllowEditingChangedEvent):void
+		{
+			view.copySystemPluginButton.visible = event.allowEditing;
+			
+			checkSystemPluginInstall();
+		}
+		
 		private function checkSystemPluginInstall():void
 		{
 			view.copySystemPluginButton.visible = false;
-			if (plugins.system && !plugins.contains(plugins.system))
+			if (config.storageAllowEditing && plugins.system && !plugins.contains(plugins.system))
 			{
 				view.copySystemPluginButton.visible = true;
 			}

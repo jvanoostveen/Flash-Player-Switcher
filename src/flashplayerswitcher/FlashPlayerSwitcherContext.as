@@ -18,7 +18,8 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.commands.ShowHelpCommand;
 	import flashplayerswitcher.controller.commands.ShowPreferencesCommand;
 	import flashplayerswitcher.controller.commands.StorageDirectoryChangedCommand;
-	import flashplayerswitcher.controller.commands.StoragePrefsLocationSelectCommand;
+	import flashplayerswitcher.controller.commands.preferences.StoragePrefsAllowEditingChangeCommand;
+	import flashplayerswitcher.controller.commands.preferences.StoragePrefsLocationSelectCommand;
 	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.CheckForUpdateEvent;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
@@ -34,7 +35,8 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
 	import flashplayerswitcher.controller.events.ShowPreferencesEvent;
 	import flashplayerswitcher.controller.events.StorageDirectoryChangedEvent;
-	import flashplayerswitcher.controller.events.StoragePrefsLocationSelectEvent;
+	import flashplayerswitcher.controller.events.preferences.StoragePrefsAllowEditingChangeEvent;
+	import flashplayerswitcher.controller.events.preferences.StoragePrefsLocationSelectEvent;
 	import flashplayerswitcher.model.ConfigModel;
 	import flashplayerswitcher.model.DownloadPluginsModel;
 	import flashplayerswitcher.model.PluginsModel;
@@ -44,13 +46,13 @@ package flashplayerswitcher
 	import flashplayerswitcher.model.values.PluginDownloadURL;
 	import flashplayerswitcher.service.ConfigService;
 	import flashplayerswitcher.service.DummyTrackerService;
+	import flashplayerswitcher.service.FlashplayersService;
 	import flashplayerswitcher.service.GoogleAnalyticsTrackerService;
 	import flashplayerswitcher.service.IConfigService;
 	import flashplayerswitcher.service.IFlashplayersService;
 	import flashplayerswitcher.service.IPluginDownloadService;
 	import flashplayerswitcher.service.ITrackerService;
 	import flashplayerswitcher.service.PluginDownloadService;
-	import flashplayerswitcher.service.FlashplayersService;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
 	import flashplayerswitcher.view.ApplicationMenuMediator;
 	import flashplayerswitcher.view.FlashPlayerSwitcherMediator;
@@ -127,7 +129,10 @@ package flashplayerswitcher
 			commandMap.mapEvent(ProvideFeedbackEvent.PROVIDE_FEEDBACK, ProvideFeedbackCommand, ProvideFeedbackEvent);
 			commandMap.mapEvent(ShowPreferencesEvent.SHOW, ShowPreferencesCommand, ShowPreferencesEvent);
 			commandMap.mapEvent(StorageDirectoryChangedEvent.CHANGED, StorageDirectoryChangedCommand, StorageDirectoryChangedEvent);
+			
+			// preferences
 			commandMap.mapEvent(StoragePrefsLocationSelectEvent.CHANGE, StoragePrefsLocationSelectCommand, StoragePrefsLocationSelectEvent);
+			commandMap.mapEvent(StoragePrefsAllowEditingChangeEvent.CHANGE, StoragePrefsAllowEditingChangeCommand, StoragePrefsAllowEditingChangeEvent);
 			
 			super.startup();
 		}

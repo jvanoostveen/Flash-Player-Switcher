@@ -1,7 +1,9 @@
 package flashplayerswitcher.view.preferences
 {
+	import flashplayerswitcher.controller.events.StorageAllowEditingChangedEvent;
 	import flashplayerswitcher.controller.events.StorageDirectoryChangedEvent;
-	import flashplayerswitcher.controller.events.StoragePrefsLocationSelectEvent;
+	import flashplayerswitcher.controller.events.preferences.StoragePrefsAllowEditingChangeEvent;
+	import flashplayerswitcher.controller.events.preferences.StoragePrefsLocationSelectEvent;
 	import flashplayerswitcher.model.ConfigModel;
 
 	import org.robotlegs.mvcs.Mediator;
@@ -9,6 +11,9 @@ package flashplayerswitcher.view.preferences
 	import mx.collections.ArrayCollection;
 
 	import flash.filesystem.File;
+
+
+
 
 	/**
 	 * @author Joeri van Oostveen
@@ -25,20 +30,24 @@ package flashplayerswitcher.view.preferences
 		
 		override public function onRegister():void
 		{
-			addContextListener(StorageDirectoryChangedEvent.CHANGED, update);
+			addContextListener(StorageDirectoryChangedEvent.CHANGED, updateStorageList);
+			addContextListener(StorageAllowEditingChangedEvent.CHANGED, updateAllowEditing);
+			
 			addContextListener(StoragePrefsLocationSelectEvent.CANCEL, onCancel, StoragePrefsLocationSelectEvent);
 			
-			addViewListener(StoragePrefsLocationSelectEvent.CHANGE, onChange, StoragePrefsLocationSelectEvent);
+			addViewListener(StoragePrefsLocationSelectEvent.CHANGE, onLocationChange, StoragePrefsLocationSelectEvent);
+			addViewListener(StoragePrefsAllowEditingChangeEvent.CHANGE, dispatch, StoragePrefsAllowEditingChangeEvent);
 			
-			updateStorageList();
-		}
-
-		private function update(event:StorageDirectoryChangedEvent):void
-		{
+			view.allowEditing = config.storageAllowEditing;
 			updateStorageList();
 		}
 		
-		private function onChange(event:StoragePrefsLocationSelectEvent):void
+		private function updateAllowEditing(event:StorageAllowEditingChangedEvent):void
+		{
+			view.allowEditing = event.allowEditing;
+		}
+
+		private function onLocationChange(event:StoragePrefsLocationSelectEvent):void
 		{
 			if (!_ignoreChange)
 				dispatch(event.clone());
@@ -52,7 +61,7 @@ package flashplayerswitcher.view.preferences
 			_ignoreChange = false;
 		}
 		
-		private function updateStorageList():void
+		private function updateStorageList(event:StorageDirectoryChangedEvent = null):void
 		{
 			var locations:Array = new Array();
 			

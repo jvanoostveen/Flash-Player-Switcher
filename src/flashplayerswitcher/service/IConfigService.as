@@ -8,7 +8,7 @@ package flashplayerswitcher.service
 	public interface IConfigService
 	{
 		function readConfig():void;
-		function getStorageDirectory():File;
 		function saveStorageDirectory(directory:File):void;
+		function saveAllowEditing(value:Boolean):void;
 	}
 }

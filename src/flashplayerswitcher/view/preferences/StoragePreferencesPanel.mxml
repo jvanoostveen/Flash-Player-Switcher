@@ -3,16 +3,14 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%"
 		 dropShadowVisible="false" title="Storage">
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
-			import flashplayerswitcher.controller.events.StoragePrefsLocationSelectEvent;
-
+			import flashplayerswitcher.controller.events.preferences.StoragePrefsAllowEditingChangeEvent;
+			import flashplayerswitcher.controller.events.preferences.StoragePrefsLocationSelectEvent;
+			import mx.collections.ArrayCollection;
 			import spark.events.IndexChangeEvent;
 
-			import mx.collections.ArrayCollection;
+
 			
 			[Bindable]
 			public var pluginStorageLocations:ArrayCollection = new ArrayCollection([{label: "[PLACEHOLDER]", data: null}, {label: "Other...", data: null}]);
@@ -22,7 +20,7 @@
 			
 			private function onStorageLocationChange(e:IndexChangeEvent):void
 			{
-				var item:Object = locations.selectedItem;
+				var item:Object = locationsDropDownList.selectedItem;
 				if (item)
 					dispatchEvent(new StoragePrefsLocationSelectEvent(StoragePrefsLocationSelectEvent.CHANGE, item.data));
 			}
@@ -35,7 +33,7 @@
 			
 			private function onAllowEditingChanged(e:Event):void
 			{
-				
+				dispatchEvent(new StoragePrefsAllowEditingChangeEvent(allowEditingCheckBox.selected));
 			}
 		]]>
 	</fx:Script>
@@ -44,13 +42,13 @@
 			<s:Group width="40%">
 				<s:Label text="Plugin storage location:" paddingTop="6" right="0"/>
 			</s:Group>
-			<s:DropDownList id="locations" dataProvider="{pluginStorageLocations}" selectedIndex="{pluginStorageLocationSelectedIndex}" width="150" change="onStorageLocationChange(event)"/>
+			<s:DropDownList id="locationsDropDownList" dataProvider="{pluginStorageLocations}" selectedIndex="{pluginStorageLocationSelectedIndex}" width="150" change="onStorageLocationChange(event)"/>
 		</s:HGroup>
-		<s:HGroup width="100%" visible="false">
+		<s:HGroup width="100%">
 			<s:Group width="40%">
 				<s:Label text="Allow editing:" paddingTop="5" right="0"/>
 			</s:Group>
-			<s:CheckBox selected="{allowEditing}" change="onAllowEditingChanged(event)" enabled="{allowEditingEnabled}" toolTip="Disallow editing when you are using a shared storage of plugins and the storage is managed by someone else."/>
+			<s:CheckBox id="allowEditingCheckBox" selected="{allowEditing}" change="onAllowEditingChanged(event)" enabled="{allowEditingEnabled}" toolTip="Disallow editing when you are using a shared storage of plugins and the storage is managed by someone else."/>
 		</s:HGroup>
 	</s:VGroup>
 </s:Panel>
