@@ -2,15 +2,17 @@
 <s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%"
-		 dropShadowVisible="false" title="Storage">
+		 dropShadowVisible="false" title="{resource('STORAGE_TITLE', ID)}">
 	<fx:Script>
 		<![CDATA[
 			import flashplayerswitcher.controller.events.preferences.StoragePrefsAllowEditingChangeEvent;
 			import flashplayerswitcher.controller.events.preferences.StoragePrefsLocationSelectEvent;
-			import mx.collections.ArrayCollection;
+
 			import spark.events.IndexChangeEvent;
 
-
+			import mx.collections.ArrayCollection;
+			
+			public static const ID:String = "Preferences";
 			
 			[Bindable]
 			public var pluginStorageLocations:ArrayCollection = new ArrayCollection([{label: "[PLACEHOLDER]", data: null}, {label: "Other...", data: null}]);
@@ -40,15 +42,15 @@
 	<s:VGroup paddingTop="15" width="100%">
 		<s:HGroup width="100%">
 			<s:Group width="40%">
-				<s:Label text="Plugin storage location:" paddingTop="6" right="0"/>
+				<s:Label text="{resource('PLUGIN_STORAGE_LOCATION', ID)}:" paddingTop="6" right="0"/>
 			</s:Group>
 			<s:DropDownList id="locationsDropDownList" dataProvider="{pluginStorageLocations}" selectedIndex="{pluginStorageLocationSelectedIndex}" width="150" change="onStorageLocationChange(event)"/>
 		</s:HGroup>
 		<s:HGroup width="100%">
 			<s:Group width="40%">
-				<s:Label text="Allow editing:" paddingTop="5" right="0"/>
+				<s:Label text="{resource('ALLOW_EDITING', ID)}:" paddingTop="5" right="0"/>
 			</s:Group>
-			<s:CheckBox id="allowEditingCheckBox" selected="{allowEditing}" change="onAllowEditingChanged(event)" enabled="{allowEditingEnabled}" toolTip="Disallow editing when you are using a shared storage of plugins and the storage is managed by someone else."/>
+			<s:CheckBox id="allowEditingCheckBox" selected="{allowEditing}" change="onAllowEditingChanged(event)" enabled="{allowEditingEnabled}" toolTip="{resource('ALLOW_EDITING_TOOLTIP', ID)}"/>
 		</s:HGroup>
 	</s:VGroup>
 </s:Panel>

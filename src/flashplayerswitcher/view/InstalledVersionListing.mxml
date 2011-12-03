@@ -13,13 +13,13 @@
 		]]>
 	</fx:Script>
 	<s:VGroup>
-		<s:Label fontWeight="bold" text="Current (user):"/>
+		<s:Label fontWeight="bold" text="{resource('INSTALLED_USER')}:"/>
 		<s:Label id="userInstalledVersion" fontWeight="normal" text="..."/>
-		<s:Button id="removeUserPluginButton" label="Remove" visible="false" click="handleRemoveUserPluginClick(event);" />
+		<s:Button id="removeUserPluginButton" label="{resource('REMOVE')}" visible="false" click="handleRemoveUserPluginClick(event);" />
 	</s:VGroup>
 	<s:VGroup paddingTop="20">
-		<s:Label fontWeight="bold" text="System:"/>
+		<s:Label fontWeight="bold" text="{resource('INSTALLED_SYSTEM')}:"/>
 		<s:Label id="systemInstalledVersion" fontWeight="normal" text="..."/>
-		<s:Button id="copySystemPluginButton" label="Copy to storage" visible="false" />
+		<s:Button id="copySystemPluginButton" label="{resource('COPY_TO_STORAGE')}" visible="false" />
 	</s:VGroup>
 </s:VGroup>

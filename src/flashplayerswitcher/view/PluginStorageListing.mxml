@@ -20,9 +20,9 @@
 	<s:DataGrid id="listing" width="385" height="364" editable="true">
 		<s:columns>
 			<s:ArrayList>
-				<s:GridColumn dataField="name" headerText="Name"></s:GridColumn>
-				<s:GridColumn dataField="version" editable="false" headerText="Version" sortCompareFunction="sortVersionCompare"></s:GridColumn>
-				<s:GridColumn dataField="debugger" editable="false" headerText="Debugger"></s:GridColumn>
+				<s:GridColumn dataField="name" headerText="{resource('LIST_NAME')}"></s:GridColumn>
+				<s:GridColumn dataField="version" editable="false" headerText="{resource('LIST_VERSION')}" sortCompareFunction="sortVersionCompare"></s:GridColumn>
+				<s:GridColumn dataField="debugger" editable="false" headerText="{resource('LIST_DEBUGGER')}"></s:GridColumn>
 			</s:ArrayList>
 		</s:columns>
 		<s:typicalItem>
@@ -30,9 +30,9 @@
 		</s:typicalItem>
 	</s:DataGrid>
 	<s:HGroup horizontalAlign="right" width="100%">
-		<s:Button id="downloadButton" label="Download more..."/>
+		<s:Button id="downloadButton" label="{resource('DOWNLOAD_MORE')}"/>
 		<mx:Spacer width="100%" />
-		<s:Button id="deleteButton" label="Delete" enabled="false"/>
-		<s:Button id="installButton" label="Activate" enabled="false" fontWeight="bold"/>
+		<s:Button id="deleteButton" label="{resource('DELETE')}" enabled="false"/>
+		<s:Button id="installButton" label="{resource('ACTIVATE')}" enabled="false" fontWeight="bold"/>
 	</s:HGroup>
 </s:VGroup>

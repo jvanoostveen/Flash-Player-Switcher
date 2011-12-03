@@ -5,7 +5,10 @@
 						xmlns:view="flashplayerswitcher.view.*"
 						backgroundColor="#F4F4F2" width="100%" height="100%" showStatusBar="false"
 						applicationComplete="onInit()" applicationActivate="onApplicationActivate(event)">
-	
+	<fx:Metadata>
+		[ResourceBundle("Main")]
+		[ResourceBundle("Preferences")]
+	</fx:Metadata>
 	<fx:Declarations>
 		<flashplayerswitcher:FlashPlayerSwitcherContext id="context" contextView="{this}" />
 	</fx:Declarations>
@@ -22,7 +25,7 @@
 			{
 				if (Capabilities.os.indexOf("Mac OS") == -1)
 				{
-					Alert.show("Only Mac OS X is supported.", "Unsupported platform");
+					Alert.show(resource("MAC_OS_ONLY"), resource("UNSUPPORTED_PLATFORM"));
 					return;
 				}
 				
@@ -45,9 +48,9 @@
 	<s:Group left="25" top="25">
 		<s:Image smooth="true" source="@Embed('flashplayerswitcher/assets/logo.png')"/>
 		<s:Label x="150" y="15" fontSize="48" text="Flash Player Switcher"/>
-		<s:TextArea x="150" y="75" width="359" height="45" borderVisible="false"
+		<s:TextArea x="150" y="75" width="475" height="45" borderVisible="false"
 					contentBackgroundAlpha="0.0" editable="false"
-					text="Flash Player Switcher makes use of '~/Library/Internet Plug-Ins/'. No systemwide Flash Player plugin will be overwritten."/>
+					text="{resource('MAIN_INFO')}"/>
 	</s:Group>
 	<view:InstalledVersionListing x="429" y="{storage.y}" width="249" height="200"/>
 	<view:PluginStorageListing id="storage" x="25" bottom="25" />

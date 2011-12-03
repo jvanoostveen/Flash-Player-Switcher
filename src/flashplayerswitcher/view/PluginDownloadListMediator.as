@@ -39,7 +39,7 @@ package flashplayerswitcher.view
 			view.listing.selectedIndex = -1;
 			view.listing.dataProvider = null;
 			
-			view.message.show("Loading data");
+			view.message.show(resource("LOADING_DATA"));
 		}
 		
 		private function onPluginsUpdated(event:DownloadPluginsUpdatedEvent):void
@@ -48,12 +48,12 @@ package flashplayerswitcher.view
 			view.listing.dataProvider = event.plugins;
 			
 			if (event.plugins.length == 0)
-				view.message.show("No plugins available");
+				view.message.show(resource("NO_PLUGINS_AVAILABLE"));
 		}
 		
 		private function onDataError(event:DownloadListDataErrorEvent):void
 		{
-			view.message.show("Plugin data could not be retrieved");
+			view.message.show(resource("PLUGIN_DATA_ERROR"));
 		}
 		
 		private function onSelectionChange(event:GridSelectionEvent):void

@@ -27,25 +27,25 @@ package flashplayerswitcher.view
 				separator = new NativeMenuItem("", true);
 				appMenu.addItemAt(separator, 1);
 				
-				var preferences:NativeMenuItem = new NativeMenuItem("Preferences…");
+				var preferences:NativeMenuItem = new NativeMenuItem(resource("PREFERENCES_MENU_ITEM"));
 				preferences.keyEquivalent = ",";
 				preferences.keyEquivalentModifiers = [Keyboard.COMMAND];
 				preferences.data = new ShowPreferencesEvent();
 				appMenu.addItemAt(preferences, 2);
 				
 				// help menu
-				var helpMenuItem:NativeMenuItem = new NativeMenuItem("Help");
+				var helpMenuItem:NativeMenuItem = new NativeMenuItem(resource("HELP_MENU_ITEM"));
 				var helpMenu:NativeMenu = new NativeMenu();
 				helpMenuItem.submenu = helpMenu;
 				
-				var help:NativeMenuItem = new NativeMenuItem("Flash Player Switcher Help");
+				var help:NativeMenuItem = new NativeMenuItem(resource("HELP_MENU_ITEM_HELP"));
 				help.data = new ShowHelpEvent();
 				helpMenu.addItem(help);
 				
 				separator = new NativeMenuItem("", true);
 				helpMenu.addItem(separator);
 				
-				var feedback:NativeMenuItem = new NativeMenuItem("Provide feedback");
+				var feedback:NativeMenuItem = new NativeMenuItem(resource("HELP_MENU_ITEM_FEEDBACK"));
 				feedback.data = new ProvideFeedbackEvent();
 				helpMenu.addItem(feedback);
 				

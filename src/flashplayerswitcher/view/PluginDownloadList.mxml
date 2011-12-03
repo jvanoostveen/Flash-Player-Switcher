@@ -21,9 +21,9 @@
 		<s:DataGrid id="listing" width="385" height="364" editable="true">
 			<s:columns>
 				<s:ArrayList>
-					<s:GridColumn dataField="name" headerText="Name"></s:GridColumn>
-					<s:GridColumn dataField="version" editable="false" headerText="Version" sortCompareFunction="sortVersionCompare"></s:GridColumn>
-					<s:GridColumn dataField="debugger" editable="false" headerText="Debugger"></s:GridColumn>
+					<s:GridColumn dataField="name" headerText="{resource('LIST_NAME')}"></s:GridColumn>
+					<s:GridColumn dataField="version" editable="false" headerText="{resource('LIST_VERSION')}" sortCompareFunction="sortVersionCompare"></s:GridColumn>
+					<s:GridColumn dataField="debugger" editable="false" headerText="{resource('LIST_DEBUGGER')}"></s:GridColumn>
 				</s:ArrayList>
 			</s:columns>
 			<s:typicalItem>
@@ -33,8 +33,8 @@
 		<view:MessageLabel id="message" x="{(listing.width - message.width) * 0.5}" y="110" />
 	</s:BorderContainer>
 	<s:HGroup horizontalAlign="right" width="100%">
-		<s:Button id="storageButton" label="Back to storage"/>
+		<s:Button id="storageButton" label="{resource('BACK_TO_STORAGE')}"/>
 		<mx:Spacer width="100%" />
-		<s:Button id="downloadButton" label="Download" enabled="false"/>
+		<s:Button id="downloadButton" label="{resource('DOWNLOAD')}" enabled="false"/>
 	</s:HGroup>
 </s:VGroup>

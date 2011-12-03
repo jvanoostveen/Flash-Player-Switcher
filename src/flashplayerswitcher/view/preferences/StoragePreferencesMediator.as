@@ -12,9 +12,6 @@ package flashplayerswitcher.view.preferences
 
 	import flash.filesystem.File;
 
-
-
-
 	/**
 	 * @author Joeri van Oostveen
 	 */
@@ -74,10 +71,10 @@ package flashplayerswitcher.view.preferences
 				
 				view.allowEditingEnabled = true;
 			}
-			var appStorage:Object = {label: "Application Storage", data: File.applicationStorageDirectory};
+			var appStorage:Object = {label: resource("APPLICATION_STORAGE", StoragePreferencesPanel.ID), data: File.applicationStorageDirectory};
 			locations.push(appStorage);
 			
-			var otherStorage:Object = {label: "Other...", data: null};
+			var otherStorage:Object = {label: resource("OTHER", StoragePreferencesPanel.ID), data: null};
 			locations.push(otherStorage);
 			
 			view.pluginStorageLocations = new ArrayCollection(locations);

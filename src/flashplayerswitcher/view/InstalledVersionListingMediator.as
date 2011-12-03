@@ -69,7 +69,7 @@ package flashplayerswitcher.view
 			if (event.plugin)
 				view.systemInstalledVersion.text = event.plugin.name + " (" + event.plugin.version + ")";
 			else
-				view.systemInstalledVersion.text = "<none>";
+				view.systemInstalledVersion.text = resource("INSTALLED_NONE");
 			
 			checkSystemPluginInstall();
 		}
@@ -79,7 +79,7 @@ package flashplayerswitcher.view
 			if (event.plugin)
 				view.userInstalledVersion.text = event.plugin.name + " (" + event.plugin.version + ")";
 			else
-				view.userInstalledVersion.text = "<none>";
+				view.userInstalledVersion.text = resource("INSTALLED_NONE");
 			
 			view.removeUserPluginButton.visible = (event.plugin ? true : false);
 		}

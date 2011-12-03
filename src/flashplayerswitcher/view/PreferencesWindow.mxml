@@ -6,7 +6,7 @@
           backgroundColor="#F4F4F2"
           width="575" height="430"
           showStatusBar="false" maximizable="false" minimizable="false" resizable="false" 
-          title="Preferences">
+          title="{resource('PREFERENCES_TITLE')}">
 	<s:VGroup left="15" top="15" right="15" bottom="15" width="100%">
 		<preferences:StoragePreferencesPanel id="storage" />
 	</s:VGroup>
