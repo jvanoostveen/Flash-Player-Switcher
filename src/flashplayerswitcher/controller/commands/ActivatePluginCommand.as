@@ -2,6 +2,7 @@ package flashplayerswitcher.controller.commands
 {
 	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
+	import flashplayerswitcher.locale.Locale;
 	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.service.ITrackerService;
@@ -40,7 +41,7 @@ package flashplayerswitcher.controller.commands
 			
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
 			
-			Alert.show(plugin.name + " " + plugin.version + " is now activated. Please restart any open browsers.", "Plugin activated");
+			Alert.show(resource('PLUGIN_ACTIVATED_FEEDBACK', Locale.MAIN, [plugin.name + " " + plugin.version]), resource('PLUGIN_ACTIVATED'));
 		}
 	}
 }

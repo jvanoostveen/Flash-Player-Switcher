@@ -1,6 +1,7 @@
 package flashplayerswitcher.controller.commands.preferences
 {
 	import flashplayerswitcher.controller.events.preferences.StoragePrefsLocationSelectEvent;
+	import flashplayerswitcher.locale.Locale;
 	import flashplayerswitcher.service.IConfigService;
 
 	import org.robotlegs.mvcs.Command;
@@ -28,7 +29,7 @@ package flashplayerswitcher.controller.commands.preferences
 				commandMap.detain(this);
 				
 				_browse = new File();
-				_browse.browseForDirectory("Please select a directory...");
+				_browse.browseForDirectory(resource('SELECT_DIRECTORY', Locale.PREFERENCES));
 				_browse.addEventListener(Event.SELECT, onDirectorySelected);
 				_browse.addEventListener(Event.CANCEL, onDirectoryCancel);
 			} else {

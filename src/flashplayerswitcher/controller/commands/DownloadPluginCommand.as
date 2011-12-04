@@ -49,14 +49,14 @@ package flashplayerswitcher.controller.commands
 			loader.load(request);
 			
 			var progress:ProgressBarPopupEvent = new ProgressBarPopupEvent(ProgressBarPopupEvent.SHOW);
-			progress.label = "Downloading...";
+			progress.label = resource('DOWNLOADING');
 			dispatch(progress);
 		}
 		
 		private function onDownloadProgress(evt:ProgressEvent):void
 		{
 			var progress:ProgressBarPopupEvent = new ProgressBarPopupEvent(ProgressBarPopupEvent.UPDATE);
-			progress.label = "Downloading: %1 of %2 KB";
+			progress.label = resource("DOWNLOAD_PROGRESS");
 			progress.value = Math.round(evt.bytesLoaded / 1024);
 			progress.total = Math.round(evt.bytesTotal / 1024);
 			dispatch(progress);
@@ -65,7 +65,7 @@ package flashplayerswitcher.controller.commands
 		private function onPluginLoaded(evt:Event):void
 		{
 			var progress:ProgressBarPopupEvent = new ProgressBarPopupEvent(ProgressBarPopupEvent.SHOW);
-			progress.label = "Extracting... Please wait...";
+			progress.label = resource("EXTRACTING");
 			progress.indeterminate = true;
 			dispatch(progress);
 			

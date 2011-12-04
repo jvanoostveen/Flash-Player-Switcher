@@ -22,7 +22,7 @@ package flashplayerswitcher.controller.commands
 		override public function execute():void
 		{
 			commandMap.detain(this);
-			Alert.show("This will delete the plugin from the storage.", "Delete plugin", Alert.CANCEL | Alert.OK, null, onAlertConfirm);
+			Alert.show(resource("DELETE_PLUGIN_ALERT"), resource("DELETE_PLUGIN"), Alert.CANCEL | Alert.OK, null, onAlertConfirm);
 		}
 		
 		private function onAlertConfirm(evt:CloseEvent):void

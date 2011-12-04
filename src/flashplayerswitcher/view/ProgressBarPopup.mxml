@@ -2,6 +2,6 @@
 <s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 width="280" height="90" title="Installing plugin">
+		 width="280" height="90" title="{resource('INSTALLING_PLUGIN')}">
 	<mx:ProgressBar x="15" y="15" id="progressbar" width="250" />
 </s:Panel>

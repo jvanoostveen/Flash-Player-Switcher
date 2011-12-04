@@ -25,7 +25,7 @@ package flashplayerswitcher.controller.commands
 			
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
 			
-			Alert.show("System plugin is now active.\nPlease restart your browser(s).", "Plugin removed");
+			Alert.show(resource("SYSTEM_PLUGIN_ACTIVE_ALERT"), resource("PLUGIN_REMOVED"));
 		}
 	}
 }

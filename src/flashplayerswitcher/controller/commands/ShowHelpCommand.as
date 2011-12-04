@@ -28,7 +28,7 @@ package flashplayerswitcher.controller.commands
 			{
 				// is there a better way to detect if this window is the help window?
 				// window is HelpWindow doesn't work...
-				if (window.title == "Flash Player Switcher - Help")
+				if (window.title == resource("HELP_WINDOW_TITLE"))
 				{
 					window.activate();
 					return;
@@ -36,7 +36,7 @@ package flashplayerswitcher.controller.commands
 			}
 			
 			var w:Window = new HelpWindow();
-			w.title = "Flash Player Switcher - Help";
+			w.title = resource("HELP_WINDOW_TITLE");
 			w.name = "help_window";
 			w.open();
 			

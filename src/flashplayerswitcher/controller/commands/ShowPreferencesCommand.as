@@ -21,7 +21,7 @@ package flashplayerswitcher.controller.commands
 			for each (var window:NativeWindow in windows)
 			{
 				// is there a better way to detect if this window is the same window?
-				if (window.title == "Preferences")
+				if (window.title == resource("PREFERENCES_TITLE"))
 				{
 					window.activate();
 					return;
