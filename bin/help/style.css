@@ -145,3 +145,12 @@ dl.faq{
   top: 0;
 }
 
+#madewith {
+	font-size: 11px;
+	margin-top: 10px;
+	padding: 5px;
+}
+
+#madewith img {
+	margin-top: 4px;
+}
