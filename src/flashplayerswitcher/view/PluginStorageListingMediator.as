@@ -1,13 +1,13 @@
 package flashplayerswitcher.view
 {
 	import flashplayerswitcher.controller.events.ActivatePluginEvent;
-	import flashplayerswitcher.controller.events.DeletePluginEvent;
+	import flashplayerswitcher.controller.events.DeletePluginsEvent;
 	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
-	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
 	import flashplayerswitcher.controller.events.StorageAllowEditingChangedEvent;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
+	import flashplayerswitcher.model.vo.PluginSet;
 
 	import spark.events.GridSelectionEvent;
 
@@ -35,14 +35,13 @@ package flashplayerswitcher.view
 			eventMap.mapListener(view.listing, GridSelectionEvent.SELECTION_CHANGE, onSelectionChange);
 			eventMap.mapListener(view.installButton, MouseEvent.CLICK, onInstallButtonClick);
 			eventMap.mapListener(view.deleteButton, MouseEvent.CLICK, onDeleteButtonClick);
-			eventMap.mapListener(view.downloadButton, MouseEvent.CLICK, onDownloadButtonClick);
 		}
 		
 		private function onPluginsUpdated(event:PluginsUpdatedEvent):void
 		{
-			view.listing.dataProvider = installed.plugins;
+			view.listing.dataProvider = installed.sortedPlugins;
 			
-			view.installButton.enabled = false;
+			view.installButton.enabled = view.installDebuggerButton.enabled = false;
 			view.deleteButton.enabled = false;
 		}
 		
@@ -52,27 +51,38 @@ package flashplayerswitcher.view
 			if (selected)
 			{
 				if (event.plugin && selected.hash == event.plugin.hash)
-					view.installButton.enabled = false;
+					view.installButton.enabled = view.installDebuggerButton.enabled = false;
 				else
-					view.installButton.enabled = true;
+					view.installButton.enabled = view.installDebuggerButton.enabled = true;
 			}
 		}
 		
 		private function onAllowEditingChanged(event:StorageAllowEditingChangedEvent):void
 		{
-			view.downloadButton.visible = event.allowEditing;
 			view.deleteButton.visible = event.allowEditing;
 		}
 		
 		private function onSelectionChange(event:GridSelectionEvent):void
 		{
-			view.installButton.enabled = false;
+			view.installButton.enabled = view.installDebuggerButton.enabled = false;
 			view.deleteButton.enabled = false;
 			
 			if (view.listing.selectedIndex != -1)
 			{
-				if (!installed.user || (view.listing.selectedItem as FlashPlayerPlugin).hash != installed.user.hash)
-					view.installButton.enabled = true;
+				var pluginSet:PluginSet = view.listing.selectedItem as PluginSet;
+				if (!installed.user)
+				{
+					if (pluginSet.release)
+						view.installButton.enabled = true;
+					if (pluginSet.debugger)
+						view.installDebuggerButton.enabled = true;
+				} else {
+					if (pluginSet.release && pluginSet.release.hash != installed.user.hash)
+						view.installButton.enabled = true;
+					if (pluginSet.debugger && pluginSet.debugger.hash != installed.user.hash)
+						view.installDebuggerButton.enabled = true;
+				}
+				
 				view.deleteButton.enabled = true;
 			}
 		}
@@ -84,12 +94,14 @@ package flashplayerswitcher.view
 		
 		private function onDeleteButtonClick(event:MouseEvent):void
 		{
-			dispatch(new DeletePluginEvent(view.listing.selectedItem as FlashPlayerPlugin));
-		}
-		
-		private function onDownloadButtonClick(event:MouseEvent):void
-		{
-			dispatch(new ShowPluginDownloadListEvent());
+			var pluginSet:PluginSet = view.listing.selectedItem as PluginSet;
+			var plugins:Array = new Array();
+			if (pluginSet.release)
+				plugins.push(pluginSet.release);
+			if (pluginSet.debugger)
+				plugins.push(pluginSet.debugger);
+			
+			dispatch(new DeletePluginsEvent(plugins));
 		}
 	}
 }

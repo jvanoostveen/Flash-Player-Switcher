@@ -22,4 +22,5 @@
 		<s:Label id="systemInstalledVersion" fontWeight="normal" text="..."/>
 		<s:Button id="copySystemPluginButton" label="{resource('COPY_TO_STORAGE')}" visible="false" />
 	</s:VGroup>
+	<mx:Spacer height="100%"/>
 </s:VGroup>

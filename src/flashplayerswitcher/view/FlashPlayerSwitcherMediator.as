@@ -4,15 +4,12 @@ package flashplayerswitcher.view
 	import flashplayerswitcher.controller.events.ApplicationActivateEvent;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.controller.events.ProgressBarPopupEvent;
-	import flashplayerswitcher.controller.events.ShowHelpEvent;
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
 	import flashplayerswitcher.controller.events.ShowPluginStorageListEvent;
 
 	import org.robotlegs.mvcs.Mediator;
 
 	import mx.managers.PopUpManager;
-
-	import flash.events.MouseEvent;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -31,8 +28,6 @@ package flashplayerswitcher.view
 			addContextListener(ProgressBarPopupEvent.SHOW, addProgressBarPopup, ProgressBarPopupEvent, false, 100);
 			
 			addViewListener(ApplicationActivateEvent.ACTIVATE, onApplicationActivate, ApplicationActivateEvent);
-			
-			eventMap.mapListener(view.helpButton, MouseEvent.CLICK, onHelpButtonClick, MouseEvent);
 		}
 		
 		private function showDownloadList(event:ShowPluginDownloadListEvent):void
@@ -65,11 +60,6 @@ package flashplayerswitcher.view
 		{
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.SYSTEM));
-		}
-		
-		private function onHelpButtonClick(event:MouseEvent):void
-		{
-			dispatch(new ShowHelpEvent());
 		}
 	}
 }

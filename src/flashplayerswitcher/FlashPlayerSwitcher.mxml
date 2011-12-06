@@ -52,8 +52,8 @@
 					contentBackgroundAlpha="0.0" editable="false"
 					text="{resource('MAIN_INFO')}"/>
 	</s:Group>
-	<view:InstalledVersionListing x="429" y="{storage.y}" width="249" height="200"/>
+	<view:InstalledVersionListing x="429" top="{storage.y}" width="249" bottom="25"/>
+	<view:MoreOptions left="429" right="25" bottom="25"/>
 	<view:PluginStorageListing id="storage" x="25" bottom="25" />
 	<view:PluginDownloadList id="download" x="25" bottom="25" visible="false"/>
-	<s:Button id="helpButton" right="25" bottom="25" width="31" label="?"/>
 </s:WindowedApplication>

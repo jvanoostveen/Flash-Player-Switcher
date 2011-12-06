@@ -6,7 +6,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.commands.CheckInstalledUserPluginVersionCommand;
 	import flashplayerswitcher.controller.commands.ConfigureDatabaseCommand;
 	import flashplayerswitcher.controller.commands.CopyPluginToStorageCommand;
-	import flashplayerswitcher.controller.commands.DeletePluginCommand;
+	import flashplayerswitcher.controller.commands.DeletePluginsCommand;
 	import flashplayerswitcher.controller.commands.DownloadPluginCommand;
 	import flashplayerswitcher.controller.commands.InitializeAppCommand;
 	import flashplayerswitcher.controller.commands.LoadDownloadPluginsCommand;
@@ -25,7 +25,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.controller.events.ConfigReadyEvent;
 	import flashplayerswitcher.controller.events.CopyPluginToStorageEvent;
-	import flashplayerswitcher.controller.events.DeletePluginEvent;
+	import flashplayerswitcher.controller.events.DeletePluginsEvent;
 	import flashplayerswitcher.controller.events.DownloadPluginEvent;
 	import flashplayerswitcher.controller.events.LoadPluginsEvent;
 	import flashplayerswitcher.controller.events.PluginStoredEvent;
@@ -58,6 +58,8 @@ package flashplayerswitcher
 	import flashplayerswitcher.view.FlashPlayerSwitcherMediator;
 	import flashplayerswitcher.view.InstalledVersionListing;
 	import flashplayerswitcher.view.InstalledVersionListingMediator;
+	import flashplayerswitcher.view.MoreOptions;
+	import flashplayerswitcher.view.MoreOptionsMediator;
 	import flashplayerswitcher.view.PluginDownloadList;
 	import flashplayerswitcher.view.PluginDownloadListMediator;
 	import flashplayerswitcher.view.PluginStorageListing;
@@ -92,6 +94,7 @@ package flashplayerswitcher
 			mediatorMap.mapView(ProgressBarPopup, ProgressBarPopupMediator, null, false, false);
 			mediatorMap.mapView(NativeMenu, ApplicationMenuMediator);
 			mediatorMap.mapView(PreferencesWindow, PreferencesWindowMediator);
+			mediatorMap.mapView(MoreOptions, MoreOptionsMediator);
 			
 			injector.mapSingletonOf(IFlashplayersService, FlashplayersService);
 			injector.mapSingletonOf(IPluginDownloadService, PluginDownloadService);
@@ -121,7 +124,7 @@ package flashplayerswitcher
 			commandMap.mapEvent(CopyPluginToStorageEvent.COPY_PLUGIN_TO_STORAGE, CopyPluginToStorageCommand, CopyPluginToStorageEvent);
 			commandMap.mapEvent(ActivatePluginEvent.ACTIVATE, ActivatePluginCommand, ActivatePluginEvent);
 			commandMap.mapEvent(CheckForUpdateEvent.CHECK_FOR_UPDATE, CheckForUpdateCommand);
-			commandMap.mapEvent(DeletePluginEvent.DELETE, DeletePluginCommand, DeletePluginEvent);
+			commandMap.mapEvent(DeletePluginsEvent.DELETE, DeletePluginsCommand, DeletePluginsEvent);
 			commandMap.mapEvent(ShowPluginDownloadListEvent.SHOW, LoadDownloadPluginsCommand, ShowPluginDownloadListEvent);
 			commandMap.mapEvent(DownloadPluginEvent.DOWNLOAD, DownloadPluginCommand, DownloadPluginEvent);
 			commandMap.mapEvent(ShowHelpEvent.SHOW, ShowHelpCommand, ShowHelpEvent);

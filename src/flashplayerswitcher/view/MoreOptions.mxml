@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
+          xmlns:s="library://ns.adobe.com/flex/spark"
+		  xmlns:mx="library://ns.adobe.com/flex/mx" currentState="storage">
+	<fx:Script>
+		<![CDATA[
+			import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
+			import flashplayerswitcher.controller.events.ShowPluginStorageListEvent;
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="storage"/>
+		<s:State name="download"/>
+	</s:states>
+	<s:Button id="storageButton" label="{resource('BACK_TO_STORAGE')}" includeIn="download" click="dispatchEvent(new ShowPluginStorageListEvent())"/>
+	<s:Button id="downloadButton" label="{resource('DOWNLOAD_MORE')}" includeIn="storage" click="dispatchEvent(new ShowPluginDownloadListEvent())"/>
+	<mx:Spacer width="100%"/>
+	<s:Button id="helpButton" right="25" bottom="25" width="31" label="?"/>
+</s:HGroup>

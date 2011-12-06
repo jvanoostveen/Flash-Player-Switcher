@@ -3,10 +3,13 @@ package flashplayerswitcher.model
 	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
+	import flashplayerswitcher.model.vo.PluginSet;
 
 	import org.robotlegs.mvcs.Actor;
 
 	import mx.collections.ArrayCollection;
+
+	import flash.utils.Dictionary;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -17,10 +20,29 @@ package flashplayerswitcher.model
 		private var _user:FlashPlayerPlugin;
 		
 		private var _plugins:ArrayCollection;
+		private var _sortedPlugins:ArrayCollection;
 		
 		public function set plugins(value:ArrayCollection):void
 		{
 			_plugins = value;
+			
+			var sortedPlugins:Array = new Array();
+			var tmp:Dictionary = new Dictionary(true);
+			for each (var plugin:FlashPlayerPlugin in _plugins)
+			{
+				var pluginSet:PluginSet = tmp[plugin.version];
+				if (!pluginSet)
+				{
+					pluginSet = new PluginSet();
+					tmp[plugin.version] = pluginSet;
+					sortedPlugins.push(pluginSet);
+				}
+				
+				pluginSet.addPlugin(plugin);
+			}
+			
+			_sortedPlugins = new ArrayCollection(sortedPlugins);
+			
 			dispatch(new PluginsUpdatedEvent(PluginsUpdatedEvent.UPDATED, _plugins));
 		}
 		
@@ -38,6 +60,11 @@ package flashplayerswitcher.model
 		public function get plugins():ArrayCollection
 		{
 			return _plugins ||= new ArrayCollection();
+		}
+		
+		public function get sortedPlugins():ArrayCollection
+		{
+			return _sortedPlugins ||= new ArrayCollection();
 		}
 		
 		public function get system():FlashPlayerPlugin

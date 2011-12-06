@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:GridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009"
+                    xmlns:s="library://ns.adobe.com/flex/spark"
+					xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import flashplayerswitcher.model.vo.FlashPlayerPlugin;
+			import flashplayerswitcher.model.vo.PluginSet;
+			
+			[Embed(source="flashplayerswitcher/assets/FlashPlayerIcon16x16.png")]
+			private static var RELEASE_ICON:Class;
+			
+			[Embed(source="flashplayerswitcher/assets/FlashPlayerIconGreen16x16.png")]
+			private static var DEBUGGER_ICON:Class;
+			
+			override public function set data(value:Object):void
+			{
+				if (value is PluginSet)
+				{
+					if (column.dataField == "hasDebugger")
+					{
+						icon.source = new DEBUGGER_ICON();
+						icon.toolTip = resource('DEBUGGER_TOOLTIP');
+					} else {
+						icon.source = new RELEASE_ICON();
+						icon.toolTip = resource('RELEASE_TOOLTIP');
+					}
+					icon.visible = value[column.dataField];
+				}
+				
+				if (value is FlashPlayerPlugin)
+				{
+					if (column.dataField == "debugger" && value[column.dataField])
+					{
+						icon.source = new DEBUGGER_ICON();
+						icon.toolTip = resource('DEBUGGER_TOOLTIP');
+						icon.visible = true;
+					} else if (column.dataField == "release" && !value["debugger"])
+					{
+						icon.source = new RELEASE_ICON();
+						icon.toolTip = resource('RELEASE_TOOLTIP');
+						icon.visible = true;
+					} else {
+						icon.visible = false;
+					}
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:Image id="icon"
+			 left="6"
+			 top="6"
+			 smooth="true"/>
+</s:GridItemRenderer>

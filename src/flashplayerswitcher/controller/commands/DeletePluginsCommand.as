@@ -1,6 +1,7 @@
 package flashplayerswitcher.controller.commands
 {
-	import flashplayerswitcher.controller.events.DeletePluginEvent;
+	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
+	import flashplayerswitcher.controller.events.DeletePluginsEvent;
 	import flashplayerswitcher.service.IFlashplayersService;
 
 	import org.robotlegs.mvcs.Command;
@@ -11,10 +12,10 @@ package flashplayerswitcher.controller.commands
 	/**
 	 * @author Joeri van Oostveen
 	 */
-	public class DeletePluginCommand extends Command
+	public class DeletePluginsCommand extends Command
 	{
 		[Inject]
-		public var event:DeletePluginEvent;
+		public var event:DeletePluginsEvent;
 		
 		[Inject]
 		public var service:IFlashplayersService;
@@ -29,8 +30,11 @@ package flashplayerswitcher.controller.commands
 		{
 			if (evt.detail == Alert.OK)
 			{
-				service.deletePlugin(event.plugin);
-				event.plugin.remove();
+				for each (var plugin:FlashPlayerPlugin in event.plugins)
+				{
+					service.deletePlugin(plugin);
+					plugin.remove();
+				}
 			}
 			commandMap.release(this);
 		}

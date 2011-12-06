@@ -4,9 +4,9 @@
           xmlns:mx="library://ns.adobe.com/flex/mx">
 	<fx:Script>
 		<![CDATA[
-			import flashplayerswitcher.model.vo.FlashPlayerPlugin;
+			import flashplayerswitcher.model.vo.PluginSet;
 			
-			private function sortVersionCompare(itemA:FlashPlayerPlugin, itemB:FlashPlayerPlugin, column:GridColumn):int
+			private function sortVersionCompare(itemA:PluginSet, itemB:PluginSet, column:GridColumn):int
 			{
 				if (itemA.major < itemB.major || itemA.minor < itemB.minor || itemA.revision < itemB.revision || itemA.build < itemB.build)
 					return -1;
@@ -17,22 +17,25 @@
 			}
 		]]>
 	</fx:Script>
-	<s:DataGrid id="listing" width="385" height="364" editable="true">
+	<s:DataGrid id="listing" width="385" height="364">
 		<s:columns>
 			<s:ArrayList>
-				<s:GridColumn dataField="name" headerText="{resource('LIST_NAME')}"></s:GridColumn>
+				<s:GridColumn dataField="name" editable="false" headerText="{resource('LIST_NAME')}" width="150"></s:GridColumn>
 				<s:GridColumn dataField="version" editable="false" headerText="{resource('LIST_VERSION')}" sortCompareFunction="sortVersionCompare"></s:GridColumn>
-				<s:GridColumn dataField="debugger" editable="false" headerText="{resource('LIST_DEBUGGER')}"></s:GridColumn>
+				<s:GridColumn dataField="hasRelease" editable="false" headerText="" itemRenderer="flashplayerswitcher.view.list.FlashPlayerIconItemRenderer" width="28"></s:GridColumn>
+				<s:GridColumn dataField="hasDebugger" editable="false" headerText="" itemRenderer="flashplayerswitcher.view.list.FlashPlayerIconItemRenderer" width="28"></s:GridColumn>
 			</s:ArrayList>
 		</s:columns>
 		<s:typicalItem>
 			<fx:Object name="Flash Player" version="10.3.0.23" debugger="false"></fx:Object>
 		</s:typicalItem>
 	</s:DataGrid>
-	<s:HGroup horizontalAlign="right" width="100%">
-		<s:Button id="downloadButton" label="{resource('DOWNLOAD_MORE')}"/>
-		<mx:Spacer width="100%" />
-		<s:Button id="deleteButton" label="{resource('DELETE')}" enabled="false"/>
+	<s:HGroup width="100%">
+		<s:Button id="deleteButton" 
+			label="{resource('DELETE')}"
+			enabled="false"/>
+		<mx:Spacer width="100%"/>
 		<s:Button id="installButton" label="{resource('ACTIVATE')}" enabled="false" fontWeight="bold"/>
+		<s:Button id="installDebuggerButton" label="{resource('ACTIVATE_DEBUGGER')}" enabled="false" fontWeight="bold"/>
 	</s:HGroup>
 </s:VGroup>

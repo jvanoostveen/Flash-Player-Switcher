@@ -5,6 +5,8 @@
 	<fx:Script>
 		<![CDATA[
 			import flashplayerswitcher.model.vo.FlashPlayerPlugin;
+
+			import spark.components.gridClasses.GridSelectionMode;
 		
 			private function sortVersionCompare(itemA:FlashPlayerPlugin, itemB:FlashPlayerPlugin, column:GridColumn):int
 			{
@@ -18,12 +20,13 @@
 		]]>
 	</fx:Script>
 	<s:BorderContainer borderVisible="false" borderWeight="0" backgroundAlpha="0.0">
-		<s:DataGrid id="listing" width="385" height="364" editable="true">
+		<s:DataGrid id="listing" width="385" height="364">
 			<s:columns>
 				<s:ArrayList>
-					<s:GridColumn dataField="name" headerText="{resource('LIST_NAME')}"></s:GridColumn>
+					<s:GridColumn dataField="name" headerText="{resource('LIST_NAME')}" width="150"></s:GridColumn>
 					<s:GridColumn dataField="version" editable="false" headerText="{resource('LIST_VERSION')}" sortCompareFunction="sortVersionCompare"></s:GridColumn>
-					<s:GridColumn dataField="debugger" editable="false" headerText="{resource('LIST_DEBUGGER')}"></s:GridColumn>
+					<s:GridColumn dataField="release" editable="false" headerText="" itemRenderer="flashplayerswitcher.view.list.FlashPlayerIconItemRenderer" width="28"></s:GridColumn>
+					<s:GridColumn dataField="debugger" editable="false" headerText="" itemRenderer="flashplayerswitcher.view.list.FlashPlayerIconItemRenderer" width="28"></s:GridColumn>
 				</s:ArrayList>
 			</s:columns>
 			<s:typicalItem>
@@ -33,7 +36,6 @@
 		<view:MessageLabel id="message" x="{(listing.width - message.width) * 0.5}" y="110" />
 	</s:BorderContainer>
 	<s:HGroup horizontalAlign="right" width="100%">
-		<s:Button id="storageButton" label="{resource('BACK_TO_STORAGE')}"/>
 		<mx:Spacer width="100%" />
 		<s:Button id="downloadButton" label="{resource('DOWNLOAD')}" enabled="false"/>
 	</s:HGroup>
