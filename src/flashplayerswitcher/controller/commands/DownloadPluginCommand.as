@@ -35,18 +35,40 @@ package flashplayerswitcher.controller.commands
 		[Inject]
 		public var tracker:ITrackerService;
 		
+		private var _queue:Vector.<FlashPlayerPlugin>;
+		private var _plugin:FlashPlayerPlugin;
+		private var _loader:URLLoader;
+		
 		override public function execute():void
 		{
 			commandMap.detain(this);
 			
-			var loader:URLLoader = new URLLoader();
-			loader.dataFormat = URLLoaderDataFormat.BINARY;
-			loader.addEventListener(ProgressEvent.PROGRESS, onDownloadProgress);
-			loader.addEventListener(Event.COMPLETE, onPluginLoaded);
-			loader.addEventListener(IOErrorEvent.IO_ERROR, onError);
+			_queue = event.plugins;
 			
-			var request:URLRequest = new URLRequest(event.plugin.url);
-			loader.load(request);
+			loadQueue();
+		}
+		
+		private function loadQueue():void
+		{
+			if (_queue.length == 0)
+			{
+				queueDone();
+				return;
+			}
+			
+			if (!_loader)
+			{
+				_loader = new URLLoader();
+				_loader.dataFormat = URLLoaderDataFormat.BINARY;
+				_loader.addEventListener(ProgressEvent.PROGRESS, onDownloadProgress);
+				_loader.addEventListener(Event.COMPLETE, onPluginLoaded);
+				_loader.addEventListener(IOErrorEvent.IO_ERROR, onError);
+			}
+			
+			_plugin = _queue.shift();
+			
+			var request:URLRequest = new URLRequest(_plugin.url);
+			_loader.load(request);
 			
 			var progress:ProgressBarPopupEvent = new ProgressBarPopupEvent(ProgressBarPopupEvent.SHOW);
 			progress.label = resource('DOWNLOADING');
@@ -69,20 +91,14 @@ package flashplayerswitcher.controller.commands
 			progress.indeterminate = true;
 			dispatch(progress);
 			
-			var plugin:FlashPlayerPlugin = event.plugin;
+			var data:ByteArray = _loader.data as ByteArray;
 			
-			var loader:URLLoader = evt.currentTarget as URLLoader;
-			loader.removeEventListener(Event.COMPLETE, onPluginLoaded);
-			loader.removeEventListener(IOErrorEvent.IO_ERROR, onError);
+			tracker.track("/download/" + _plugin.version + "/" + (_plugin.debugger ? "debugger" : "release") + "/");
 			
-			var data:ByteArray = loader.data as ByteArray;
-			
-			tracker.track("/download/" + plugin.version + "/" + (plugin.debugger ? "debugger" : "release") + "/");
-			
-			setTimeout(parseZip, 50, plugin, data);
+			setTimeout(parseZip, 50, data);
 		}
 		
-		private function parseZip(plugin:FlashPlayerPlugin, data:ByteArray):void
+		private function parseZip(data:ByteArray):void
 		{
 			var fzip:FZip = new FZip();
 			fzip.loadBytes(data);
@@ -104,15 +120,13 @@ package flashplayerswitcher.controller.commands
 				}
 			}
 			
-			plugin.search(destination.getDirectoryListing()[0]);
+			_plugin.search(destination.getDirectoryListing()[0]);
 			
-			dispatch(new CopyPluginToStorageEvent(plugin));
-			dispatch(new ProgressBarPopupEvent(ProgressBarPopupEvent.HIDE));
-			dispatch(new ShowPluginStorageListEvent());
+			dispatch(new CopyPluginToStorageEvent(_plugin));
 			
 			destination.deleteDirectory(true);
 			
-			commandMap.release(this);
+			loadQueue();
 		}
 
 		private function onError(evt:IOErrorEvent):void
@@ -121,10 +135,25 @@ package flashplayerswitcher.controller.commands
 			loader.removeEventListener(Event.COMPLETE, onPluginLoaded);
 			loader.removeEventListener(IOErrorEvent.IO_ERROR, onError);
 			
-			trace("unable to load plugin: " + event.plugin.url);
+			trace("unable to load plugin: " + _plugin.url);
+			
+			// TODO: show error message
+			
+			loadQueue();
+		}
+
+		private function queueDone():void
+		{
+			if (_loader)
+			{
+				_loader.removeEventListener(ProgressEvent.PROGRESS, onDownloadProgress);
+				_loader.removeEventListener(Event.COMPLETE, onPluginLoaded);
+				_loader.removeEventListener(IOErrorEvent.IO_ERROR, onError);
+				_loader = null;
+			}
 			
 			dispatch(new ProgressBarPopupEvent(ProgressBarPopupEvent.HIDE));
-			// show error message
+			dispatch(new ShowPluginStorageListEvent());
 			
 			commandMap.release(this);
 		}

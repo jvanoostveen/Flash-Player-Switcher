@@ -20,7 +20,7 @@
 		]]>
 	</fx:Script>
 	<s:BorderContainer borderVisible="false" borderWeight="0" backgroundAlpha="0.0">
-		<s:DataGrid id="listing" width="385" height="364">
+		<s:DataGrid id="listing" width="385" height="364" selectionMode="{GridSelectionMode.MULTIPLE_ROWS}">
 			<s:columns>
 				<s:ArrayList>
 					<s:GridColumn dataField="name" headerText="{resource('LIST_NAME')}" width="150"></s:GridColumn>

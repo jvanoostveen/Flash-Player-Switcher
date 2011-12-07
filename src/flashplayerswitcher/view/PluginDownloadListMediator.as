@@ -66,7 +66,13 @@ package flashplayerswitcher.view
 		
 		private function onDownloadButtonClick(event:MouseEvent):void
 		{
-			dispatch(new DownloadPluginEvent(view.listing.selectedItem as FlashPlayerPlugin));
+			var plugins:Vector.<FlashPlayerPlugin> = new Vector.<FlashPlayerPlugin>();
+			for each (var plugin:FlashPlayerPlugin in view.listing.selectedItems)
+			{
+				plugins.push(plugin);
+			}
+			
+			dispatch(new DownloadPluginEvent(plugins));
 		}
 	}
 }

@@ -11,13 +11,13 @@ package flashplayerswitcher.controller.events
 	{
 		public static const DOWNLOAD:String = "download_plugin";
 		
-		public var plugin:FlashPlayerPlugin;
+		public var plugins:Vector.<FlashPlayerPlugin>;
 		
-		public function DownloadPluginEvent(plugin:FlashPlayerPlugin)
+		public function DownloadPluginEvent(plugins:Vector.<FlashPlayerPlugin>)
 		{
 			super(DOWNLOAD);
 			
-			this.plugin = plugin;
+			this.plugins = plugins;
 		}
 	}
 }
