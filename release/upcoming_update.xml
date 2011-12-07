@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<update xmlns="http://ns.adobe.com/air/framework/update/description/2.5">
+	<versionNumber>1.2.0</versionNumber>
+	<url>https://raw.github.com/jvanoostveen/Flash-Player-Switcher/master/release/FlashPlayerSwitcher.air</url>
+	<description><![CDATA[Changelog
+
+v1.2.0
+- Compacted listing of stored plugins by grouping release and debugger based on version.
+- Ability to select and download multiple plugins in one go.
+- Added localization (English and Dutch for the moment, awaiting more translations).
+- Ability to disable editing of storage (useful for managed storage).
+- New application icon (by Igor van Oostveen).
+- Added FDT5 logo and link as Powerflasher sponsered a FDT5 Max license :).
+
+v1.1.0
+- Storage location for database and plugins can now be chosen.
+- Better positioning of Help window.
+- Text changes.
+- Added Help menu with links to the help and issue list.
+- Rechecks installed versions when application is activated.
+
+v1.0.1
+- Multiple Help windows issue fixed.
+
+v1.0.0
+- All basic stuff is in.
+- Help added.
+- Added alert when removing user plugin.
+
+v0.9.1
+- Download progress when adding plugins.
+- Visual feedback in downloadable plugin list.
+
+v0.9.0
+- Added ability to download plugins into the storage.
+  (visuals like progres bars etc aren't in yet)
+
+v0.8.5
+- Added an alert when deleting a plugin from the storage.
+- Added an alert after installing a plugin.
+
+v0.8.4
+- Added ability to delete installed plugins.
+
+v0.8.3
+- First public release.]]></description>
+</update>
