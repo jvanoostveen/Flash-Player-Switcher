@@ -1,5 +1,7 @@
 package flashplayerswitcher
 {
+	import mx.managers.SystemManager;
+	import spark.components.Application;
 	import flashplayerswitcher.controller.commands.ActivatePluginCommand;
 	import flashplayerswitcher.controller.commands.CheckForUpdateCommand;
 	import flashplayerswitcher.controller.commands.CheckInstalledSystemPluginVersionCommand;
@@ -116,6 +118,7 @@ package flashplayerswitcher
 			injector.mapSingleton(PluginsModel);
 			injector.mapSingleton(DownloadPluginsModel);
 			injector.mapSingleton(ConfigModel);
+			injector.mapValue(SystemManager, (contextView as Application).systemManager);
 			
 			commandMap.mapEvent(FlexEvent.APPLICATION_COMPLETE, ReadConfigCommand);
 			commandMap.mapEvent(ConfigReadyEvent.READY, ConfigureDatabaseCommand);
