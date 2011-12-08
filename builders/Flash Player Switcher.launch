@@ -5,7 +5,7 @@
 <stringAttribute key="ADL_SCREENSIZE" value="768x1004:768x1024"/>
 <intAttribute key="AIR_VIEWER_CONF" value="0"/>
 <stringAttribute key="APP_ARGUMENTS" value=""/>
-<stringAttribute key="ARGUMENTS" value="-static-link-runtime-shared-libraries=true&#10;-target-player={playerVersion}&#10;-library-path+=&quot;{flexSDK}/frameworks/locale/en_US&quot;&#10;-default-size=550,400&#10;-define+=IF::DEV,true&#10;-define+=IF::RELEASE,false&#10;-locale=en_US,nl_NL,fr_FR,de_DE,it_IT&#10;-source-path=&quot;{project}/locale/{locale}&quot;"/>
+<stringAttribute key="ARGUMENTS" value="-static-link-runtime-shared-libraries=true&#10;-target-player={playerVersion}&#10;-library-path+=&quot;{flexSDK}/frameworks/locale/en_US&quot;&#10;-default-size=550,400&#10;-define+=IF::DEV,true&#10;-define+=IF::RELEASE,false&#10;-locale=en_US,nl_NL&#10;-source-path=&quot;{project}/locale/{locale}&quot;"/>
 <stringAttribute key="LAUNCHER_DEPENDENCIES" value="[Self]"/>
 <stringAttribute key="MAIN_CLASS" value="src/flashplayerswitcher/FlashPlayerSwitcher.mxml"/>
 <stringAttribute key="MOBILE_PRESET" value="iPad"/>
