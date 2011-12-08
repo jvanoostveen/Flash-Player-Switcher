@@ -8,7 +8,9 @@ package flashplayerswitcher.controller.commands
 
 	import org.robotlegs.mvcs.Command;
 
+	import flash.desktop.DockIcon;
 	import flash.desktop.NativeApplication;
+	import flash.display.NativeMenu;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -25,6 +27,9 @@ package flashplayerswitcher.controller.commands
 			
 			new ApplicationMenu();
 			mediatorMap.createMediator(NativeApplication.nativeApplication.menu);
+			
+			(NativeApplication.nativeApplication.icon as DockIcon).menu = new NativeMenu();
+			mediatorMap.createMediator(NativeApplication.nativeApplication.icon);
 			
 			IF::RELEASE
 			{

@@ -7,13 +7,12 @@ package flashplayerswitcher.view
 	import flash.desktop.NativeApplication;
 	import flash.display.NativeMenu;
 	import flash.display.NativeMenuItem;
-	import flash.events.EventDispatcher;
 	import flash.ui.Keyboard;
 
 	/**
 	 * @author Joeri van Oostveen
 	 */
-	public class ApplicationMenu extends EventDispatcher
+	public class ApplicationMenu
 	{
 		public function ApplicationMenu()
 		{

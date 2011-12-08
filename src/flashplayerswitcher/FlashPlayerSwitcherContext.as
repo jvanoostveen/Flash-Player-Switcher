@@ -55,6 +55,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.service.PluginDownloadService;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
 	import flashplayerswitcher.view.ApplicationMenuMediator;
+	import flashplayerswitcher.view.DockIconMediator;
 	import flashplayerswitcher.view.FlashPlayerSwitcherMediator;
 	import flashplayerswitcher.view.InstalledVersionListing;
 	import flashplayerswitcher.view.InstalledVersionListingMediator;
@@ -73,6 +74,7 @@ package flashplayerswitcher
 
 	import mx.events.FlexEvent;
 
+	import flash.desktop.DockIcon;
 	import flash.display.NativeMenu;
 
 	/**
@@ -93,6 +95,7 @@ package flashplayerswitcher
 			mediatorMap.mapView(PluginDownloadList, PluginDownloadListMediator);
 			mediatorMap.mapView(ProgressBarPopup, ProgressBarPopupMediator, null, false, false);
 			mediatorMap.mapView(NativeMenu, ApplicationMenuMediator);
+			mediatorMap.mapView(DockIcon, DockIconMediator);
 			mediatorMap.mapView(PreferencesWindow, PreferencesWindowMediator);
 			mediatorMap.mapView(MoreOptions, MoreOptionsMediator);
 			

@@ -5,10 +5,12 @@
 	<description><![CDATA[Changelog
 
 v1.2.0
+- Fixed storing plugins with a custom storage path.
 - Compacted listing of stored plugins by grouping release and debugger based on version.
 - Ability to select and download multiple plugins in one go.
 - Added localization (English and Dutch for the moment, awaiting more translations).
 - Ability to disable editing of storage (useful for managed storage).
+- Ability to activate a plugin from the Dock icon.
 - New application icon (by Igor van Oostveen).
 - Added FDT5 logo and link as Powerflasher sponsered a FDT5 Max license :).
 
