@@ -1,5 +1,6 @@
 package flashplayerswitcher.controller.commands
 {
+	import flashplayerswitcher.model.ConfigModel;
 	import flashplayerswitcher.controller.events.CopyPluginToStorageEvent;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.service.IFlashplayersService;
@@ -23,11 +24,14 @@ package flashplayerswitcher.controller.commands
 		[Inject]
 		public var tracker:ITrackerService;
 		
+		[Inject]
+		public var config:ConfigModel;
+		
 		override public function execute():void
 		{
 			var plugin:FlashPlayerPlugin = event.plugin;
 			
-			var storage:File = File.applicationStorageDirectory.resolvePath("plugins");
+			var storage:File = config.storageDirectory.resolvePath("plugins");
 			if (!storage.exists)
 				storage.createDirectory();
 			
