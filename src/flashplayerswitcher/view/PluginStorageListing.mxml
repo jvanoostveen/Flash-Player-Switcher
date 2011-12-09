@@ -15,6 +15,14 @@
 				else
 					return 0;
 			}
+			
+			public function get selectedPluginSet():PluginSet
+			{
+				if (listing.selectedItem)
+					return listing.selectedItem as PluginSet;
+				
+				return null;
+			}
 		]]>
 	</fx:Script>
 	<s:DataGrid id="listing" width="385" height="364">
@@ -35,7 +43,7 @@
 			label="{resource('DELETE')}"
 			enabled="false"/>
 		<mx:Spacer width="100%"/>
-		<s:Button id="installButton" label="{resource('ACTIVATE')}" enabled="false" fontWeight="bold"/>
-		<s:Button id="installDebuggerButton" label="{resource('ACTIVATE_DEBUGGER')}" enabled="false" fontWeight="bold"/>
+		<s:Button id="activateReleaseButton" label="{resource('ACTIVATE')}" enabled="false" fontWeight="bold"/>
+		<s:Button id="activateDebuggerButton" label="{resource('ACTIVATE_DEBUGGER')}" enabled="false" fontWeight="bold"/>
 	</s:HGroup>
 </s:VGroup>

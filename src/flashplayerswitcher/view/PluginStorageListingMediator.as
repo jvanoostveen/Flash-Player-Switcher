@@ -33,29 +33,25 @@ package flashplayerswitcher.view
 			addContextListener(StorageAllowEditingChangedEvent.CHANGED, onAllowEditingChanged, StorageAllowEditingChangedEvent);
 			
 			eventMap.mapListener(view.listing, GridSelectionEvent.SELECTION_CHANGE, onSelectionChange);
-			eventMap.mapListener(view.installButton, MouseEvent.CLICK, onInstallButtonClick);
-			eventMap.mapListener(view.installDebuggerButton, MouseEvent.CLICK, onInstallButtonClick);
+			eventMap.mapListener(view.activateReleaseButton, MouseEvent.CLICK, onInstallButtonClick);
+			eventMap.mapListener(view.activateDebuggerButton, MouseEvent.CLICK, onInstallButtonClick);
 			eventMap.mapListener(view.deleteButton, MouseEvent.CLICK, onDeleteButtonClick);
 		}
 		
 		private function onPluginsUpdated(event:PluginsUpdatedEvent):void
 		{
 			view.listing.dataProvider = installed.sortedPlugins;
+			view.listing.selectedIndex = -1;
 			
-			view.installButton.enabled = view.installDebuggerButton.enabled = false;
+			view.activateReleaseButton.enabled = view.activateDebuggerButton.enabled = false;
 			view.deleteButton.enabled = false;
 		}
 		
 		private function onUserPluginUpdate(event:InstalledPluginUpdatedEvent):void
 		{
-			var selected:FlashPlayerPlugin = view.listing.selectedItem as FlashPlayerPlugin;
+			var selected:PluginSet = view.selectedPluginSet;
 			if (selected)
-			{
-				if (event.plugin && selected.hash == event.plugin.hash)
-					view.installButton.enabled = view.installDebuggerButton.enabled = false;
-				else
-					view.installButton.enabled = view.installDebuggerButton.enabled = true;
-			}
+				view.listing.dispatchEvent(new GridSelectionEvent(GridSelectionEvent.SELECTION_CHANGE));
 		}
 		
 		private function onAllowEditingChanged(event:StorageAllowEditingChangedEvent):void
@@ -65,23 +61,23 @@ package flashplayerswitcher.view
 		
 		private function onSelectionChange(event:GridSelectionEvent):void
 		{
-			view.installButton.enabled = view.installDebuggerButton.enabled = false;
+			view.activateReleaseButton.enabled = view.activateDebuggerButton.enabled = false;
 			view.deleteButton.enabled = false;
 			
 			if (view.listing.selectedIndex != -1)
 			{
-				var pluginSet:PluginSet = view.listing.selectedItem as PluginSet;
+				var pluginSet:PluginSet = view.selectedPluginSet;
 				if (!installed.user)
 				{
 					if (pluginSet.release)
-						view.installButton.enabled = true;
+						view.activateReleaseButton.enabled = true;
 					if (pluginSet.debugger)
-						view.installDebuggerButton.enabled = true;
+						view.activateDebuggerButton.enabled = true;
 				} else {
 					if (pluginSet.release && pluginSet.release.hash != installed.user.hash)
-						view.installButton.enabled = true;
+						view.activateReleaseButton.enabled = true;
 					if (pluginSet.debugger && pluginSet.debugger.hash != installed.user.hash)
-						view.installDebuggerButton.enabled = true;
+						view.activateDebuggerButton.enabled = true;
 				}
 				
 				view.deleteButton.enabled = true;
@@ -90,11 +86,11 @@ package flashplayerswitcher.view
 		
 		private function onInstallButtonClick(event:MouseEvent):void
 		{
-			var pluginSet:PluginSet = view.listing.selectedItem as PluginSet;
+			var pluginSet:PluginSet = view.selectedPluginSet;
 			var plugin:FlashPlayerPlugin;
-			if (event.currentTarget == view.installButton)
+			if (event.currentTarget == view.activateReleaseButton)
 				plugin = pluginSet.release;
-			if (event.currentTarget == view.installDebuggerButton)
+			if (event.currentTarget == view.activateDebuggerButton)
 				plugin = pluginSet.debugger;
 			
 			if (plugin)
@@ -103,7 +99,7 @@ package flashplayerswitcher.view
 		
 		private function onDeleteButtonClick(event:MouseEvent):void
 		{
-			var pluginSet:PluginSet = view.listing.selectedItem as PluginSet;
+			var pluginSet:PluginSet = view.selectedPluginSet;
 			var plugins:Array = new Array();
 			if (pluginSet.release)
 				plugins.push(pluginSet.release);
