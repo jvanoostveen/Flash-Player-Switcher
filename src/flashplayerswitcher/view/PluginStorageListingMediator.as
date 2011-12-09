@@ -34,6 +34,7 @@ package flashplayerswitcher.view
 			
 			eventMap.mapListener(view.listing, GridSelectionEvent.SELECTION_CHANGE, onSelectionChange);
 			eventMap.mapListener(view.installButton, MouseEvent.CLICK, onInstallButtonClick);
+			eventMap.mapListener(view.installDebuggerButton, MouseEvent.CLICK, onInstallButtonClick);
 			eventMap.mapListener(view.deleteButton, MouseEvent.CLICK, onDeleteButtonClick);
 		}
 		
@@ -89,7 +90,15 @@ package flashplayerswitcher.view
 		
 		private function onInstallButtonClick(event:MouseEvent):void
 		{
-			dispatch(new ActivatePluginEvent(view.listing.selectedItem as FlashPlayerPlugin));
+			var pluginSet:PluginSet = view.listing.selectedItem as PluginSet;
+			var plugin:FlashPlayerPlugin;
+			if (event.currentTarget == view.installButton)
+				plugin = pluginSet.release;
+			if (event.currentTarget == view.installDebuggerButton)
+				plugin = pluginSet.debugger;
+			
+			if (plugin)
+				dispatch(new ActivatePluginEvent(plugin));
 		}
 		
 		private function onDeleteButtonClick(event:MouseEvent):void
