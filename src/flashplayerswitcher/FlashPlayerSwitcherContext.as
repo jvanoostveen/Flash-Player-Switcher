@@ -1,7 +1,5 @@
 package flashplayerswitcher
 {
-	import mx.managers.SystemManager;
-	import spark.components.Application;
 	import flashplayerswitcher.controller.commands.ActivatePluginCommand;
 	import flashplayerswitcher.controller.commands.CheckForUpdateCommand;
 	import flashplayerswitcher.controller.commands.CheckInstalledSystemPluginVersionCommand;
@@ -42,6 +40,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.model.ConfigModel;
 	import flashplayerswitcher.model.DownloadPluginsModel;
 	import flashplayerswitcher.model.PluginsModel;
+	import flashplayerswitcher.model.StateModel;
 	import flashplayerswitcher.model.values.DatabaseFilename;
 	import flashplayerswitcher.model.values.GoogleAnalyticsAccount;
 	import flashplayerswitcher.model.values.InternetPlugins;
@@ -118,7 +117,7 @@ package flashplayerswitcher
 			injector.mapSingleton(PluginsModel);
 			injector.mapSingleton(DownloadPluginsModel);
 			injector.mapSingleton(ConfigModel);
-			injector.mapValue(SystemManager, (contextView as Application).systemManager);
+			injector.mapSingleton(StateModel);
 			
 			commandMap.mapEvent(FlexEvent.APPLICATION_COMPLETE, ReadConfigCommand);
 			commandMap.mapEvent(ConfigReadyEvent.READY, ConfigureDatabaseCommand);
