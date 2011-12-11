@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <update xmlns="http://ns.adobe.com/air/framework/update/description/2.5">
-	<versionNumber>1.2.0</versionNumber>
+	<versionNumber>1.2.1</versionNumber>
 	<url>https://raw.github.com/jvanoostveen/Flash-Player-Switcher/master/release/FlashPlayerSwitcher.air</url>
 	<description><![CDATA[Changelog
+
+v1.2.1
+- Fixed DockIcon menu version info when no user plugin was installed.
+- Show system player version when no user plugin is installed (issue #16).
 
 v1.2.0
 - Fixed storing plugins with a custom storage path.
