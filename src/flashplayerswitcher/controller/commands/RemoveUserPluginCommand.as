@@ -1,6 +1,7 @@
 package flashplayerswitcher.controller.commands
 {
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
+	import flashplayerswitcher.model.StateModel;
 	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 
@@ -16,6 +17,9 @@ package flashplayerswitcher.controller.commands
 		[Inject]
 		public var pluginLocations:InternetPlugins;
 		
+		[Inject]
+		public var state:StateModel;
+		
 		override public function execute():void
 		{
 			var plugin:FlashPlayerPlugin = new FlashPlayerPlugin();
@@ -25,7 +29,7 @@ package flashplayerswitcher.controller.commands
 			
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
 			
-			Alert.show(resource("SYSTEM_PLUGIN_ACTIVE_ALERT"), resource("PLUGIN_REMOVED"));
+			state.alert = Alert.show(resource("SYSTEM_PLUGIN_ACTIVE_ALERT"), resource("PLUGIN_REMOVED"));
 		}
 	}
 }

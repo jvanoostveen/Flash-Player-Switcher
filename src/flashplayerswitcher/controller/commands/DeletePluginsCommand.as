@@ -1,7 +1,8 @@
 package flashplayerswitcher.controller.commands
 {
-	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.controller.events.DeletePluginsEvent;
+	import flashplayerswitcher.model.StateModel;
+	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.service.IFlashplayersService;
 
 	import org.robotlegs.mvcs.Command;
@@ -20,10 +21,13 @@ package flashplayerswitcher.controller.commands
 		[Inject]
 		public var service:IFlashplayersService;
 		
+		[Inject]
+		public var state:StateModel;
+		
 		override public function execute():void
 		{
 			commandMap.detain(this);
-			Alert.show(resource("DELETE_PLUGIN_ALERT"), resource("DELETE_PLUGIN"), Alert.CANCEL | Alert.OK, null, onAlertConfirm);
+			state.alert = Alert.show(resource("DELETE_PLUGIN_ALERT"), resource("DELETE_PLUGIN"), Alert.CANCEL | Alert.OK, null, onAlertConfirm);
 		}
 		
 		private function onAlertConfirm(evt:CloseEvent):void
