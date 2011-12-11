@@ -66,7 +66,7 @@ package flashplayerswitcher.view
 						
 						if (subitem.data is FlashPlayerPlugin)
 						{
-							if ((subitem.data as FlashPlayerPlugin).hash == user.hash)
+							if (user && (subitem.data as FlashPlayerPlugin).hash == user.hash)
 								subitem.enabled = false;
 							else
 								subitem.enabled = true;
