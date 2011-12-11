@@ -49,10 +49,11 @@ package flashplayerswitcher.view
 					if (item.data is String && item.data == "current")
 					{
 						item.label = resource("INSTALLED_NONE");
-						if (user)
+						var plugin:FlashPlayerPlugin = installed.user || installed.system;
+						if (plugin)
 						{
-							var type:String = user.debugger ? resource("DEBUGGER") : resource("RELEASE");
-							item.label = resource("CURRENT_PLUGIN", Locale.MAIN, [user.version, type]);
+							var type:String = plugin.debugger ? resource("DEBUGGER") : resource("RELEASE");
+							item.label = resource("CURRENT_PLUGIN", Locale.MAIN, [plugin.version, type]);
 						}
 					}
 				}
