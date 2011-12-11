@@ -3,6 +3,7 @@ package flashplayerswitcher.view
 	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
+	import flashplayerswitcher.locale.Locale;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.model.vo.PluginSet;
@@ -43,6 +44,19 @@ package flashplayerswitcher.view
 			var user:FlashPlayerPlugin = installed.user;
 			for each (var item:NativeMenuItem in icon.menu.items)
 			{
+				if (item.data)
+				{
+					if (item.data is String && item.data == "current")
+					{
+						item.label = resource("INSTALLED_NONE");
+						if (user)
+						{
+							var type:String = user.debugger ? resource("DEBUGGER") : resource("RELEASE");
+							item.label = resource("CURRENT_PLUGIN", Locale.MAIN, [user.version, type]);
+						}
+					}
+				}
+				
 				if (item.submenu)
 				{
 					for each (var subitem:NativeMenuItem in item.submenu.items)
@@ -71,6 +85,16 @@ package flashplayerswitcher.view
 			var label:NativeMenuItem = new NativeMenuItem(resource("PLUGINS"));
 			label.enabled = false;
 			items.push(label);
+			
+			var current:NativeMenuItem = new NativeMenuItem(resource("INSTALLED_NONE"));
+			current.data = "current";
+			current.enabled = false;
+			items.push(current);
+			if (installed.user)
+			{
+				var type:String = installed.user.debugger ? resource("DEBUGGER") : resource("RELEASE");
+				current.label = resource("CURRENT_PLUGIN", Locale.MAIN, [installed.user.version, type]);
+			}
 			
 			for each (var s:PluginSet in installed.sortedPlugins)
 			{
