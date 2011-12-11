@@ -1,6 +1,7 @@
 package flashplayerswitcher.view
 {
 	import flashplayerswitcher.controller.events.ActivatePluginEvent;
+	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
@@ -27,8 +28,38 @@ package flashplayerswitcher.view
 		override public function onRegister():void
 		{
 			addContextListener(PluginsUpdatedEvent.UPDATED, onPluginsUpdated, PluginsUpdatedEvent);
+			addContextListener(InstalledPluginUpdatedEvent.USER, onUserPluginUpdated, InstalledPluginUpdatedEvent);
 			
 			eventMap.mapListener(icon.menu, Event.SELECT, onMenuItemSelected);
+		}
+		
+		private function onUserPluginUpdated(event:InstalledPluginUpdatedEvent):void
+		{
+			updateMenuItems();
+		}
+		
+		private function updateMenuItems():void
+		{
+			var user:FlashPlayerPlugin = installed.user;
+			for each (var item:NativeMenuItem in icon.menu.items)
+			{
+				if (item.submenu)
+				{
+					for each (var subitem:NativeMenuItem in item.submenu.items)
+					{
+						if (!subitem.data)
+							continue;
+						
+						if (subitem.data is FlashPlayerPlugin)
+						{
+							if ((subitem.data as FlashPlayerPlugin).hash == user.hash)
+								subitem.enabled = false;
+							else
+								subitem.enabled = true;
+						}
+					}
+				}
+			}
 		}
 
 		private function onPluginsUpdated(event:PluginsUpdatedEvent):void
@@ -65,6 +96,8 @@ package flashplayerswitcher.view
 			}
 			
 			icon.menu.items = items;
+			
+			updateMenuItems();
 		}
 
 		private function reset():void
