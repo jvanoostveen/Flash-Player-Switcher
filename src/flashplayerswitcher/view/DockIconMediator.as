@@ -82,14 +82,14 @@ package flashplayerswitcher.view
 				
 				if (s.release)
 				{
-					var release:NativeMenuItem = new NativeMenuItem("Release");
+					var release:NativeMenuItem = new NativeMenuItem(resource("RELEASE"));
 					release.data = s.release;
 					submenu.addItem(release);
 				}
 				
 				if (s.debugger)
 				{
-					var debugger:NativeMenuItem = new NativeMenuItem("Debugger");
+					var debugger:NativeMenuItem = new NativeMenuItem(resource("DEBUGGER"));
 					debugger.data = s.debugger;
 					submenu.addItem(debugger);
 				}
