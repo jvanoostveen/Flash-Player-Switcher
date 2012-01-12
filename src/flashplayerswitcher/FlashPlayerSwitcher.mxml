@@ -52,8 +52,17 @@
 					contentBackgroundAlpha="0.0" editable="false"
 					text="{resource('MAIN_INFO')}"/>
 	</s:Group>
-	<view:InstalledVersionListing x="429" top="{storage.y}" width="249" bottom="25"/>
-	<view:MoreOptions left="429" right="25" bottom="25"/>
-	<view:PluginStorageListing id="storage" x="25" bottom="25" />
-	<view:PluginDownloadList id="download" x="25" bottom="25" visible="false"/>
+	
+	<s:HGroup bottom="0" gap="20" width="100%" paddingLeft="25" paddingRight="25" paddingBottom="25">
+		<s:Group>
+			<view:PluginStorageListing id="storage" />
+			<view:PluginDownloadList id="download" visible="false"/>
+		</s:Group>
+		<s:VGroup width="100%" height="100%">
+			<view:InstalledVersionListing width="100%"/>
+			<mx:Spacer height="100%"/>
+			<view:MoreOptions width="100%"/>
+		</s:VGroup>
+	</s:HGroup>
+		
 </s:WindowedApplication>
