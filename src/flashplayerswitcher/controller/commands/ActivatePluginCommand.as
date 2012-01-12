@@ -44,6 +44,7 @@ package flashplayerswitcher.controller.commands
 			tracker.track("/activate/" + plugin.version + "/" + (plugin.debugger ? "debugger" : "release") + "/");
 			
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
+			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.SYSTEM));
 			
 			state.alert = Alert.show(resource('PLUGIN_ACTIVATED_FEEDBACK', Locale.MAIN, [plugin.name + " " + plugin.version]), resource('PLUGIN_ACTIVATED'));
 		}
