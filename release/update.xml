@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <update xmlns="http://ns.adobe.com/air/framework/update/description/2.5">
-	<versionNumber>1.2.1</versionNumber>
+	<versionNumber>1.2.2</versionNumber>
 	<url>https://raw.github.com/jvanoostveen/Flash-Player-Switcher/master/release/FlashPlayerSwitcher.air</url>
 	<description><![CDATA[Changelog
+
+v1.2.2
+- Layout fix when having no active Flash Player plugin (issue #19).
+- Now checks system installed plugin after activating app as well.
+- Updated the Help.
 
 v1.2.1
 - Fixed DockIcon menu version info when no user plugin was installed.
