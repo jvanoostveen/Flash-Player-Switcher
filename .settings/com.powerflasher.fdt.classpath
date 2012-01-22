@@ -25,4 +25,5 @@
     <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">libs/fzip.swc</AS3Classpath>
     <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">libs/analytics.swc</AS3Classpath>
     <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">libs/robotlegs-framework-v1.5.2.swc</AS3Classpath>
+    <AS3Classpath generateProblems="false" inclusion="complete" sdkBased="false" type="project" useAsSharedCode="false">AS3Growl</AS3Classpath>
 </AS3Classpath>

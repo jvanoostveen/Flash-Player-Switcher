@@ -4,6 +4,7 @@ package flashplayerswitcher.controller.commands
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.controller.events.LoadPluginsEvent;
 	import flashplayerswitcher.service.ITrackerService;
+	import flashplayerswitcher.service.growl.IGrowlService;
 	import flashplayerswitcher.view.ApplicationMenu;
 
 	import org.robotlegs.mvcs.Command;
@@ -17,13 +18,15 @@ package flashplayerswitcher.controller.commands
 	 */
 	public class InitializeAppCommand extends Command
 	{
-		[Inject]
-		public var tracker:ITrackerService;
+		[Inject] public var tracker:ITrackerService;
+		[Inject] public var growl:IGrowlService;
 		
 		override public function execute():void
 		{
 			tracker.init(contextView);
 			tracker.track("/");
+			
+			growl.register();
 			
 			new ApplicationMenu();
 			mediatorMap.createMediator(NativeApplication.nativeApplication.menu);

@@ -1,5 +1,6 @@
 package flashplayerswitcher.controller.commands
 {
+	import flashplayerswitcher.service.growl.NotificationName;
 	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.locale.Locale;
@@ -7,6 +8,7 @@ package flashplayerswitcher.controller.commands
 	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.service.ITrackerService;
+	import flashplayerswitcher.service.growl.IGrowlService;
 
 	import org.robotlegs.mvcs.Command;
 
@@ -31,6 +33,8 @@ package flashplayerswitcher.controller.commands
 		[Inject]
 		public var state:StateModel;
 		
+		[Inject] public var growl:IGrowlService;
+		
 		override public function execute():void
 		{
 			var plugins:File = pluginLocations.user;
@@ -47,6 +51,8 @@ package flashplayerswitcher.controller.commands
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.SYSTEM));
 			
 			state.alert = Alert.show(resource('PLUGIN_ACTIVATED_FEEDBACK', Locale.MAIN, [plugin.name + " " + plugin.version]), resource('PLUGIN_ACTIVATED'));
+			
+			growl.notify(NotificationName.PLUGIN_ACTIVATED, resource("PLUGIN_ACTIVATED_NOTIFICATION_TITLE"), resource("PLUGIN_ACTIVATED_NOTITICATION_MESSAGE", Locale.MAIN, [plugin.name + " " + plugin.version]));
 		}
 	}
 }
