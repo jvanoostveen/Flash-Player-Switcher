@@ -6,7 +6,6 @@ package flashplayerswitcher.model
 	import mx.managers.PopUpManager;
 
 	import flash.events.Event;
-	import flash.events.IEventDispatcher;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -22,20 +21,23 @@ package flashplayerswitcher.model
 
 		public function set alert(alert:Alert):void
 		{
+			
 			if (_alert)
 				PopUpManager.removePopUp(_alert);
 			
 			_alert = alert;
 			
 			if (_alert)
-				_alert.addEventListener(Event.REMOVED_FROM_STAGE, onAlertRemoved);
+				_alert.addEventListener(Event.REMOVED_FROM_STAGE, onAlertRemoved, false, -10);
 		}
 
 		private function onAlertRemoved(event:Event):void
 		{
-			(event.currentTarget as IEventDispatcher).removeEventListener(event.type, onAlertRemoved);
+			var alert:Alert = event.currentTarget as Alert;
+			alert.removeEventListener(event.type, onAlertRemoved);
 			
-			_alert = null;
+			if (alert == _alert)
+				_alert = null;
 		}
 	}
 }
