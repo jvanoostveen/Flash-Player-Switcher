@@ -43,6 +43,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.model.StateModel;
 	import flashplayerswitcher.model.values.DatabaseFilename;
 	import flashplayerswitcher.model.values.GoogleAnalyticsAccount;
+	import flashplayerswitcher.model.values.GrowlApplication;
 	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.values.PluginDownloadURL;
 	import flashplayerswitcher.service.ConfigService;
@@ -55,6 +56,8 @@ package flashplayerswitcher
 	import flashplayerswitcher.service.ITrackerService;
 	import flashplayerswitcher.service.PluginDownloadService;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
+	import flashplayerswitcher.service.growl.GrowlServiceWrapper;
+	import flashplayerswitcher.service.growl.IGrowlService;
 	import flashplayerswitcher.view.ApplicationMenuMediator;
 	import flashplayerswitcher.view.DockIconMediator;
 	import flashplayerswitcher.view.FlashPlayerSwitcherMediator;
@@ -77,6 +80,7 @@ package flashplayerswitcher
 
 	import flash.desktop.DockIcon;
 	import flash.display.NativeMenu;
+	import flash.filesystem.File;
 
 	/**
 	 * @author Joeri van Oostveen
@@ -89,6 +93,7 @@ package flashplayerswitcher
 			injector.mapValue(GoogleAnalyticsAccount, new GoogleAnalyticsAccount("UA-26342584-3"));
 			injector.mapValue(PluginDownloadURL, new PluginDownloadURL("http://www.webdebugger.nl/flashplayerswitcher/plugins.xml"));
 			injector.mapValue(DatabaseFilename, new DatabaseFilename("flashplayers.db"));
+			injector.mapValue(GrowlApplication, new GrowlApplication("Flash Player Switcher", "file://" + escape(File.applicationDirectory.resolvePath("icons").resolvePath("icon128.png").nativePath)));
 			
 			mediatorMap.mapView(FlashPlayerSwitcher, FlashPlayerSwitcherMediator);
 			mediatorMap.mapView(InstalledVersionListing, InstalledVersionListingMediator);
@@ -103,6 +108,7 @@ package flashplayerswitcher
 			injector.mapSingletonOf(IFlashplayersService, FlashplayersService);
 			injector.mapSingletonOf(IPluginDownloadService, PluginDownloadService);
 			injector.mapSingletonOf(IConfigService, ConfigService);
+			injector.mapSingletonOf(IGrowlService, GrowlServiceWrapper);
 			
 			IF::DEV
 			{
