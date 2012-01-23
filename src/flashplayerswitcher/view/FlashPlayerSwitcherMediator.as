@@ -16,8 +16,7 @@ package flashplayerswitcher.view
 	 */
 	public class FlashPlayerSwitcherMediator extends Mediator
 	{
-		[Inject]
-		public var view:FlashPlayerSwitcher;
+		[Inject] public var view:FlashPlayerSwitcher;
 		
 		private var _progressPopUp:ProgressBarPopup;
 		
@@ -32,14 +31,12 @@ package flashplayerswitcher.view
 		
 		private function showDownloadList(event:ShowPluginDownloadListEvent):void
 		{
-			view.download.visible = true;
-			view.storage.visible = false;
+			view.currentState = FlashPlayerSwitcher.STATE_DOWNLOAD;
 		}
 		
 		private function showStorageList(event:ShowPluginStorageListEvent):void
 		{
-			view.download.visible = false;
-			view.storage.visible = true;
+			view.currentState = FlashPlayerSwitcher.STATE_STORAGE;
 		}
 		
 		private function addProgressBarPopup(event:ProgressBarPopupEvent):void

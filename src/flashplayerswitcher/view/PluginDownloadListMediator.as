@@ -28,6 +28,8 @@ package flashplayerswitcher.view
 			
 			eventMap.mapListener(view.listing, GridSelectionEvent.SELECTION_CHANGE, onSelectionChange);
 			eventMap.mapListener(view.downloadButton, MouseEvent.CLICK, onDownloadButtonClick);
+			
+			onShowList(null);
 		}
 		
 		private function onShowList(event:ShowPluginDownloadListEvent):void
