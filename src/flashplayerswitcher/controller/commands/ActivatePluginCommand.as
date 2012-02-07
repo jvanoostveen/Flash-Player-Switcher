@@ -21,18 +21,11 @@ package flashplayerswitcher.controller.commands
 	 */
 	public class ActivatePluginCommand extends Command
 	{
-		[Inject]
-		public var event:ActivatePluginEvent;
+		[Inject] public var event:ActivatePluginEvent;
 		
-		[Inject]
-		public var tracker:ITrackerService;
-		
-		[Inject]
-		public var pluginLocations:InternetPlugins;
-		
-		[Inject]
-		public var state:StateModel;
-		
+		[Inject] public var tracker:ITrackerService;
+		[Inject] public var pluginLocations:InternetPlugins;
+		[Inject] public var state:StateModel;
 		[Inject] public var growl:IGrowlService;
 		
 		override public function execute():void
@@ -52,7 +45,7 @@ package flashplayerswitcher.controller.commands
 			
 			state.alert = Alert.show(resource('PLUGIN_ACTIVATED_FEEDBACK', Locale.MAIN, [plugin.name + " " + plugin.version]), resource('PLUGIN_ACTIVATED'));
 			
-			growl.notify(NotificationName.PLUGIN_ACTIVATED, resource("PLUGIN_ACTIVATED_NOTIFICATION_TITLE"), resource("PLUGIN_ACTIVATED_NOTITICATION_MESSAGE", Locale.MAIN, [plugin.name + " " + plugin.version]));
+			growl.notify(NotificationName.PLUGIN_ACTIVATED, resource("PLUGIN_ACTIVATED_NOTIFICATION_TITLE", Locale.GROWL), resource("PLUGIN_ACTIVATED_NOTITICATION_MESSAGE", Locale.GROWL, [plugin.name + " " + plugin.version]));
 		}
 	}
 }

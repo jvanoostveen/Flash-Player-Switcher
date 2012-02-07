@@ -44,11 +44,18 @@ package flashplayerswitcher.model.vo
 		
 		public function remove():void
 		{
+			var parentDirecotry:File;
+			if (plugin.exists)
+				parentDirecotry = plugin.parent;
+			
 			if (plugin.exists)
 				plugin.deleteDirectory(true);
 			
 			if (xpt.exists)
 				xpt.deleteFile();
+			
+			if (parentDirecotry.getDirectoryListing().length == 0)
+				parentDirecotry.deleteDirectory(false);
 		}
 		
 		public function get exists():Boolean

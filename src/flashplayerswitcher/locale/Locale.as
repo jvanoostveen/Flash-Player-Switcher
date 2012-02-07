@@ -7,5 +7,6 @@ package flashplayerswitcher.locale
 	{
 		public static const MAIN:String = "Main";
 		public static const PREFERENCES:String = "Preferences";
+		public static const GROWL:String = "Growl";
 	}
 }

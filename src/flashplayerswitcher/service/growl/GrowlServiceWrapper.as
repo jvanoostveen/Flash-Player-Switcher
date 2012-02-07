@@ -36,12 +36,22 @@ package flashplayerswitcher.service.growl
 		 */
 		public function register():void
 		{
+			var pluginInstalled:NotificationType = new NotificationType();
+			pluginInstalled.enabled = true;
+			pluginInstalled.name = NotificationName.PLUGIN_INSTALLED;
+			pluginInstalled.displayName = "Plugin has been installed"; // for Growl preferences
+			
 			var pluginActivated:NotificationType = new NotificationType();
 			pluginActivated.enabled = true;
 			pluginActivated.name = NotificationName.PLUGIN_ACTIVATED;
 			pluginActivated.displayName = "Plugin has been activated"; // for Growl preferences
 			
-			_service.register([pluginActivated]);
+			var pluginDeleted:NotificationType = new NotificationType();
+			pluginDeleted.enabled = true;
+			pluginDeleted.name = NotificationName.PLUGIN_DELETED;
+			pluginDeleted.displayName = "Plugin(s) have been deleted"; // for Growl preferences
+			
+			_service.register([pluginInstalled, pluginActivated, pluginDeleted]);
 		}
 
 		/**

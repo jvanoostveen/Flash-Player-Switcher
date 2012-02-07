@@ -8,6 +8,7 @@
 	<fx:Metadata>
 		[ResourceBundle("Main")]
 		[ResourceBundle("Preferences")]
+		[ResourceBundle("Growl")]
 	</fx:Metadata>
 	<fx:Declarations>
 		<flashplayerswitcher:FlashPlayerSwitcherContext id="context" contextView="{this}" />

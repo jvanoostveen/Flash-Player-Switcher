@@ -1,10 +1,13 @@
 package flashplayerswitcher.controller.commands
 {
-	import flashplayerswitcher.model.ConfigModel;
 	import flashplayerswitcher.controller.events.CopyPluginToStorageEvent;
+	import flashplayerswitcher.locale.Locale;
+	import flashplayerswitcher.model.ConfigModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.service.IFlashplayersService;
 	import flashplayerswitcher.service.ITrackerService;
+	import flashplayerswitcher.service.growl.IGrowlService;
+	import flashplayerswitcher.service.growl.NotificationName;
 
 	import org.robotlegs.mvcs.Command;
 
@@ -15,17 +18,12 @@ package flashplayerswitcher.controller.commands
 	 */
 	public class CopyPluginToStorageCommand extends Command
 	{
-		[Inject]
-		public var event:CopyPluginToStorageEvent;
+		[Inject] public var event:CopyPluginToStorageEvent;
 		
-		[Inject]
-		public var service:IFlashplayersService;
-		
-		[Inject]
-		public var tracker:ITrackerService;
-		
-		[Inject]
-		public var config:ConfigModel;
+		[Inject] public var service:IFlashplayersService;
+		[Inject] public var tracker:ITrackerService;
+		[Inject] public var config:ConfigModel;
+		[Inject] public var growl:IGrowlService;
 		
 		override public function execute():void
 		{
@@ -45,6 +43,8 @@ package flashplayerswitcher.controller.commands
 			service.storePlugin(plugin);
 			
 			tracker.track("/storage/" + plugin.version + "/" + (plugin.debugger ? "debugger" : "release") + "/");
+			
+			growl.notify(NotificationName.PLUGIN_INSTALLED, resource("PLUGIN_INSTALLED_NOTIFICATION_TITLE", Locale.GROWL), resource("PLUGIN_INSTALLED_NOTITICATION_MESSAGE", Locale.GROWL, [plugin.name + " " + plugin.version]));
 		}
 	}
 }
