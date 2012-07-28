@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <update xmlns="http://ns.adobe.com/air/framework/update/description/2.5">
-	<versionNumber>1.3.0</versionNumber>
+	<versionNumber>1.3.1</versionNumber>
 	<url>https://raw.github.com/jvanoostveen/Flash-Player-Switcher/master/release/FlashPlayerSwitcher.air</url>
 	<description><![CDATA[Changelog
+
+v1.3.1
+- Added more Growl notifications.
+- Containing directory is now also deleted when deleting plugins from the storage.
 
 v1.3.0
 - Growl (v1.3) notifications added (issue #17).

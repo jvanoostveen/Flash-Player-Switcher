@@ -1,43 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><application xmlns="http://ns.adobe.com/air/application/2.6">
-
-	<id>nl.webdebugger.FlashPlayerSwitcher</id>
-	<filename>Flash Player Switcher</filename>
-	<name>Flash Player Switcher</name>
-	
-	<versionNumber>1.3.0</versionNumber>
-	<!-- <versionLabel></versionLabel> -->
-	
-	<description>Utility for easy switching between Flash Player plugins.</description>
-	<copyright>© Joeri van Oostveen</copyright>
-
-	<initialWindow>
-		<content>FlashPlayerSwitcher.swf</content>
-		<title>Flash Player Switcher</title>
-		<systemChrome>standard</systemChrome>
-		<transparent>false</transparent>
-		<visible>true</visible>
-		<minimizable>true</minimizable>
-		<maximizable>false</maximizable>
-		<resizable>false</resizable>
-		<width>700</width>
-		<height>624</height>
-		<x>150</x>
-		<y>150</y>
-		<minSize>700 624</minSize>
-		<maxSize>700 624</maxSize>
-    </initialWindow>
-
-	<supportedProfiles>desktop</supportedProfiles>
-
-	<!-- <installFolder></installFolder> -->
-
-	<icon>
-		<image16x16>icons/icon16.png</image16x16>
-		<image32x32>icons/icon32.png</image32x32>
-		<image48x48>icons/icon48.png</image48x48>
-		<image128x128>icons/icon128.png</image128x128>
-	</icon>
-
-	<customUpdateUI>false</customUpdateUI>
-	<allowBrowserInvocation>false</allowBrowserInvocation>
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://ns.adobe.com/air/application/2.6">
+  <id>nl.webdebugger.FlashPlayerSwitcher</id>
+  <filename>Flash Player Switcher</filename>
+  <name>Flash Player Switcher</name>
+  <versionNumber>1.3.1</versionNumber>
+  <!-- <versionLabel></versionLabel> -->
+  <description>Utility for easy switching between Flash Player plugins.</description>
+  <copyright>© Joeri van Oostveen</copyright>
+  <initialWindow>
+    <content>FlashPlayerSwitcher.swf</content>
+    <title>Flash Player Switcher</title>
+    <systemChrome>standard</systemChrome>
+    <transparent>false</transparent>
+    <visible>true</visible>
+    <minimizable>true</minimizable>
+    <maximizable>false</maximizable>
+    <resizable>false</resizable>
+    <width>700</width>
+    <height>624</height>
+    <x>150</x>
+    <y>150</y>
+    <minSize>700 624</minSize>
+    <maxSize>700 624</maxSize>
+  </initialWindow>
+  <supportedProfiles>desktop</supportedProfiles>
+  <!-- <installFolder></installFolder> -->
+  <icon>
+    <image16x16>AppIcons/16x16-icon16.png</image16x16>
+    <image32x32>AppIcons/32x32-icon32.png</image32x32>
+    <image128x128>AppIcons/128x128-icon128.png</image128x128>
+    <image48x48>AppIcons/48x48-icon48.png</image48x48>
+  </icon>
+  <customUpdateUI>false</customUpdateUI>
+  <allowBrowserInvocation>false</allowBrowserInvocation>
 </application>
+
