@@ -1,4 +1,4 @@
-#Mon Sep 12 21:24:32 CEST 2011
+#Sat Jul 28 21:51:39 CEST 2012
 com.powerflasher.fdt.core.CompatiblePlayers=AIR_Debug_Launcher
 com.powerflasher.fdt.core.CompilerArguments=-target-player\={playerVersion}\n-library-path+\="{flexSDK}/frameworks/locale/en_US"\n-default-size\=550,400
 com.powerflasher.fdt.core.DefaultOutputFolder=bin
@@ -12,4 +12,65 @@ com.powerflasher.fdt.core.PlayerVersion=10.2
 com.powerflasher.fdt.core.ProjectTypeHint=Flex 4.5 AIR
 com.powerflasher.fdt.core.Runtime=AIR
 com.powerflasher.fdt.core.SdkName=Flex 4.5.1
+com.powerflasher.fdt.core.mobile.AirDesktop.ACTIVE=true
+com.powerflasher.fdt.core.mobile.AirDesktop.AVAILABLE.EXTENSIONS=
+com.powerflasher.fdt.core.mobile.AirDesktop.CUSTOM.ADT.CMD.LINE=${package} ${signing} ${target} ${connection} ${provision} ${output} ${content} ${icons}
+com.powerflasher.fdt.core.mobile.AirDesktop.CUSTOMIZE.ADT.ARGS=false
+com.powerflasher.fdt.core.mobile.AirDesktop.DEPLOY.LOCATION=release/FlashPlayerSwitcher.air
+com.powerflasher.fdt.core.mobile.AirDesktop.DEPLOY.PRE.PACKAGE.LAUNCHER=Flash Player Switcher Release
+com.powerflasher.fdt.core.mobile.AirDesktop.DEPLOY.TYPE.AIR.DESKTOP=AIR
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.114x114=
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.128x128=bin/icons/icon128.png
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.16x16=bin/icons/icon16.png
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.32x32=bin/icons/icon32.png
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.36x36=
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.48x48=bin/icons/icon48.png
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.72x72=
+com.powerflasher.fdt.core.mobile.AirDesktop.MOBILE.DESCRIPTOR=bin/FlashPlayerSwitcher-app.xml
+com.powerflasher.fdt.core.mobile.AirDesktop.PACKAGE.CONTENT=bin/FlashPlayerSwitcher-app.xml > FlashPlayerSwitcher-app.xml;bin/FlashPlayerSwitcher.swf > FlashPlayerSwitcher.swf;bin/icons;bin/help;
+com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.CERTIFICATE=builders/FlashPlayerSwitcher.p12
+com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.PWD=0+cL1Xxrx6Udmx2bZQM3/g\=\=
+com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.REMEMBER.PWD=true
+com.powerflasher.fdt.core.mobile.Android.ACTIVE=false
+com.powerflasher.fdt.core.mobile.Android.AVAILABLE.EXTENSIONS=
+com.powerflasher.fdt.core.mobile.Android.CUSTOM.ADT.CMD.LINE=${package} ${target} ${connection} ${market} ${signing} ${provision} ${output} ${content} ${icons} ${platformsdk}
+com.powerflasher.fdt.core.mobile.Android.CUSTOMIZE.ADT.ARGS=false
+com.powerflasher.fdt.core.mobile.Android.DEPLOY.EXPORT.CAPTIVE=false
+com.powerflasher.fdt.core.mobile.Android.DEPLOY.INSTALL.CHECK=false
+com.powerflasher.fdt.core.mobile.Android.DEPLOY.LOCATION=
+com.powerflasher.fdt.core.mobile.Android.DEPLOY.MARKET.INDEX=0
+com.powerflasher.fdt.core.mobile.Android.DEPLOY.PRE.PACKAGE.LAUNCHER=\ -- No adequate launcher found\! -- 
+com.powerflasher.fdt.core.mobile.Android.ICON.PATH.36x36=
+com.powerflasher.fdt.core.mobile.Android.ICON.PATH.48x48=
+com.powerflasher.fdt.core.mobile.Android.ICON.PATH.72x72=
+com.powerflasher.fdt.core.mobile.Android.MOBILE.DESCRIPTOR=bin/FlashPlayerSwitcher-app.xml
+com.powerflasher.fdt.core.mobile.Android.PACKAGE.CONTENT=bin/FlashPlayerSwitcher-app.xml > FlashPlayerSwitcher-app.xml;bin/FlashPlayerSwitcher.swf > FlashPlayerSwitcher.swf;
+com.powerflasher.fdt.core.mobile.Android.SIGNATURE.CERTIFICATE=
+com.powerflasher.fdt.core.mobile.Android.SIGNATURE.PWD=HZsdm2UDN/4\=
+com.powerflasher.fdt.core.mobile.Android.SIGNATURE.REMEMBER.PWD=false
+com.powerflasher.fdt.core.mobile.iOS.ACTIVE=false
+com.powerflasher.fdt.core.mobile.iOS.AVAILABLE.EXTENSIONS=
+com.powerflasher.fdt.core.mobile.iOS.CUSTOM.ADT.CMD.LINE=${package} ${target} ${connection} ${market} ${signing} ${provision} ${output} ${content} ${icons} ${platformsdk}
+com.powerflasher.fdt.core.mobile.iOS.CUSTOMIZE.ADT.ARGS=false
+com.powerflasher.fdt.core.mobile.iOS.DEPLOY.LOCATION=
+com.powerflasher.fdt.core.mobile.iOS.DEPLOY.PACKAGE.TYPE=0
+com.powerflasher.fdt.core.mobile.iOS.DEPLOY.PRE.PACKAGE.LAUNCHER=\ -- No adequate launcher found\! -- 
+com.powerflasher.fdt.core.mobile.iOS.DEPLOY.SDK.LOCATION=
+com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.114x114=
+com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.29x29=
+com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.48x48=
+com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.512x512=
+com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.57x57=
+com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.72x72=
+com.powerflasher.fdt.core.mobile.iOS.MOBILE.DESCRIPTOR=bin/FlashPlayerSwitcher-app.xml
+com.powerflasher.fdt.core.mobile.iOS.PACKAGE.CONTENT=bin/FlashPlayerSwitcher-app.xml > FlashPlayerSwitcher-app.xml;bin/FlashPlayerSwitcher.swf > FlashPlayerSwitcher.swf;
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE=
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE.RELEASE=
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE=
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE.RELEASE=
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PWD=HZsdm2UDN/4\=
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PWD.RELEASE=HZsdm2UDN/4\=
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.REMEMBER.PWD=false
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.REMEMBER.PWD.RELEASE=false
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.USE.DIFEERENT.PROFILES=false
 eclipse.preferences.version=1
