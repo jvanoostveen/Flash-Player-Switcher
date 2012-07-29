@@ -9,8 +9,7 @@ package flashplayerswitcher.controller.commands
 	 */
 	public class LoadPluginsCommand extends Command
 	{
-		[Inject]
-		public var flashplayers:IFlashplayersService;
+		[Inject] public var flashplayers:IFlashplayersService;
 		
 		override public function execute():void
 		{

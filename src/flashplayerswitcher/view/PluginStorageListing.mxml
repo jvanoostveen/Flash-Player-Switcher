@@ -25,10 +25,10 @@
 			}
 		]]>
 	</fx:Script>
-	<s:DataGrid id="listing" width="385" height="364">
+	<s:DataGrid id="listing" width="385" height="364" editable="true">
 		<s:columns>
 			<s:ArrayList>
-				<s:GridColumn dataField="name" editable="false" headerText="{resource('LIST_NAME')}" width="150"></s:GridColumn>
+				<s:GridColumn dataField="name" editable="true" headerText="{resource('LIST_NAME')}" width="150"></s:GridColumn>
 				<s:GridColumn dataField="version" editable="false" headerText="{resource('LIST_VERSION')}" sortCompareFunction="sortVersionCompare"></s:GridColumn>
 				<s:GridColumn dataField="hasRelease" editable="false" headerText="" itemRenderer="flashplayerswitcher.view.list.FlashPlayerIconItemRenderer" width="28"></s:GridColumn>
 				<s:GridColumn dataField="hasDebugger" editable="false" headerText="" itemRenderer="flashplayerswitcher.view.list.FlashPlayerIconItemRenderer" width="28"></s:GridColumn>

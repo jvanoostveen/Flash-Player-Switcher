@@ -2,7 +2,6 @@ package flashplayerswitcher.controller.commands
 {
 	import flashplayerswitcher.model.ConfigModel;
 	import flashplayerswitcher.model.values.DatabaseFilename;
-	import flashplayerswitcher.service.events.DatabaseReadyEvent;
 	import flashplayerswitcher.service.helpers.DatabaseCreator;
 
 	import com.probertson.data.SQLRunner;
@@ -13,11 +12,8 @@ package flashplayerswitcher.controller.commands
 
 	public class ConfigureDatabaseCommand extends Command
 	{
-		[Inject]
-		public var config:ConfigModel;
-		
-		[Inject]
-		public var database:DatabaseFilename;
+		[Inject] public var config:ConfigModel;
+		[Inject] public var database:DatabaseFilename;
 		
 		override public function execute():void
 		{
@@ -28,17 +24,12 @@ package flashplayerswitcher.controller.commands
 			// load any data.
 			config.sqlrunner = new SQLRunner(file);
 			
-			if (!file.exists)
-			{
-				// We use the injector to instantiate the DatabaseCreator here because
-				// we want to inject the SQLRunner that is mapped above. This works
-				// well even though the DatabaseCreator is not a mapped object, we still
-				// get access to injections from Robotlegs by creating it this way!
-				var creator:DatabaseCreator = injector.instantiate(DatabaseCreator);
-				creator.createDatabaseStructure();
-			} else {
-				dispatch(new DatabaseReadyEvent());
-			}
+			// We use the injector to instantiate the DatabaseCreator here because
+			// we want to inject the SQLRunner that is mapped above. This works
+			// well even though the DatabaseCreator is not a mapped object, we still
+			// get access to injections from Robotlegs by creating it this way!
+			var creator:DatabaseCreator = injector.instantiate(DatabaseCreator);
+			creator.createDatabaseStructure();
 		}
 	}
 }

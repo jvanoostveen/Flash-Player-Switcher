@@ -26,11 +26,32 @@ package flashplayerswitcher.model.vo
 		
 		public function get name():String
 		{
+			if (_name == null)
+			{
+				if (_release)
+					name = _release.name;
+				else if (_debugger)
+					name = _debugger.name.substring(0, _debugger.name.indexOf(" Debugger"));
+			}
+			
 			return _name;
+		}
+		
+		public function set name(value:String):void
+		{
+			_name = value;
 		}
 		
 		public function get version():String
 		{
+			if (_version == null)
+			{
+				if (_release)
+					version = _release.version;
+				else if (_debugger)
+					version = _debugger.version;
+			}
+			
 			return _version;
 		}
 
@@ -61,9 +82,6 @@ package flashplayerswitcher.model.vo
 		public function set release(plugin:FlashPlayerPlugin):void
 		{
 			_release = plugin;
-			
-			_name = _release.name;
-			version = _release.version;
 		}
 
 		public function get debugger():FlashPlayerPlugin
@@ -74,9 +92,6 @@ package flashplayerswitcher.model.vo
 		public function set debugger(plugin:FlashPlayerPlugin):void
 		{
 			_debugger = plugin;
-			
-			_name = _debugger.name.substring(0, _debugger.name.indexOf(" Debugger"));
-			version = _debugger.version;
 		}
 		
 		public function get hasRelease():Boolean

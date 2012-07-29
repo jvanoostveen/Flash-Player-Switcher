@@ -40,6 +40,7 @@ package flashplayerswitcher.controller.commands
 				for each (var plugin:FlashPlayerPlugin in event.plugins)
 				{
 					service.deletePlugin(plugin);
+					service.deletePluginSetForVersion(plugin.version);
 					plugin.remove();
 				}
 				

@@ -43,18 +43,7 @@ package flashplayerswitcher.model
 			
 			_sortedPlugins = new ArrayCollection(sortedPlugins);
 			
-			dispatch(new PluginsUpdatedEvent(PluginsUpdatedEvent.UPDATED, _plugins));
-		}
-		
-		public function contains(plugin:FlashPlayerPlugin):Boolean
-		{
-			for each (var p:FlashPlayerPlugin in _plugins)
-			{
-				if (plugin.hash == p.hash)
-					return true;
-			}
-			
-			return false;
+//			dispatch(new PluginsUpdatedEvent(PluginsUpdatedEvent.UPDATED, plugins));
 		}
 		
 		public function get plugins():ArrayCollection
@@ -89,6 +78,22 @@ package flashplayerswitcher.model
 			_user = plugin;
 			
 			dispatch(new InstalledPluginUpdatedEvent(InstalledPluginUpdatedEvent.USER, _user));
+		}
+		
+		public function dispatchUpdate():void
+		{
+			dispatch(new PluginsUpdatedEvent(PluginsUpdatedEvent.UPDATED, plugins));
+		}
+		
+		public function contains(plugin:FlashPlayerPlugin):Boolean
+		{
+			for each (var p:FlashPlayerPlugin in _plugins)
+			{
+				if (plugin.hash == p.hash)
+					return true;
+			}
+			
+			return false;
 		}
 	}
 }

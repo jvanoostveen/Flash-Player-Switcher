@@ -5,10 +5,12 @@ package flashplayerswitcher.view
 	import flashplayerswitcher.controller.events.InstalledPluginUpdatedEvent;
 	import flashplayerswitcher.controller.events.PluginsUpdatedEvent;
 	import flashplayerswitcher.controller.events.StorageAllowEditingChangedEvent;
+	import flashplayerswitcher.controller.events.StorePluginSetEvent;
 	import flashplayerswitcher.model.PluginsModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.model.vo.PluginSet;
 
+	import spark.events.GridItemEditorEvent;
 	import spark.events.GridSelectionEvent;
 
 	import org.robotlegs.mvcs.Mediator;
@@ -20,11 +22,9 @@ package flashplayerswitcher.view
 	 */
 	public class PluginStorageListingMediator extends Mediator
 	{
-		[Inject]
-		public var view:PluginStorageListing;
+		[Inject] public var view:PluginStorageListing;
 
-		[Inject]
-		public var installed:PluginsModel;
+		[Inject] public var installed:PluginsModel;
 		
 		override public function onRegister():void
 		{
@@ -33,6 +33,7 @@ package flashplayerswitcher.view
 			addContextListener(StorageAllowEditingChangedEvent.CHANGED, onAllowEditingChanged, StorageAllowEditingChangedEvent);
 			
 			eventMap.mapListener(view.listing, GridSelectionEvent.SELECTION_CHANGE, onSelectionChange);
+			eventMap.mapListener(view.listing, GridItemEditorEvent.GRID_ITEM_EDITOR_SESSION_SAVE, onGridItemEditorSave);
 			eventMap.mapListener(view.activateReleaseButton, MouseEvent.CLICK, onInstallButtonClick);
 			eventMap.mapListener(view.activateDebuggerButton, MouseEvent.CLICK, onInstallButtonClick);
 			eventMap.mapListener(view.deleteButton, MouseEvent.CLICK, onDeleteButtonClick);
@@ -82,6 +83,11 @@ package flashplayerswitcher.view
 				
 				view.deleteButton.enabled = true;
 			}
+		}
+		
+		private function onGridItemEditorSave(event:GridItemEditorEvent):void
+		{
+			dispatch(new StorePluginSetEvent(view.selectedPluginSet));
 		}
 		
 		private function onInstallButtonClick(event:MouseEvent):void

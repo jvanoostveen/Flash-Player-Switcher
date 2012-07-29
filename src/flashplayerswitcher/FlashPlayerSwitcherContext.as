@@ -18,6 +18,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.commands.ShowHelpCommand;
 	import flashplayerswitcher.controller.commands.ShowPreferencesCommand;
 	import flashplayerswitcher.controller.commands.StorageDirectoryChangedCommand;
+	import flashplayerswitcher.controller.commands.StorePluginSetCommand;
 	import flashplayerswitcher.controller.commands.preferences.StoragePrefsAllowEditingChangeCommand;
 	import flashplayerswitcher.controller.commands.preferences.StoragePrefsLocationSelectCommand;
 	import flashplayerswitcher.controller.events.ActivatePluginEvent;
@@ -35,6 +36,7 @@ package flashplayerswitcher
 	import flashplayerswitcher.controller.events.ShowPluginDownloadListEvent;
 	import flashplayerswitcher.controller.events.ShowPreferencesEvent;
 	import flashplayerswitcher.controller.events.StorageDirectoryChangedEvent;
+	import flashplayerswitcher.controller.events.StorePluginSetEvent;
 	import flashplayerswitcher.controller.events.preferences.StoragePrefsAllowEditingChangeEvent;
 	import flashplayerswitcher.controller.events.preferences.StoragePrefsLocationSelectEvent;
 	import flashplayerswitcher.model.ConfigModel;
@@ -143,6 +145,7 @@ package flashplayerswitcher
 			commandMap.mapEvent(ProvideFeedbackEvent.PROVIDE_FEEDBACK, ProvideFeedbackCommand, ProvideFeedbackEvent);
 			commandMap.mapEvent(ShowPreferencesEvent.SHOW, ShowPreferencesCommand, ShowPreferencesEvent);
 			commandMap.mapEvent(StorageDirectoryChangedEvent.CHANGED, StorageDirectoryChangedCommand, StorageDirectoryChangedEvent);
+			commandMap.mapEvent(StorePluginSetEvent.STORE_PLUGINSET, StorePluginSetCommand);
 			
 			// preferences
 			commandMap.mapEvent(StoragePrefsLocationSelectEvent.CHANGE, StoragePrefsLocationSelectCommand, StoragePrefsLocationSelectEvent);
