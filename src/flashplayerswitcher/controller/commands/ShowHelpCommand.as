@@ -1,6 +1,5 @@
 package flashplayerswitcher.controller.commands
 {
-	import flashplayerswitcher.service.ITrackerService;
 	import flashplayerswitcher.view.HelpWindow;
 
 	import spark.components.Window;
@@ -16,13 +15,8 @@ package flashplayerswitcher.controller.commands
 	 */
 	public class ShowHelpCommand extends Command
 	{
-		[Inject]
-		public var tracker:ITrackerService;
-		
 		override public function execute():void
 		{
-			tracker.track("/help/");
-			
 			var windows:Array = NativeApplication.nativeApplication.openedWindows;
 			for each (var window:NativeWindow in windows)
 			{

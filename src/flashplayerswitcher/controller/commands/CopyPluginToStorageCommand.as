@@ -5,7 +5,6 @@ package flashplayerswitcher.controller.commands
 	import flashplayerswitcher.model.ConfigModel;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
 	import flashplayerswitcher.service.IFlashplayersService;
-	import flashplayerswitcher.service.ITrackerService;
 	import flashplayerswitcher.service.growl.IGrowlService;
 	import flashplayerswitcher.service.growl.NotificationName;
 
@@ -21,7 +20,6 @@ package flashplayerswitcher.controller.commands
 		[Inject] public var event:CopyPluginToStorageEvent;
 		
 		[Inject] public var service:IFlashplayersService;
-		[Inject] public var tracker:ITrackerService;
 		[Inject] public var config:ConfigModel;
 		[Inject] public var growl:IGrowlService;
 		
@@ -41,8 +39,6 @@ package flashplayerswitcher.controller.commands
 			plugin.xpt.copyTo(pluginDirectory.resolvePath(plugin.xpt.name), true);
 			
 			service.storePlugin(plugin);
-			
-			tracker.track("/storage/" + plugin.version + "/" + (plugin.debugger ? "debugger" : "release") + "/");
 			
 			growl.notify(NotificationName.PLUGIN_INSTALLED, resource("PLUGIN_INSTALLED_NOTIFICATION_TITLE", Locale.GROWL), resource("PLUGIN_INSTALLED_NOTITICATION_MESSAGE", Locale.GROWL, [plugin.name + " " + plugin.version]));
 		}

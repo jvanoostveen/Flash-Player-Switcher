@@ -8,7 +8,6 @@ package flashplayerswitcher.controller.commands
 	import flashplayerswitcher.controller.events.ProgressBarPopupEvent;
 	import flashplayerswitcher.controller.events.ShowPluginStorageListEvent;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
-	import flashplayerswitcher.service.ITrackerService;
 
 	import org.robotlegs.mvcs.Command;
 
@@ -31,9 +30,6 @@ package flashplayerswitcher.controller.commands
 	{
 		[Inject]
 		public var event:DownloadPluginEvent;
-		
-		[Inject]
-		public var tracker:ITrackerService;
 		
 		private var _queue:Vector.<FlashPlayerPlugin>;
 		private var _plugin:FlashPlayerPlugin;
@@ -92,8 +88,6 @@ package flashplayerswitcher.controller.commands
 			dispatch(progress);
 			
 			var data:ByteArray = _loader.data as ByteArray;
-			
-			tracker.track("/download/" + _plugin.version + "/" + (_plugin.debugger ? "debugger" : "release") + "/");
 			
 			setTimeout(parseZip, 50, data);
 		}

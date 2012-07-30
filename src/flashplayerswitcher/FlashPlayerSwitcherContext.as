@@ -49,13 +49,10 @@ package flashplayerswitcher
 	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.values.PluginDownloadURL;
 	import flashplayerswitcher.service.ConfigService;
-	import flashplayerswitcher.service.DummyTrackerService;
 	import flashplayerswitcher.service.FlashplayersService;
-	import flashplayerswitcher.service.GoogleAnalyticsTrackerService;
 	import flashplayerswitcher.service.IConfigService;
 	import flashplayerswitcher.service.IFlashplayersService;
 	import flashplayerswitcher.service.IPluginDownloadService;
-	import flashplayerswitcher.service.ITrackerService;
 	import flashplayerswitcher.service.PluginDownloadService;
 	import flashplayerswitcher.service.events.DatabaseReadyEvent;
 	import flashplayerswitcher.service.growl.GrowlServiceWrapper;
@@ -111,16 +108,6 @@ package flashplayerswitcher
 			injector.mapSingletonOf(IPluginDownloadService, PluginDownloadService);
 			injector.mapSingletonOf(IConfigService, ConfigService);
 			injector.mapSingletonOf(IGrowlService, GrowlServiceWrapper);
-			
-			IF::DEV
-			{
-				injector.mapSingletonOf(ITrackerService, DummyTrackerService);
-			}
-			
-			IF::RELEASE
-			{
-				injector.mapSingletonOf(ITrackerService, GoogleAnalyticsTrackerService);
-			}
 			
 			injector.mapSingleton(PluginsModel);
 			injector.mapSingleton(DownloadPluginsModel);

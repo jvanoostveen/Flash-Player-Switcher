@@ -1,14 +1,13 @@
 package flashplayerswitcher.controller.commands
 {
-	import flashplayerswitcher.service.growl.NotificationName;
 	import flashplayerswitcher.controller.events.ActivatePluginEvent;
 	import flashplayerswitcher.controller.events.CheckInstalledPluginVersionEvent;
 	import flashplayerswitcher.locale.Locale;
 	import flashplayerswitcher.model.StateModel;
 	import flashplayerswitcher.model.values.InternetPlugins;
 	import flashplayerswitcher.model.vo.FlashPlayerPlugin;
-	import flashplayerswitcher.service.ITrackerService;
 	import flashplayerswitcher.service.growl.IGrowlService;
+	import flashplayerswitcher.service.growl.NotificationName;
 
 	import org.robotlegs.mvcs.Command;
 
@@ -23,7 +22,6 @@ package flashplayerswitcher.controller.commands
 	{
 		[Inject] public var event:ActivatePluginEvent;
 		
-		[Inject] public var tracker:ITrackerService;
 		[Inject] public var pluginLocations:InternetPlugins;
 		[Inject] public var state:StateModel;
 		[Inject] public var growl:IGrowlService;
@@ -37,8 +35,6 @@ package flashplayerswitcher.controller.commands
 			var plugin:FlashPlayerPlugin = event.plugin;
 			plugin.plugin.copyTo(plugins.resolvePath(plugin.plugin.name), true);
 			plugin.xpt.copyTo(plugins.resolvePath(plugin.xpt.name), true);
-			
-			tracker.track("/activate/" + plugin.version + "/" + (plugin.debugger ? "debugger" : "release") + "/");
 			
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.USER));
 			dispatch(new CheckInstalledPluginVersionEvent(CheckInstalledPluginVersionEvent.SYSTEM));
