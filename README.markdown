@@ -8,6 +8,12 @@ Background
 
 Tired of running those Flash Player installers to see upcoming features in beta releases, testing in debugger versions and wanting full speed in release builds, an easier way of managing the Flash Player plug-ins files was needed.
 
+Installation
+------------
+With the disappearance of the downloads section on GitHub, the initial Air package is now somewhat hard to find.
+But the latest build can be downloaded from the 'release' directory and downloading the raw file:
+https://github.com/jvanoostveen/Flash-Player-Switcher/blob/master/release/FlashPlayerSwitcher.air?raw=true
+
 Usage
 -------
 
