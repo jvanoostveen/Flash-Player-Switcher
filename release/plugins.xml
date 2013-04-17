@@ -131,4 +131,28 @@
 		<debugger>true</debugger>
 		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.5.502.110_debugger.zip</url>
 	</plugin>
+	<plugin>
+		<name>Flash Player</name>
+		<version>11.6.602.180</version>
+		<debugger>false</debugger>
+		<url>https://dl.dropboxusercontent.com/u/15470024/flashplayerswitcher/11.6.602.180_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger</name>
+		<version>11.6.602.180</version>
+		<debugger>true</debugger>
+		<url>https://dl.dropboxusercontent.com/u/15470024/flashplayerswitcher/11.6.602.180_debugger.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player</name>
+		<version>11.7.700.169</version>
+		<debugger>false</debugger>
+		<url>https://dl.dropboxusercontent.com/u/15470024/flashplayerswitcher/11.7.700.169_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger</name>
+		<version>11.7.700.169</version>
+		<debugger>true</debugger>
+		<url>https://dl.dropboxusercontent.com/u/15470024/flashplayerswitcher/11.7.700.169_debugger.zip</url>
+	</plugin>
 </plugins>
