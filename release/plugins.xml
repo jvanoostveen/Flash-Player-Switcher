@@ -1,0 +1,134 @@
+<plugins>
+	<plugin>
+		<name>Flash Player</name>
+		<version>10.2.159.1</version>
+		<debugger>false</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/10.2.159.1_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger</name>
+		<version>10.2.159.1</version>
+		<debugger>true</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/10.2.159.1_debugger.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player</name>
+		<version>10.3.183.11</version>
+		<debugger>false</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/10.3.183.11_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger</name>
+		<version>10.3.183.11</version>
+		<debugger>true</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/10.3.183.11_debugger.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player</name>
+		<version>11.0.1.152</version>
+		<debugger>false</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.0.1.152_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger</name>
+		<version>11.0.1.152</version>
+		<debugger>true</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.0.1.152_debugger.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player</name>
+		<version>11.1.102.62</version>
+		<debugger>false</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.1.102.62_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger</name>
+		<version>11.1.102.62</version>
+		<debugger>true</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.1.102.62_debugger.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player (RC 1)</name>
+		<version>11.2.202.221</version>
+		<debugger>false</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.2.202.221_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger (RC 1)</name>
+		<version>11.2.202.221</version>
+		<debugger>true</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.2.202.221_debugger.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player (beta 2)</name>
+		<version>11.3.300.231</version>
+		<debugger>false</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.3.300.231_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger (beta 2)</name>
+		<version>11.3.300.231</version>
+		<debugger>true</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.3.300.231_debugger.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player</name>
+		<version>11.3.300.268</version>
+		<debugger>false</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.3.300.268_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger</name>
+		<version>11.3.300.268</version>
+		<debugger>true</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.3.300.268_debugger.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player (beta 1)</name>
+		<version>11.4.400.231</version>
+		<debugger>false</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.4.400.231_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger (beta 1)</name>
+		<version>11.4.400.231</version>
+		<debugger>true</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.4.400.231_debugger.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player</name>
+		<version>11.4.402.265</version>
+		<debugger>false</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.4.402.265_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger</name>
+		<version>11.4.402.265</version>
+		<debugger>true</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.4.402.265_debugger.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player (beta)</name>
+		<version>11.5.500.104</version>
+		<debugger>false</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.5.500.104_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger (beta)</name>
+		<version>11.5.500.104</version>
+		<debugger>true</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.5.500.104_debugger.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player</name>
+		<version>11.5.502.110</version>
+		<debugger>false</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.5.502.110_release.zip</url>
+	</plugin>
+	<plugin>
+		<name>Flash Player Debugger</name>
+		<version>11.5.502.110</version>
+		<debugger>true</debugger>
+		<url>http://www.webdebugger.nl/flashplayerswitcher/plugins/11.5.502.110_debugger.zip</url>
+	</plugin>
+</plugins>

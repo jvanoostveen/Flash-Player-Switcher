@@ -90,7 +90,7 @@ package flashplayerswitcher
 		{
 			injector.mapValue(InternetPlugins, new InternetPlugins());
 			injector.mapValue(GoogleAnalyticsAccount, new GoogleAnalyticsAccount("UA-26342584-3"));
-			injector.mapValue(PluginDownloadURL, new PluginDownloadURL("http://www.webdebugger.nl/flashplayerswitcher/plugins.xml"));
+			injector.mapValue(PluginDownloadURL, new PluginDownloadURL("https://raw.github.com/jvanoostveen/Flash-Player-Switcher/master/release/plugins.xml"));
 			injector.mapValue(DatabaseFilename, new DatabaseFilename("flashplayers.db"));
 			injector.mapValue(GrowlApplication, new GrowlApplication("Flash Player Switcher", "file://" + escape(File.applicationDirectory.resolvePath("icons").resolvePath("icon128.png").nativePath)));
 			
