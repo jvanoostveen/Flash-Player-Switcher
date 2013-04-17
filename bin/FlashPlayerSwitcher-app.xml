@@ -3,7 +3,7 @@
   <id>nl.webdebugger.FlashPlayerSwitcher</id>
   <filename>Flash Player Switcher</filename>
   <name>Flash Player Switcher</name>
-  <versionNumber>1.3.1</versionNumber>
+  <versionNumber>1.4.0</versionNumber>
   <!-- <versionLabel></versionLabel> -->
   <description>Utility for easy switching between Flash Player plugins.</description>
   <copyright>© Joeri van Oostveen</copyright>
