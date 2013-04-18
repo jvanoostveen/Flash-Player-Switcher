@@ -11,8 +11,7 @@ Tired of running those Flash Player installers to see upcoming features in beta 
 Installation
 ------------
 With the disappearance of the downloads section on GitHub, the initial Air package is now somewhat hard to find.
-But the latest build can be downloaded from the 'release' directory and downloading the raw file:
-https://github.com/jvanoostveen/Flash-Player-Switcher/blob/master/release/FlashPlayerSwitcher.air?raw=true
+But the latest build can be downloaded from the 'release' directory and downloading the [raw file][1].
 
 Usage
 -------
@@ -27,3 +26,5 @@ Roadmap
  * Design changes.
  * If a way is found to extract the files from Adobes own lzma implementation, add an even easier method of adding Flash Player plug-ins to the list.
  * Windows version?
+
+  [1]: https://github.com/jvanoostveen/Flash-Player-Switcher/blob/master/release/FlashPlayerSwitcher.air?raw=true
